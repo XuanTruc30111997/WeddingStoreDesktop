@@ -65,6 +65,7 @@ namespace WeddingStoreDesktop.ViewModels
             GetData();
             GetDanhSachVatLieu();
 
+            RefreshCommand = new ActionCommand(p => Refresh());
             ModifyCommand = new ActionCommand(p => ModifySoLuong());
             AddCommand = new ActionCommand(p => AddPhatSinh());
             DeleteCommand = new ActionCommand(p => DeletePhatSinh());
@@ -73,6 +74,7 @@ namespace WeddingStoreDesktop.ViewModels
         #endregion
 
         #region Commands
+        public ICommand RefreshCommand { get; }
         public ICommand ModifyCommand { get; }
         public ICommand AddCommand { get; }
         public ICommand DeleteCommand { get; }
@@ -89,29 +91,6 @@ namespace WeddingStoreDesktop.ViewModels
         {
             _lstVatLieuAo = new List<KhoVatLieuAoModel>();
             _lstVatLieuAo = serviceVL.GetVatLieuCan(_myHoaDon.NgayTrangTri, _myHoaDon.NgayThaoDo, _myHoaDon.MaHD);
-
-            //if (_LstPhatSinh != null || _LstPhatSinh.Count != 0)
-            //{
-            //    foreach (var ps in _LstPhatSinh)
-            //    {
-            //        //foreach (var vl in _lstVatLieuAo)
-            //        //{
-            //        //    if (!ps.IsNhap)
-            //        //    {
-            //        //        if (ps.MaVL == vl.MaVL)
-            //        //        {
-            //        //            vl.SoLuong -= ps.SoLuong;
-            //        //            break;
-            //        //        }
-            //        //    }
-            //        //}
-            //        if (!ps.IsNhap)
-            //        {
-            //            KhoVatLieuAoModel myVLAo = _lstVatLieuAo.FirstOrDefault(vl => vl.MaVL == ps.MaVL);
-            //            myVLAo.SoLuong -= ps.SoLuong;
-            //        }
-            //    }
-            //}
         }
         void ChangedKhoAo()
         {
@@ -186,7 +165,13 @@ namespace WeddingStoreDesktop.ViewModels
                 }
             }
         }
-
+        void Refresh()
+        {
+            DataProvider.Ins.RefreshDB();
+            GetData();
+            GetDanhSachVatLieu();
+            OnPropertyChanged(nameof(LstPhatSinh));
+        }
         void AddPhatSinh()
         {
             var viewModel = new ThemPhatSinhViewModel(_myHoaDon.MaHD);

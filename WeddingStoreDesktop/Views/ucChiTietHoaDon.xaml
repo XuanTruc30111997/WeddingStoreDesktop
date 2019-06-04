@@ -35,10 +35,10 @@
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
-                <ListView Grid.Row="0" Background="Aqua"
+                <ListView Grid.Row="0" Background="Aqua" x:Name="lstSanPham"
                           ItemsSource="{Binding LstChiTiet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding SelectedMau, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                          MouseDoubleClick="SanPham_Click">
+                          SelectionChanged="SanPham_Click">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>

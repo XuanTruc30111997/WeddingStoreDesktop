@@ -60,7 +60,7 @@
                                    Margin="8,0,0,0" x:Name="moreOption"
                                    Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}">
                     <StackPanel>
-                        <Button>
+                        <Button Command="{Binding RefreshCommand}">
                             <material:PackIcon Kind="Refresh"/>
                         </Button>
                         <Button Command="{Binding AddCommand}">

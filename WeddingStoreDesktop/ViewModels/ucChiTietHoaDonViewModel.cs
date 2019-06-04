@@ -13,6 +13,7 @@ using WeddingStoreDesktop.Models.DesktopModel;
 using WeddingStoreDesktop.Services.DesktopService;
 using WeddingStoreDesktop.Models.SystemModel;
 using WeddingStoreDesktop.Services.SystemService;
+using System.Windows.Data;
 
 namespace WeddingStoreDesktop.ViewModels
 {
@@ -30,7 +31,7 @@ namespace WeddingStoreDesktop.ViewModels
                 if (_LstChiTiet != value)
                 {
                     _LstChiTiet = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged("LstChiTiet");
                 }
             }
         }
@@ -120,6 +121,7 @@ namespace WeddingStoreDesktop.ViewModels
             DataProvider.Ins.RefreshDB();
             GetData();
             GetDanhSachVatLieu();
+            OnPropertyChanged(nameof(LstChiTiet));
         }
         private void ModifySoLuong()
         {

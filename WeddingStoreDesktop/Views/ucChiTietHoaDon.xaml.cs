@@ -30,17 +30,21 @@ namespace WeddingStoreDesktop.Views
             DataContext = vm;
         }
 
-        private void SanPham_Click(object sender, MouseButtonEventArgs e)
-        {
-            ClearGrid();
-            gridThongTinMau.Children.Add(new ucThongTinSanPham(vm.SelectedMau.MaSP));
-            gridChiTietMau.Children.Add(new ucChiTietSanPham(vm.SelectedMau.MaSP, _maHD));
-        }
-
         void ClearGrid()
         {
             gridThongTinMau.Children.Clear();
             gridChiTietMau.Children.Clear();
+        }
+
+        private void SanPham_Click(object sender, SelectionChangedEventArgs e)
+        {
+            ClearGrid();
+            if (vm.SelectedMau != null)
+            {
+                gridThongTinMau.Children.Add(new ucThongTinSanPham(vm.SelectedMau.MaSP));
+                gridChiTietMau.Children.Add(new ucChiTietSanPham(vm.SelectedMau.MaSP, _maHD));
+            }
+
         }
     }
 }
