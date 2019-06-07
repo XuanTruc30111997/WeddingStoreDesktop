@@ -225,7 +225,6 @@ namespace WeddingStoreDesktop.ViewModels
             if (_SelectedHDKH != null)
             {
                 myHD = DataProvider.Ins.DB.HoaDons.FirstOrDefault(hd => hd.MaHD == _SelectedHDKH.MaHD);
-
                 myKH = DataProvider.Ins.DB.KhachHangs.FirstOrDefault(kh => kh.MaKH == _SelectedHDKH.MaKH);
             }
         }
@@ -403,8 +402,12 @@ namespace WeddingStoreDesktop.ViewModels
                 {
                     UpdateKhoVatLieu(false);
                 }
-                _myHD.TinhTrang = 0;
+                HoaDon myHoaDon = DataProvider.Ins.DB.HoaDons.FirstOrDefault(hd => hd.MaHD == _myHD.MaHD);
+                myHoaDon.TinhTrang = 0;
                 DataProvider.Ins.DB.SaveChanges();
+
+                myHD.TinhTrang = 0;
+                OnPropertyChanged(nameof(myHD));
             }
         }
 
@@ -418,8 +421,13 @@ namespace WeddingStoreDesktop.ViewModels
                 {
                     UpdateKhoVatLieu(true);
                 }
-                _myHD.TinhTrang = 1;
+
+                HoaDon myHoaDon = DataProvider.Ins.DB.HoaDons.FirstOrDefault(hd => hd.MaHD == _myHD.MaHD);
+                myHoaDon.TinhTrang = 1;
                 DataProvider.Ins.DB.SaveChanges();
+
+                myHD.TinhTrang = 1;
+                OnPropertyChanged(nameof(myHD));
             }
         }
 
@@ -433,8 +441,13 @@ namespace WeddingStoreDesktop.ViewModels
                 {
                     UpdateKhoVatLieu(false);
                 }
-                _myHD.TinhTrang = 2;
+
+                HoaDon myHoaDon = DataProvider.Ins.DB.HoaDons.FirstOrDefault(hd => hd.MaHD == _myHD.MaHD);
+                myHoaDon.TinhTrang = 2;
                 DataProvider.Ins.DB.SaveChanges();
+
+                myHD.TinhTrang = 2;
+                OnPropertyChanged(nameof(myHD));
             }
         }
 
