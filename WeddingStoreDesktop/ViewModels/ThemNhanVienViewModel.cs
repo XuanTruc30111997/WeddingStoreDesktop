@@ -142,6 +142,7 @@ namespace WeddingStoreDesktop.ViewModels
                     myImage.Save(mStream, myImage.RawFormat);
                     myNV.Avatar = mStream.ToArray();
                 }
+                OnPropertyChanged(nameof(myNV));
             }
         }
         #endregion

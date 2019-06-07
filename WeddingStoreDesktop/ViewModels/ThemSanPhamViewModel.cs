@@ -352,6 +352,7 @@ namespace WeddingStoreDesktop.ViewModels
                     ahihi.Save(mStream, ahihi.RawFormat);
                     mySanPham.HinhMoTa = mStream.ToArray();
                 }
+                OnPropertyChanged(nameof(mySanPham));
                 //imgPhoto.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 //mySanPham.HinhMoTa = openFileDialog.FileName;
             }

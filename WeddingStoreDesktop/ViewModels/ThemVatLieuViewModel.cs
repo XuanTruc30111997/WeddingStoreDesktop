@@ -123,6 +123,7 @@ namespace WeddingStoreDesktop.ViewModels
                     myImage.Save(mStream, myImage.RawFormat);
                     myVL.AnhMoTa = mStream.ToArray();
                 }
+                OnPropertyChanged(nameof(myVL));
             }
         }
 

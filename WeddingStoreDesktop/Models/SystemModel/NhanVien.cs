@@ -11,8 +11,8 @@ namespace WeddingStoreDesktop.Models.SystemModel
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class NhanVien
+
+    public partial class NhanVien : BaseModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhanVien()
@@ -20,16 +20,19 @@ namespace WeddingStoreDesktop.Models.SystemModel
             this.PhanCongs = new HashSet<PhanCong>();
             this.TaiKhoans = new HashSet<TaiKhoan>();
         }
-    
+
         public string MaNV { get; set; }
-        public string TenNV { get; set; }
+        private string _TenNV { get; set; }
+        public string TenNV { get => _TenNV; set { _TenNV = value;OnPropertyChanged(); } }
         public string GioiTinh { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string DiaChi { get; set; }
         public string SoDT { get; set; }
         public Nullable<float> Luong { get; set; }
         public byte[] Avatar { get; set; }
-    
+        //private byte[] _Avatar { get; set; }
+        //public byte[] Avatar { get => _Avatar; set { _Avatar = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhanCong> PhanCongs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
