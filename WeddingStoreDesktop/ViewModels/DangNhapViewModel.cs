@@ -72,54 +72,5 @@ namespace WeddingStoreDesktop.ViewModels
                 MessageBox.Show("Sai tên tài khoản hoặc mật khẩu","Đăng nhập thất bại!",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
-
-        //public void ahihi()
-        //{
-        //    SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-        //    dlg.FileName = String.Format("MyFile{0:ddMMyyyyHHmmss}", DateTime.Now); // Default file name
-        //    dlg.DefaultExt = ".xps"; // Default file extension
-        //    dlg.Filter = "XPS Documents (.xps)|*.xps"; // Filter files by extension
-
-        //    // Show save file dialog box
-        //    Nullable<bool> result = dlg.ShowDialog();
-
-        //    // Process save file dialog box results
-        //    if (result == true)
-        //    {
-        //        // Save document
-        //        string filename = dlg.FileName;
-
-        //        // Initialize the xps document structure
-        //        FixedDocument fixedDoc = new FixedDocument();
-        //        PageContent pageContent = new PageContent();
-        //        FixedPage fixedPage = new FixedPage();
-
-        //        // Create the document and set the datacontext
-        //        //ReportHoaDon view = new ReportHoaDon();
-        //        //view.DataContext = this;
-        //        ucNhanVien view = new ucNhanVien();
-        //        view.DataContext = new ucNhanVienViewModel();
-        //        view.UpdateLayout();
-
-        //        // Get the page size of an A4 document
-        //        var pageSize = new Size(8 * 96, 11 * 96);
-
-        //        // We just fit it horizontally, so only the width is set here
-        //        //view.Height = pageSize.Height;
-        //        view.Width = pageSize.Width;
-        //        view.UpdateLayout();
-
-        //        //Create first page of document
-        //        fixedPage.Children.Add(view);
-        //        ((System.Windows.Markup.IAddChild)pageContent).AddChild(fixedPage);
-        //        fixedDoc.Pages.Add(pageContent);
-
-        //        // Create the xps file and write it
-        //        XpsDocument xpsd = new XpsDocument(filename, FileAccess.ReadWrite);
-        //        XpsDocumentWriter xw = XpsDocument.CreateXpsDocumentWriter(xpsd);
-        //        xw.Write(fixedDoc);
-        //        xpsd.Close();
-        //    }
-        //}
     }
 }

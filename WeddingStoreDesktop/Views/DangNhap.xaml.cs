@@ -30,8 +30,8 @@ namespace WeddingStoreDesktop.Views
 
         private void Thoat_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            //vm.ahihi();
+            //  this.Close();
+            Application.Current.Shutdown(99);
         }
     }
 }

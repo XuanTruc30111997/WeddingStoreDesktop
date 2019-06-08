@@ -89,10 +89,6 @@
                             <material:PackIcon Kind="Pen" Width="30" Height="30"/>
                         </Button>
 
-                        <Button Width="Auto" Height="Auto" Margin="5" Background="Green">
-                            <material:PackIcon Kind="Payment" Width="30" Height="30"/>
-                        </Button>
-
                         <Button Width="Auto" Height="Auto" Margin="5" Background="Red" Command="{Binding DeleteDonGiaNhapCommand}">
                             <material:PackIcon Kind="Garbage" Width="30" Height="30"/>
                         </Button>
