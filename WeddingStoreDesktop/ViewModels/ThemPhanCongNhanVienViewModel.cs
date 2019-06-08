@@ -140,8 +140,8 @@ namespace WeddingStoreDesktop.ViewModels
                     TenNV = myNV.TenNV,
                     MaHD = myHD.MaHD,
                     Ngay = myHD.NgayTrangTri.Value.ToString(),
-                    ThoiGianDen = "",
-                    ThoiGianDi = ""
+                    ThoiGianDen = TimeSpan.Zero.ToString(),
+                    ThoiGianDi = TimeSpan.Zero.ToString()
                 });
             }
         }
@@ -159,16 +159,18 @@ namespace WeddingStoreDesktop.ViewModels
                     TenNV = myNV.TenNV,
                     MaHD = myHD.MaHD,
                     Ngay = myHD.NgayThaoDo.Value.ToString(),
-                    ThoiGianDen = "",
-                    ThoiGianDi = ""
+                    ThoiGianDen = TimeSpan.Zero.ToString(),
+                    ThoiGianDi = TimeSpan.Zero.ToString()
                 });
             }
         }
 
         public void XoaPhanCongTrangTri()
         {
-            if (!String.IsNullOrEmpty(_SelectedPhanCongTrangTri.ThoiGianDen) || !String.IsNullOrEmpty(_SelectedPhanCongTrangTri.ThoiGianDi)
-                            || TimeSpan.Parse(_SelectedPhanCongTrangTri.ThoiGianDen) != TimeSpan.Zero
+            //if (!String.IsNullOrEmpty(_SelectedPhanCongTrangTri.ThoiGianDen) || !String.IsNullOrEmpty(_SelectedPhanCongTrangTri.ThoiGianDi)
+            //                || TimeSpan.Parse(_SelectedPhanCongTrangTri.ThoiGianDen) != TimeSpan.Zero
+            //                || TimeSpan.Parse(_SelectedPhanCongTrangTri.ThoiGianDi) != TimeSpan.Zero)
+            if (TimeSpan.Parse(_SelectedPhanCongTrangTri.ThoiGianDen) != TimeSpan.Zero
                             || TimeSpan.Parse(_SelectedPhanCongTrangTri.ThoiGianDi) != TimeSpan.Zero)
             {
                 var result = MessageBox.Show("Nhân viên đã được CheckIn hoặc CheckOut. Bạn có muốn xóa nhân viên khỏi ngày trang trí?"
@@ -181,9 +183,11 @@ namespace WeddingStoreDesktop.ViewModels
         }
         public void XoaPhanCongThaoDo()
         {
-            if (!String.IsNullOrEmpty(_SelectedPhanCongThaoDo.ThoiGianDen) || !String.IsNullOrEmpty(_SelectedPhanCongThaoDo.ThoiGianDi)
-                                    || TimeSpan.Parse(_SelectedPhanCongThaoDo.ThoiGianDen) != TimeSpan.Zero
-                                    || TimeSpan.Parse(_SelectedPhanCongThaoDo.ThoiGianDi) != TimeSpan.Zero)
+            //if (!String.IsNullOrEmpty(_SelectedPhanCongThaoDo.ThoiGianDen) || !String.IsNullOrEmpty(_SelectedPhanCongThaoDo.ThoiGianDi)
+            //                        || TimeSpan.Parse(_SelectedPhanCongThaoDo.ThoiGianDen) != TimeSpan.Zero
+            //                        || TimeSpan.Parse(_SelectedPhanCongThaoDo.ThoiGianDi) != TimeSpan.Zero)
+            if (TimeSpan.Parse(_SelectedPhanCongThaoDo.ThoiGianDen) != TimeSpan.Zero
+                            || TimeSpan.Parse(_SelectedPhanCongThaoDo.ThoiGianDi) != TimeSpan.Zero)
             {
                 var result = MessageBox.Show("Nhân viên đã được CheckIn hoặc CheckOut. Bạn có muốn xóa nhân viên khỏi ngày trang trí?"
                                             , "Thông báo", MessageBoxButton.YesNo, MessageBoxImage.Information);

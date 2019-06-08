@@ -56,7 +56,8 @@ namespace WeddingStoreDesktop.Views
                 if (e.Source != null)
                 {
                     NhanVien myNV = (NhanVien)lstNhanVien.SelectedItem;
-                    DragDrop.DoDragDrop(lstNhanVien, myNV.MaNV, DragDropEffects.Move);
+                    if (myNV != null)
+                        DragDrop.DoDragDrop(lstNhanVien, myNV.MaNV, DragDropEffects.Move);
                 }
             }
         }
