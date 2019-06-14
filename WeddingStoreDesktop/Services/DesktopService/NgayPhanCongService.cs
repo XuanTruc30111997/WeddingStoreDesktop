@@ -87,7 +87,7 @@ namespace WeddingStoreDesktop.Services.DesktopService
                     {
                         MaHD = my.MaHD,
                         TenKH = my.TenKH,
-                        type = true // ngày tháo dở
+                        type = false // ngày tháo dở
                     });
                     myLst.Add(new NgayPhanCongModel
                     {
@@ -119,7 +119,7 @@ namespace WeddingStoreDesktop.Services.DesktopService
                         {
                             MaHD = my.MaHD,
                             TenKH = my.TenKH,
-                            type = true // ngày tháo dở
+                            type = false // ngày tháo dở
                         });
                         myLst.Add(new NgayPhanCongModel
                         {

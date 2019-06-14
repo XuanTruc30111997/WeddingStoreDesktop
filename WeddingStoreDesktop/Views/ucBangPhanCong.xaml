@@ -10,6 +10,7 @@
 
     <UserControl.Resources>
         <converter:ConvertDisplayImage x:Key="myAvatar"/>
+        <converter:ConvertNgayToImage x:Key="myTinhTrang"/>
 
         <local:BoolToBrushConverter FalseValue="Red" TrueValue="Green" x:Key="checkStatus"/>
 
@@ -192,14 +193,16 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>
+                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
-
-                                    <TextBlock x:Name="myHD" Grid.Row="0" Text="{Binding MaHD, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="Bold"
+                                    <Image Source="{Binding type, Converter={StaticResource myTinhTrang}}" 
+                                           Grid.Row="0" HorizontalAlignment="Right" Width="25" Height="25"/>
+                                    <TextBlock x:Name="myHD" Grid.Row="1" Text="{Binding MaHD, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="Bold"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                                Foreground="{Binding type, Converter={StaticResource checkStatus}}">
                                     </TextBlock>
 
-                                    <TextBlock Grid.Row="1" Text="{Binding TenKH, UpdateSourceTrigger=PropertyChanged}" FontSize="15" FontWeight="DemiBold"
+                                    <TextBlock Grid.Row="2" Text="{Binding TenKH, UpdateSourceTrigger=PropertyChanged}" FontSize="15" FontWeight="DemiBold"
                                                HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
                                 </Grid>
                             </material:Card>

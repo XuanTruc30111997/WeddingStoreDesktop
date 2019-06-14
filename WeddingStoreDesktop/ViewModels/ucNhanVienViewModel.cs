@@ -265,6 +265,12 @@ namespace WeddingStoreDesktop.ViewModels
                     DataProvider.Ins.DB.PhanCongs.Remove(pc);
                     DataProvider.Ins.DB.SaveChanges();
                 }
+
+                // Xóa tài khoản
+                TaiKhoan myTaiKhoan = DataProvider.Ins.DB.TaiKhoans.FirstOrDefault(tk => tk.MaNV == _SelectedNhanVien.MaNV);
+                DataProvider.Ins.DB.TaiKhoans.Remove(myTaiKhoan);
+                DataProvider.Ins.DB.SaveChanges();
+
                 // Xóa nhân viên
                 DataProvider.Ins.DB.NhanViens.Remove(_SelectedNhanVien);
                 DataProvider.Ins.DB.SaveChanges();

@@ -185,6 +185,7 @@
     <Compile Include="Converters\ConvertByteToImage.cs" />
     <Compile Include="Converters\ConvertDateTimeToString.cs" />
     <Compile Include="Converters\ConvertDisplayImage.cs" />
+    <Compile Include="Converters\ConvertNgayToImage.cs" />
     <Compile Include="Converters\ConvertObjectToBinary.cs" />
     <Compile Include="Converters\ConvertTinhTrangToBrush.cs" />
     <Compile Include="Converters\ConvertToEnable.cs" />
@@ -693,6 +694,8 @@
     <Resource Include="Images\Tools\next.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\ThaoDo.png" />
+    <Resource Include="Images\TrangTri.png" />
     <Content Include="Models\SystemModel\WeddingStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WeddingStoreModel.edmx</DependentUpon>
