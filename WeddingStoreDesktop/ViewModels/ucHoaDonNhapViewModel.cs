@@ -349,6 +349,11 @@ namespace WeddingStoreDesktop.ViewModels
                         List<ChiTietDonGiaNhapHang> lstChiTiet = DataProvider.Ins.DB.ChiTietDonGiaNhapHangs.Where(ct => ct.MaDG == _SelectedDG.MaDG).ToList();
                         foreach (var ct in lstChiTiet)
                         {
+                            // Trừ số lượng tồn của vật liệu trong kho
+                            KhoVatLieu myVatLieu = DataProvider.Ins.DB.KhoVatLieux.FirstOrDefault(vl => vl.MaVL == ct.MaVL);
+                            myVatLieu.SoLuongTon -= ct.SoLuong;
+                            DataProvider.Ins.DB.SaveChanges();
+
                             DataProvider.Ins.DB.ChiTietDonGiaNhapHangs.Remove(ct);
                             DataProvider.Ins.DB.SaveChanges();
                         }
@@ -356,6 +361,11 @@ namespace WeddingStoreDesktop.ViewModels
                         // Thêm chi tiết đơn giá
                         foreach (var ct in viewModel.LstChiTietDG)
                         {
+                            // Cộng số lượng tồn của vật liệu trong kho
+                            KhoVatLieu myVatLieu = DataProvider.Ins.DB.KhoVatLieux.FirstOrDefault(vl => vl.MaVL == ct.MaVL);
+                            myVatLieu.SoLuongTon += ct.SoLuong;
+                            DataProvider.Ins.DB.SaveChanges();
+
                             DataProvider.Ins.DB.ChiTietDonGiaNhapHangs.Add(new ChiTietDonGiaNhapHang
                             {
                                 MaDG = viewModel.myDG.MaDG,

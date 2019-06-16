@@ -109,7 +109,10 @@ namespace WeddingStoreDesktop.ViewModels
                     OnPropertyChanged();
                     GetDV();
                     if (_isModifyDV && _SelectedDV != null)
+                    {
                         myDV = _SelectedDV.TenDV;
+                        myDVMoTa = _SelectedDV.ThongTinMoTa;
+                    }
                 }
             }
         }
@@ -161,6 +164,17 @@ namespace WeddingStoreDesktop.ViewModels
             set
             {
                 _myDV = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _myDVMoTa;
+        public string myDVMoTa
+        {
+            get => _myDVMoTa;
+            set
+            {
+                _myDVMoTa = value;
                 OnPropertyChanged();
             }
         }
@@ -315,6 +329,7 @@ namespace WeddingStoreDesktop.ViewModels
             {
                 isCreateDV = true;
                 myDV = "";
+                myDVMoTa = "";
                 onActionDV = true;
                 isModifyDV = false;
             }
@@ -322,6 +337,7 @@ namespace WeddingStoreDesktop.ViewModels
             {
                 isCreateDV = false;
                 myDV = "";
+                myDVMoTa = "";
                 onActionDV = false;
             }
         }
@@ -333,6 +349,7 @@ namespace WeddingStoreDesktop.ViewModels
                 {
                     isModifyDV = true;
                     myDV = _SelectedDV.TenDV;
+                    myDVMoTa = _SelectedDV.ThongTinMoTa;
                     isCreateDV = false;
                     onActionDV = true;
                 }
@@ -341,6 +358,7 @@ namespace WeddingStoreDesktop.ViewModels
             {
                 isModifyDV = false;
                 myDV = "";
+                myDVMoTa = _SelectedDV.ThongTinMoTa;
                 onActionDV = false;
             }
         }
@@ -363,7 +381,8 @@ namespace WeddingStoreDesktop.ViewModels
                 DataProvider.Ins.DB.DichVus.Add(new DichVu
                 {
                     MaDV = "DV-" + GetMaxID.GetMaxIdDV(),
-                    TenDV = myDV,
+                    TenDV = _myDV,
+                    ThongTinMoTa=_myDVMoTa,
                     LoaiDV=_SelectedLDVInDV.MaLoaiDV
                 });
                 DataProvider.Ins.DB.SaveChanges();
@@ -374,7 +393,8 @@ namespace WeddingStoreDesktop.ViewModels
             }
             else
             {
-                SelectedDV.TenDV = myDV;
+                SelectedDV.TenDV = _myDV;
+                SelectedDV.ThongTinMoTa = _myDVMoTa;
                 SelectedDV.LoaiDV = _SelectedLDVInDV.MaLoaiDV;
                 DataProvider.Ins.DB.SaveChanges(); // Update loại dịch vụ
                 GetDV();
