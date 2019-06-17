@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeddingStoreDesktop.Views"
-             mc:Ignorable="d" Loaded="modifyThongTin_Load" SizeToContent="WidthAndHeight"
+             mc:Ignorable="d" Loaded="modifyThongTin_Load" Width="1000" Height="320"
              WindowStartupLocation="CenterScreen" WindowStyle="None"
              xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes" Background="#b3f442">
 
@@ -63,7 +63,7 @@
                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                 <material:PackIcon Kind="UserAddress" Height="30" Width="30"/>
                                 <TextBlock Text="Đia chỉ:"/>
-                                <TextBox Text="{Binding myKH.DiaChi}"/>
+                                <TextBox Text="{Binding myKH.DiaChi}" TextWrapping="Wrap"/>
                             </StackPanel>
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                 <material:PackIcon Kind="Phone" Height="30" Width="30"/>

@@ -7,7 +7,7 @@
         xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="ModifyNhaCungCap" Height="300" Width="400" Background="#FF6DC74B">
+        Title="ModifyNhaCungCap" Height="300" Width="600" Background="#FF6DC74B">
 
     <Window.Resources>
         <Style TargetType="material:PackIcon">
@@ -27,7 +27,6 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="5,0"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="Width" Value="220"/>
         </Style>
 
         <Style TargetType="StackPanel">
@@ -66,22 +65,37 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <material:PackIcon Kind="Shop"/>
-                <TextBlock Text="Tên nhà cung cấp: "/>
-                <TextBox Text="{Binding myNCC.TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
+            <Grid Grid.Row="0" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <material:PackIcon Kind="Shop" Grid.Column="0"/>
+                <TextBlock Grid.Column="1" Text="Tên nhà cung cấp: "/>
+                <TextBox Grid.Column="2" Text="{Binding myNCC.TenNCC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <material:PackIcon Kind="Phone"/>
-                <TextBlock Text="Số điện thoại: "/>
-                <TextBox Text="{Binding myNCC.SoDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <material:PackIcon Kind="AddressMarker"/>
-                <TextBlock Text="Địa chỉ: "/>
-                <TextBox Text="{Binding myNCC.DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="280"/>
-            </StackPanel>
+            <Grid Grid.Row="1" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <material:PackIcon Kind="Phone" Grid.Column="0"/>
+                <TextBlock Grid.Column="1" Text="Số điện thoại: "/>
+                <TextBox Grid.Column="2" Text="{Binding myNCC.SoDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <material:PackIcon Kind="AddressMarker" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBlock Text="Địa chỉ: " Grid.Column="1" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="2" Text="{Binding myNCC.DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
+            </Grid>
 
         </Grid>
         <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">

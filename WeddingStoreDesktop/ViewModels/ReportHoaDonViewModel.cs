@@ -46,7 +46,7 @@ namespace WeddingStoreDesktop.ViewModels
         public string maNV;
         public int thang;
         public int nam;
-        public ReportHoaDonViewModel(string maNV,int thang,int nam)
+        public ReportHoaDonViewModel(string maNV, int thang, int nam)
         {
             idRequest = 2;
             this.maNV = maNV;
@@ -118,7 +118,8 @@ namespace WeddingStoreDesktop.ViewModels
         void ahihi()
         {
             PrintDialog printDlg = new PrintDialog();
-            printDlg.PrintVisual(new ucTestReport(maHD),"Hóa đơn");
+            if (printDlg.ShowDialog() == true)
+                printDlg.PrintVisual(new ucTestReport(maHD), "Hóa đơn");
         }
     }
 }

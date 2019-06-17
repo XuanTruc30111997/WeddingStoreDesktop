@@ -8,7 +8,7 @@
         xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer" x:Class="WeddingStoreDesktop.Views.ReportHoaDon"
         mc:Ignorable="d"
         Background="#c2d3ef" SizeToContent="WidthAndHeight"
-        Title="ReportHoaDon" WindowStartupLocation="CenterScreen">
+        Title="Report" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
