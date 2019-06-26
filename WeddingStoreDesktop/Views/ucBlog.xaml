@@ -1,0 +1,288 @@
+﻿<UserControl x:Class="WeddingStoreDesktop.Views.ucBlog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeddingStoreDesktop.Views"
+             xmlns:converter="clr-namespace:WeddingStoreDesktop.Converters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converter:ConvertDisplayImage x:Key="myConvertToImage"/>
+        <converter:BoolToVisibilityConverter x:Key="myVisibility" TrueValue="Visible" FalseValue="Collapsed"/>
+
+        <Storyboard x:Key="showChinhSua">
+            <!--<DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="groupChinhSua"
+                             From="0.0" To="1.0" Duration="0:0:0.2"/>-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="300"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
+                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="closeChinhSua">
+            <!--<DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="groupThongTin"
+                             From="0.0" To="1.0" Duration="0:0:0.2"/>-->
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
+                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="300"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="showThemMoi">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
+                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
+                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="300"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="closeThemMoi">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="300"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
+                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnChinhSua">
+            <BeginStoryboard Storyboard="{StaticResource showChinhSua}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnLuu">
+            <BeginStoryboard Storyboard="{StaticResource closeChinhSua}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnHuy">
+            <BeginStoryboard Storyboard="{StaticResource closeChinhSua}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnThemMoi">
+            <BeginStoryboard Storyboard="{StaticResource showThemMoi}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnThem">
+            <BeginStoryboard Storyboard="{StaticResource closeThemMoi}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnHuyThem">
+            <BeginStoryboard Storyboard="{StaticResource closeThemMoi}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0" Header="Danh sách Blog">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0" ItemsSource="{Binding LstBlog, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" SelectedItem="{Binding SelectedBlog, UpdateSourceTrigger=PropertyChanged}"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" CanUserSortColumns="True">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Hình mô tả">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding HinhMoTa, Converter={StaticResource myConvertToImage}}"
+                                       Height="100" Width="100" Stretch="Fill"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Tên blog" Binding="{Binding TenBlog}"/>
+                        <DataGridTemplateColumn  Header="Nội dung" Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!--<TextBlock Text="{Binding NoiDung, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>-->
+                                    <xctk:MultiLineTextEditor Text="{Binding NoiDung, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"
+                                                           IsReadOnly="True"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTextColumn Header="Nội dung" Binding="{Binding NoiDung}"/>-->
+                        <DataGridTextColumn Header="Created Date" Binding="{Binding CreatedDate, StringFormat=' {0:dd/MM/yyyy}'}"/>
+                        <DataGridTextColumn Header="Updated Date" Binding="{Binding UpdatedDate, StringFormat=' {0:dd/MM/yyyy}'}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Command="{Binding RefreshCommand}" Margin="5,0">
+                        <material:PackIcon Kind="Refresh"/>
+                    </Button>
+                    <Button Command="{Binding ThemCommand}" x:Name="btnThemMoi" Margin="5,0">
+                        <material:PackIcon Kind="Add"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Header="Thông tin Blog" x:Name="groupThongTin" 
+                  Visibility="{Binding isVisibility, Converter={StaticResource myVisibility}}">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="{Binding SelectedBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
+                               Stretch="Uniform"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="btnChinhSua" Content="Chỉnh sửa" Margin="3,0,5,0" Command="{Binding ChinhSuaCommand}"/>
+                            <Button Content="Xóa" Margin="3,0,5,0" Background="#ed2d2d" Command="{Binding XoaCommand}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding SelectedBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
+                               FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
+                        <Grid Grid.Row="1" Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding SelectedBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                            <TextBlock Grid.Column="1" Text="{Binding SelectedBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                        </Grid>
+                        <TextBlock Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                               FontFamily="13" TextWrapping="Wrap"/>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Header="Chỉnh sửa Blog" x:Name="groupChinhSua" Height="0"
+                  Visibility="{Binding isVisibility, Converter={StaticResource myVisibility}}">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="{Binding SelectedBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
+                               Stretch="Uniform"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="btnLuu" Content="Lưu" Margin="3,0,5,0" Command="{Binding LuuCommand}"
+                                    Background="#70ed47" Foreground="Black"/>
+                            <Button x:Name="btnHuy" Content="Hủy" Margin="3,0,5,0" Command="{Binding HuyCommand}"
+                                    Background="#5ee098" Foreground="Black"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" Text="{Binding SelectedBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
+                                 FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
+                        <Grid Grid.Row="1" Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding SelectedBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                            <TextBlock Grid.Column="1" Text="{Binding SelectedBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                        </Grid>
+                        <!--<xctk:MultiLineTextEditor Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                                                  FontFamily="13" TextWrapping="Wrap"/>-->
+                        <xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                                          FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Header="Thêm Blog" x:Name="groupThemMoi" Height="0"
+                  Visibility="{Binding isVisibility, Converter={StaticResource myVisibility}}">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="{Binding myBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
+                               Stretch="Uniform">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding ChooseImageCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="btnThem" Content="Thêm" Margin="3,0,5,0" Command="{Binding SaveCommand}"
+                                    Background="#5063e0"/>
+                            <Button Content="Hủy thêm" Margin="3,0,5,0" Background="#ed2d2d" Command="{Binding HuyThemCommand}"
+                                    x:Name="btnHuyThem"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" Text="{Binding myBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
+                                 FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
+                        <Grid Grid.Row="1" Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding myBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                            <TextBlock Grid.Column="1" Text="{Binding myBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                        </Grid>
+                        <xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                                          FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</UserControl>

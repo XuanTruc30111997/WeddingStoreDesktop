@@ -12,7 +12,7 @@ namespace WeddingStoreDesktop.Models.SystemModel
     using System;
     using System.Collections.Generic;
     
-    public partial class SanPham:BaseModel
+    public partial class SanPham
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
@@ -28,8 +28,6 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] HinhMoTa { get; set; }
-        //private byte[] _HinhMoTa { get; set; }
-        //public byte[] HinhMoTa { get => _HinhMoTa; set { _HinhMoTa = value;OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }

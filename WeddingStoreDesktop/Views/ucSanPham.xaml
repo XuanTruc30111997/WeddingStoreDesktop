@@ -172,58 +172,6 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!--<ListView x:Name="lvSanPham" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10"
-                      ItemsSource="{Binding LstSanPhamByDV, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="{Binding TenDV, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"/>
-                            
-                            <ListView Grid.Row="1" ItemsSource="{Binding lstSanPham, UpdateSourceTrigger=PropertyChanged}"
-                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                      SelectedItem="{Binding SelectedSanPham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-                                <ListView.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel/>
-                                    </ItemsPanelTemplate>
-                                </ListView.ItemsPanel>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <material:Card Margin="20" Width="150" Height="130" Background="Transparent">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="130"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="35"/>
-                                                </Grid.RowDefinitions>
-                                                <Ellipse Width="150" Height="130" Grid.Row="0">
-                                                    <Ellipse.Fill>
-                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                            <GradientStop Color="Black" Offset="0"/>
-                                                            <GradientStop Color="#FF66EAA8" Offset="1"/>
-                                                        </LinearGradientBrush>
-                                                    </Ellipse.Fill>
-                                                </Ellipse>
-                                                <TextBlock Grid.Row="1" HorizontalAlignment="Center"
-                                           Text="{Binding TenSP}" Foreground="White" FontSize="20"
-                                           FontWeight="Bold" Margin="8"/>
-                                                <TextBlock Grid.Row="2" HorizontalAlignment="Center"
-                                           Text="{Binding GiaTien, StringFormat=' {0:0,0} VNĐ'}"
-                                       Foreground="White" FontSize="15" FontStyle="Italic" Margin="5"/>
-                                            </Grid>
-                                        </material:Card>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>-->
-
             <material:PopupBox Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                    Margin="8"
                                    Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}">

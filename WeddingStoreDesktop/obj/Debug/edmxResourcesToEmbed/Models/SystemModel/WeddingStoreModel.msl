@@ -43,19 +43,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DatLiches">
-      <EntityTypeMapping TypeName="WeddingStoreDBModel.DatLich">
-        <MappingFragment StoreEntitySet="DatLich">
-          <ScalarProperty Name="MaDL" ColumnName="MaDL" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-          <ScalarProperty Name="NgayCuoi" ColumnName="NgayCuoi" />
-          <ScalarProperty Name="NgayTrangTri" ColumnName="NgayTrangTri" />
-          <ScalarProperty Name="ThoiGianTrangTri" ColumnName="ThoiGianTrangTri" />
-          <ScalarProperty Name="TrangThaiDuyet" ColumnName="TrangThaiDuyet" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DichVus">
       <EntityTypeMapping TypeName="WeddingStoreDBModel.DichVu">
         <MappingFragment StoreEntitySet="DichVu">
@@ -185,6 +172,21 @@
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="PassWord" ColumnName="PassWord" />
           <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatLiches">
+      <EntityTypeMapping TypeName="WeddingStoreDBModel.DatLich">
+        <MappingFragment StoreEntitySet="DatLich">
+          <ScalarProperty Name="MaDL" ColumnName="MaDL" />
+          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+          <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="NgayCuoi" ColumnName="NgayCuoi" />
+          <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+          <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="TrangThaiDuyet" ColumnName="TrangThaiDuyet" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

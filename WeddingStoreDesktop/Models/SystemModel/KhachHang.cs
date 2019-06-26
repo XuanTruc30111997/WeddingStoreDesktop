@@ -17,7 +17,6 @@ namespace WeddingStoreDesktop.Models.SystemModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KhachHang()
         {
-            this.DatLiches = new HashSet<DatLich>();
             this.HoaDons = new HashSet<HoaDon>();
         }
     
@@ -26,8 +25,6 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public string DiaChi { get; set; }
         public string SoDT { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DatLich> DatLiches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
     }

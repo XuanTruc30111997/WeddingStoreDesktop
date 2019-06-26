@@ -180,5 +180,22 @@ namespace WeddingStoreDesktop.Functions
 
             return max + 1;
         }
+
+        // Blog
+        public static int GetMaxIdBlog()
+        {
+            int max = 0;
+            List<Blog> lstBlog = new List<Blog>();
+            lstBlog = DataProvider.Ins.DB.Blogs.ToList();
+            foreach (var bl in lstBlog)
+            {
+                string[] myStr = bl.MaBlog.Split('-');
+                int id = int.Parse(myStr[1]);
+                if (id > max)
+                    max = id;
+            }
+
+            return max + 1;
+        }
     }
 }

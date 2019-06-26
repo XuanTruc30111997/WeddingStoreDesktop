@@ -39,6 +39,12 @@ namespace WeddingStoreDesktop.Functions
                 case 10:
                     uc = new ucHoaDonNhap();
                     break;
+                case 11:
+                    uc = new ucDatLich();
+                    break;
+                case 12:
+                    uc = new ucBlog();
+                    break;
             }
             return uc;
         }

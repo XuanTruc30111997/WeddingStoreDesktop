@@ -23,6 +23,8 @@ namespace WeddingStoreDesktop.Services
                 new TinhNangModel{id=7,icon="/WeddingStoreDesktop;component/Images/TinhNang/mautrangtri.png",ChucNang="Mẫu Trang Trí"},
                 new TinhNangModel{id=10,icon="/WeddingStoreDesktop;component/Images/TinhNang/hoadonnhap.png",ChucNang="Hóa Đơn Nhập"},
                 new TinhNangModel{id=9,icon="/WeddingStoreDesktop;component/Images/TinhNang/thongke.png",ChucNang="Thống Kê"},
+                new TinhNangModel{id=11,icon="/WeddingStoreDesktop;component/Images/TinhNang/datlich.png",ChucNang="Đặt Lịch"},
+                new TinhNangModel{id=12,icon="/WeddingStoreDesktop;component/Images/TinhNang/blog.png",ChucNang="Blog"},
             };
         }
 

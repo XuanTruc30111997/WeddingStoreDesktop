@@ -33,7 +33,6 @@ namespace WeddingStoreDesktop.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Image returnImage = null;
-            ImageSource my = null;
 
             // conver object to binary
             byte[] arrBinary = Converters.ConvertObjectToBinary.ObjectToByteArray(value);

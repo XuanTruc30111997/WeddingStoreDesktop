@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WeddingStoreDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WeddingStoreDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Blog">
           <Key>
             <PropertyRef Name="MaBlog" />
@@ -14,7 +14,7 @@
           <Property Name="NoiDung" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
-          <Property Name="HinhMoTa" Type="nvarchar(max)" />
+          <Property Name="HinhMoTa" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ChiTietDonGiaNhapHang">
           <Key>
@@ -49,14 +49,15 @@
         <EntityType Name="DatLich">
           <Key>
             <PropertyRef Name="MaDL" />
-            <PropertyRef Name="MaKH" />
           </Key>
           <Property Name="MaDL" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="MaKH" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="100" />
+          <Property Name="SoDT" Type="nchar" MaxLength="12" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
           <Property Name="NgayCuoi" Type="date" />
-          <Property Name="NgayTrangTri" Type="date" />
-          <Property Name="ThoiGianTrangTri" Type="time" Precision="7" />
+          <Property Name="NgayDat" Type="date" />
+          <Property Name="ThoiGian" Type="time" Precision="7" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
           <Property Name="TrangThaiDuyet" Type="bit" />
         </EntityType>
         <EntityType Name="DichVu">
@@ -255,18 +256,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DatLich_KhachHang">
-          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
-          <End Role="DatLich" Type="Self.DatLich" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhachHang">
-              <PropertyRef Name="MaKH" />
-            </Principal>
-            <Dependent Role="DatLich">
-              <PropertyRef Name="MaKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DichVu_LoaiDichVu">
           <End Role="LoaiDichVu" Type="Self.LoaiDichVu" Multiplicity="0..1" />
           <End Role="DichVu" Type="Self.DichVu" Multiplicity="*" />
@@ -417,10 +406,6 @@
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="ChiTietSanPham" EntitySet="ChiTietSanPham" />
           </AssociationSet>
-          <AssociationSet Name="FK_DatLich_KhachHang" Association="Self.FK_DatLich_KhachHang">
-            <End Role="KhachHang" EntitySet="KhachHang" />
-            <End Role="DatLich" EntitySet="DatLich" />
-          </AssociationSet>
           <AssociationSet Name="FK_DichVu_LoaiDichVu" Association="Self.FK_DichVu_LoaiDichVu">
             <End Role="LoaiDichVu" EntitySet="LoaiDichVu" />
             <End Role="DichVu" EntitySet="DichVu" />
@@ -458,8 +443,7 @@
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WeddingStoreDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -472,7 +456,7 @@
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="HinhMoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhMoTa" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="ChiTietDonGiaNhapHang">
           <Key>
@@ -509,20 +493,6 @@
           <Property Name="GiaTien" Type="Single" />
           <NavigationProperty Name="KhoVatLieu" Relationship="Self.FK_ChiTietSanPham_KhoVatLieu" FromRole="ChiTietSanPham" ToRole="KhoVatLieu" />
           <NavigationProperty Name="SanPham" Relationship="Self.FK_ChiTietSanPham_SanPham" FromRole="ChiTietSanPham" ToRole="SanPham" />
-        </EntityType>
-        <EntityType Name="DatLich">
-          <Key>
-            <PropertyRef Name="MaDL" />
-            <PropertyRef Name="MaKH" />
-          </Key>
-          <Property Name="MaDL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MaKH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NgayCuoi" Type="DateTime" Precision="0" />
-          <Property Name="NgayTrangTri" Type="DateTime" Precision="0" />
-          <Property Name="ThoiGianTrangTri" Type="Time" Precision="7" />
-          <Property Name="TrangThaiDuyet" Type="Boolean" />
-          <NavigationProperty Name="KhachHang" Relationship="Self.FK_DatLich_KhachHang" FromRole="DatLich" ToRole="KhachHang" />
         </EntityType>
         <EntityType Name="DichVu">
           <Key>
@@ -570,7 +540,6 @@
           <Property Name="TenKH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SoDT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="DatLiches" Relationship="Self.FK_DatLich_KhachHang" FromRole="KhachHang" ToRole="DatLich" />
           <NavigationProperty Name="HoaDons" Relationship="Self.FK_HoaDon_KhachHang" FromRole="KhachHang" ToRole="HoaDon" />
         </EntityType>
         <EntityType Name="KhoVatLieu">
@@ -673,6 +642,20 @@
           <Property Name="MaNV" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_TaiKhoan_NhanVien1" FromRole="TaiKhoan" ToRole="NhanVien" />
         </EntityType>
+        <EntityType Name="DatLich">
+          <Key>
+            <PropertyRef Name="MaDL" />
+          </Key>
+          <Property Name="MaDL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TenKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SoDT" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayCuoi" Type="DateTime" Precision="0" />
+          <Property Name="NgayDat" Type="DateTime" Precision="0" />
+          <Property Name="ThoiGian" Type="Time" Precision="7" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThaiDuyet" Type="Boolean" />
+        </EntityType>
         <Association Name="FK_ChiTietDonGiaNhapHang_DonGiaNhapHang">
           <End Role="DonGiaNhapHang" Type="Self.DonGiaNhapHang" Multiplicity="1" />
           <End Role="ChiTietDonGiaNhapHang" Type="Self.ChiTietDonGiaNhapHang" Multiplicity="*" />
@@ -742,18 +725,6 @@
             </Principal>
             <Dependent Role="ChiTietSanPham">
               <PropertyRef Name="MaSP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DatLich_KhachHang">
-          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
-          <End Role="DatLich" Type="Self.DatLich" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhachHang">
-              <PropertyRef Name="MaKH" />
-            </Principal>
-            <Dependent Role="DatLich">
-              <PropertyRef Name="MaKH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -870,7 +841,6 @@
           <EntitySet Name="ChiTietDonGiaNhapHangs" EntityType="Self.ChiTietDonGiaNhapHang" />
           <EntitySet Name="ChiTietHoaDons" EntityType="Self.ChiTietHoaDon" />
           <EntitySet Name="ChiTietSanPhams" EntityType="Self.ChiTietSanPham" />
-          <EntitySet Name="DatLiches" EntityType="Self.DatLich" />
           <EntitySet Name="DichVus" EntityType="Self.DichVu" />
           <EntitySet Name="DonGiaNhapHangs" EntityType="Self.DonGiaNhapHang" />
           <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
@@ -883,6 +853,7 @@
           <EntitySet Name="PhatSinhs" EntityType="Self.PhatSinh" />
           <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
           <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+          <EntitySet Name="DatLiches" EntityType="Self.DatLich" />
           <AssociationSet Name="FK_ChiTietDonGiaNhapHang_DonGiaNhapHang" Association="Self.FK_ChiTietDonGiaNhapHang_DonGiaNhapHang">
             <End Role="DonGiaNhapHang" EntitySet="DonGiaNhapHangs" />
             <End Role="ChiTietDonGiaNhapHang" EntitySet="ChiTietDonGiaNhapHangs" />
@@ -906,10 +877,6 @@
           <AssociationSet Name="FK_ChiTietSanPham_SanPham" Association="Self.FK_ChiTietSanPham_SanPham">
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="ChiTietSanPham" EntitySet="ChiTietSanPhams" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DatLich_KhachHang" Association="Self.FK_DatLich_KhachHang">
-            <End Role="KhachHang" EntitySet="KhachHangs" />
-            <End Role="DatLich" EntitySet="DatLiches" />
           </AssociationSet>
           <AssociationSet Name="FK_DichVu_LoaiDichVu" Association="Self.FK_DichVu_LoaiDichVu">
             <End Role="LoaiDichVu" EntitySet="LoaiDichVus" />
@@ -993,19 +960,6 @@
                 <ScalarProperty Name="MaVL" ColumnName="MaVL" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DatLiches">
-            <EntityTypeMapping TypeName="WeddingStoreDBModel.DatLich">
-              <MappingFragment StoreEntitySet="DatLich">
-                <ScalarProperty Name="MaDL" ColumnName="MaDL" />
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="NgayCuoi" ColumnName="NgayCuoi" />
-                <ScalarProperty Name="NgayTrangTri" ColumnName="NgayTrangTri" />
-                <ScalarProperty Name="ThoiGianTrangTri" ColumnName="ThoiGianTrangTri" />
-                <ScalarProperty Name="TrangThaiDuyet" ColumnName="TrangThaiDuyet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1138,6 +1092,21 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PassWord" ColumnName="PassWord" />
                 <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatLiches">
+            <EntityTypeMapping TypeName="WeddingStoreDBModel.DatLich">
+              <MappingFragment StoreEntitySet="DatLich">
+                <ScalarProperty Name="MaDL" ColumnName="MaDL" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="NgayCuoi" ColumnName="NgayCuoi" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="TrangThaiDuyet" ColumnName="TrangThaiDuyet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

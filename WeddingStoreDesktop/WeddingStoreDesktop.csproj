@@ -180,6 +180,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToValueConverter.cs" />
     <Compile Include="Converters\ConvertByteToImage.cs" />
@@ -189,10 +190,8 @@
     <Compile Include="Converters\ConvertObjectToBinary.cs" />
     <Compile Include="Converters\ConvertTinhTrangToBrush.cs" />
     <Compile Include="Converters\ConvertToEnable.cs" />
-    <Compile Include="Converters\ConvertToImage.cs" />
     <Compile Include="Converters\ConvertToVisibility.cs" />
     <Compile Include="Converters\EnumToBoolExtension.cs" />
-    <Compile Include="Functions\AddImageToResource.cs" />
     <Compile Include="Functions\Check.cs" />
     <Compile Include="Functions\CheckTinhNang.cs" />
     <Compile Include="Functions\GetMaxID.cs" />
@@ -211,6 +210,7 @@
     <Compile Include="Models\DesktopModel\HoaDonKhachHangModel.cs" />
     <Compile Include="Models\DesktopModel\KhoVatLieuAoModel.cs" />
     <Compile Include="Models\DesktopModel\LuongNhanVienModel.cs" />
+    <Compile Include="Models\DesktopModel\NgayDatLichModel.cs" />
     <Compile Include="Models\DesktopModel\NgayPhanCongModel.cs" />
     <Compile Include="Models\DesktopModel\PhanCongNhanVienModel.cs" />
     <Compile Include="Models\DesktopModel\SanPhamByDichVuModel.cs" />
@@ -295,6 +295,7 @@
     <Compile Include="Services\DesktopService\ChamCongService.cs" />
     <Compile Include="Services\DesktopService\HoaDonKhachHangService.cs" />
     <Compile Include="Services\DesktopService\LuongNhanVienService.cs" />
+    <Compile Include="Services\DesktopService\NgayDatLichService.cs" />
     <Compile Include="Services\DesktopService\NgayPhanCongService.cs" />
     <Compile Include="Services\DesktopService\NhanVienPhanCongService.cs" />
     <Compile Include="Services\DesktopService\ThongTinChiTietVatLieuService.cs" />
@@ -334,8 +335,10 @@
     <Compile Include="ViewModels\ThongTinAccountViewModel.cs" />
     <Compile Include="ViewModels\ucBangPhanCongViewModel.cs" />
     <Compile Include="ViewModels\ucBieuDoDoanhThuViewModel.cs" />
+    <Compile Include="ViewModels\ucBlogViewModel.cs" />
     <Compile Include="ViewModels\ucChiTietHoaDonViewModel.cs" />
     <Compile Include="ViewModels\ucChiTietSanPhamViewModel.cs" />
+    <Compile Include="ViewModels\ucDatLichViewModel.cs" />
     <Compile Include="ViewModels\ucDoanhThuTongQuatViewModel.cs" />
     <Compile Include="ViewModels\ucHoaDonNhapViewModel.cs" />
     <Compile Include="ViewModels\ucHoaDonViewModel.cs" />
@@ -411,11 +414,17 @@
     <Compile Include="Views\ucBieuDoDoanhThu.xaml.cs">
       <DependentUpon>ucBieuDoDoanhThu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ucBlog.xaml.cs">
+      <DependentUpon>ucBlog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ucChiTietHoaDon.xaml.cs">
       <DependentUpon>ucChiTietHoaDon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ucChiTietSanPham.xaml.cs">
       <DependentUpon>ucChiTietSanPham.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ucDatLich.xaml.cs">
+      <DependentUpon>ucDatLich.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ucDoanhThuTongQuat.xaml.cs">
       <DependentUpon>ucDoanhThuTongQuat.xaml</DependentUpon>
@@ -504,12 +513,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WeddingStoreApp\WeddingStoreData\WeddingStoreData.csproj">
-      <Project>{49fcbebd-38a5-4416-bd6a-2f906184ccf3}</Project>
-      <Name>WeddingStoreData</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -593,6 +596,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ucBlog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ucChiTietHoaDon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -600,6 +607,10 @@
     <Page Include="Views\ucChiTietSanPham.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ucDatLich.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ucDoanhThuTongQuat.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -696,6 +707,8 @@
   <ItemGroup>
     <Resource Include="Images\ThaoDo.png" />
     <Resource Include="Images\TrangTri.png" />
+    <Resource Include="Images\TinhNang\datlich.png" />
+    <Resource Include="Images\TinhNang\blog.png" />
     <Content Include="Models\SystemModel\WeddingStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WeddingStoreModel.edmx</DependentUpon>

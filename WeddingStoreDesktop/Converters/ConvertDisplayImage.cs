@@ -13,7 +13,8 @@ namespace WeddingStoreDesktop.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
-                return WeddingStoreData.WeddingStoreResource.noimage;
+                return "/WeddingStoreDesktop;component/Images/noimage.png";
+                //return WeddingStoreData.WeddingStoreResource.noimage;
             else
                 return value as byte[];
         }

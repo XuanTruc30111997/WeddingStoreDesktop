@@ -29,7 +29,6 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public virtual DbSet<ChiTietDonGiaNhapHang> ChiTietDonGiaNhapHangs { get; set; }
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual DbSet<ChiTietSanPham> ChiTietSanPhams { get; set; }
-        public virtual DbSet<DatLich> DatLiches { get; set; }
         public virtual DbSet<DichVu> DichVus { get; set; }
         public virtual DbSet<DonGiaNhapHang> DonGiaNhapHangs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
@@ -42,5 +41,6 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public virtual DbSet<PhatSinh> PhatSinhs { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
+        public virtual DbSet<DatLich> DatLiches { get; set; }
     }
 }

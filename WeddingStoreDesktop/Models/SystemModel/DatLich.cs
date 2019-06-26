@@ -11,17 +11,18 @@ namespace WeddingStoreDesktop.Models.SystemModel
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class DatLich
+
+    public partial class DatLich : BaseModel
     {
         public string MaDL { get; set; }
-        public string MaKH { get; set; }
-        public string GhiChu { get; set; }
+        public string TenKH { get; set; }
+        public string SoDT { get; set; }
+        public string DiaChi { get; set; }
         public Nullable<System.DateTime> NgayCuoi { get; set; }
-        public Nullable<System.DateTime> NgayTrangTri { get; set; }
-        public Nullable<System.TimeSpan> ThoiGianTrangTri { get; set; }
-        public Nullable<bool> TrangThaiDuyet { get; set; }
-    
-        public virtual KhachHang KhachHang { get; set; }
+        public Nullable<System.DateTime> NgayDat { get; set; }
+        public Nullable<System.TimeSpan> ThoiGian { get; set; }
+        public string GhiChu { get; set; }
+        private Nullable<bool> _TrangThaiDuyet { get; set; }
+        public Nullable<bool> TrangThaiDuyet { get => _TrangThaiDuyet; set { _TrangThaiDuyet = value; OnPropertyChanged(); } }
     }
 }

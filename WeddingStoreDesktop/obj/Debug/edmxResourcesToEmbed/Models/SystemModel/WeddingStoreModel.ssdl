@@ -9,7 +9,7 @@
     <Property Name="NoiDung" Type="nvarchar(max)" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="UpdatedDate" Type="datetime" />
-    <Property Name="HinhMoTa" Type="nvarchar(max)" />
+    <Property Name="HinhMoTa" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="ChiTietDonGiaNhapHang">
     <Key>
@@ -44,14 +44,15 @@
   <EntityType Name="DatLich">
     <Key>
       <PropertyRef Name="MaDL" />
-      <PropertyRef Name="MaKH" />
     </Key>
     <Property Name="MaDL" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="MaKH" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="GhiChu" Type="nvarchar(max)" />
+    <Property Name="TenKH" Type="nvarchar" MaxLength="100" />
+    <Property Name="SoDT" Type="nchar" MaxLength="12" />
+    <Property Name="DiaChi" Type="nvarchar(max)" />
     <Property Name="NgayCuoi" Type="date" />
-    <Property Name="NgayTrangTri" Type="date" />
-    <Property Name="ThoiGianTrangTri" Type="time" Precision="7" />
+    <Property Name="NgayDat" Type="date" />
+    <Property Name="ThoiGian" Type="time" Precision="7" />
+    <Property Name="GhiChu" Type="nvarchar(max)" />
     <Property Name="TrangThaiDuyet" Type="bit" />
   </EntityType>
   <EntityType Name="DichVu">
@@ -250,18 +251,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DatLich_KhachHang">
-    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
-    <End Role="DatLich" Type="Self.DatLich" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KhachHang">
-        <PropertyRef Name="MaKH" />
-      </Principal>
-      <Dependent Role="DatLich">
-        <PropertyRef Name="MaKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_DichVu_LoaiDichVu">
     <End Role="LoaiDichVu" Type="Self.LoaiDichVu" Multiplicity="0..1" />
     <End Role="DichVu" Type="Self.DichVu" Multiplicity="*" />
@@ -411,10 +400,6 @@
     <AssociationSet Name="FK_ChiTietSanPham_SanPham" Association="Self.FK_ChiTietSanPham_SanPham">
       <End Role="SanPham" EntitySet="SanPham" />
       <End Role="ChiTietSanPham" EntitySet="ChiTietSanPham" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DatLich_KhachHang" Association="Self.FK_DatLich_KhachHang">
-      <End Role="KhachHang" EntitySet="KhachHang" />
-      <End Role="DatLich" EntitySet="DatLich" />
     </AssociationSet>
     <AssociationSet Name="FK_DichVu_LoaiDichVu" Association="Self.FK_DichVu_LoaiDichVu">
       <End Role="LoaiDichVu" EntitySet="LoaiDichVu" />

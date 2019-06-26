@@ -19,6 +19,6 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public string HinhMoTa { get; set; }
+        public byte[] HinhMoTa { get; set; }
     }
 }

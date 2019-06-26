@@ -11,8 +11,8 @@ namespace WeddingStoreDesktop.Models.SystemModel
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class HoaDon : BaseModel
+    
+    public partial class HoaDon
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HoaDon()
@@ -21,7 +21,7 @@ namespace WeddingStoreDesktop.Models.SystemModel
             this.PhanCongs = new HashSet<PhanCong>();
             this.PhatSinhs = new HashSet<PhatSinh>();
         }
-
+    
         public string MaHD { get; set; }
         public string MaKH { get; set; }
         public Nullable<System.DateTime> NgayLap { get; set; }
@@ -29,9 +29,7 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public Nullable<System.DateTime> NgayThaoDo { get; set; }
         public Nullable<float> TongTien { get; set; }
         public Nullable<int> TinhTrang { get; set; }
-        //private Nullable<int> _TinhTrang { get; set; }
-        //public Nullable<int> TinhTrang { get => _TinhTrang; set { _TinhTrang = value; OnPropertyChanged(); } }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual KhachHang KhachHang { get; set; }

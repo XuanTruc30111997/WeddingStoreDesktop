@@ -78,8 +78,6 @@ D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\Them
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ThemSanPham.baml
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ThemVatLieu.baml
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucThem.baml
-D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\WeddingStoreData.dll
-D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\WeddingStoreData.pdb
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Microsoft.Expression.Interactions.dll
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\System.Windows.Interactivity.dll
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Microsoft.Expression.Interactions.xml
@@ -240,3 +238,7 @@ D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\zh-CHT\Mic
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\WeddingStoreDesktop.exe.config
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucReportLuongNhanVien.g.cs
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucReportLuongNhanVien.baml
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucDatLich.g.cs
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucDatLich.baml
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucBlog.g.cs
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucBlog.baml
