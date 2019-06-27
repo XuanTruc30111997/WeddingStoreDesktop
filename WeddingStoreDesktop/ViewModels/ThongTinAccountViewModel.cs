@@ -65,8 +65,25 @@ namespace WeddingStoreDesktop.ViewModels
 
         void Save()
         {
-            DataProvider.Ins.DB.SaveChanges();
-            MessageBox.Show("Chỉnh sửa tài khoản thành công", "Thành công!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            bool flag = false;
+            List<TaiKhoan> lstTK = DataProvider.Ins.DB.TaiKhoans.ToList();
+            foreach (var tk in lstTK)
+            {
+                if (tk.MaNV != _myTaiKhoan.MaNV && tk.UserName == _myTaiKhoan.UserName)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                MessageBox.Show("Chỉnh sửa tài khoản thất bại. UserName đã được sử dụng.", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                DataProvider.Ins.DB.SaveChanges();
+                MessageBox.Show("Chỉnh sửa tài khoản thành công", "Thành công!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
         void Cancel()
         {

@@ -155,23 +155,60 @@ namespace WeddingStoreDesktop.ViewModels
                 {
                     if (!String.IsNullOrEmpty(myTaiKhoan.UserName) && !String.IsNullOrEmpty(myTaiKhoan.PassWord))
                     {
-                        DataProvider.Ins.DB.TaiKhoans.Add(myTaiKhoan);
-                        DataProvider.Ins.DB.SaveChanges();
+                        bool flag = false;
+                        List<TaiKhoan> lstTK = DataProvider.Ins.DB.TaiKhoans.ToList();
+                        foreach (var tk in lstTK)
+                        {
+                            if (tk.UserName == _myTaiKhoan.UserName)
+                            {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (flag)
+                        {
+                            MessageBox.Show("Chỉnh sửa tài khoản thất bại. UserName đã được sử dụng.", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            DataProvider.Ins.DB.TaiKhoans.Add(_myTaiKhoan);
+                            DataProvider.Ins.DB.SaveChanges();
+                            MessageBox.Show("Thêm tài khoản thành công", "Thành công!", MessageBoxButton.OK);
+                        }
                         GetNhanVien();
                     }
                     else
                         MessageBox.Show("UserName hoặc PassWord không được để trống", "Fail!!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            else
+                MessageBox.Show("Chọn nhân viên please", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         void Save()
         {
             TaiKhoan myTK = DataProvider.Ins.DB.TaiKhoans.FirstOrDefault(tk => tk.MaNV == _SelectedNhanVien.MaNV);
             if (myTK != null)
             {
-                DataProvider.Ins.DB.SaveChanges();
-                GetNhanVien();
-                MessageBox.Show("Success!!", "Tạo tài khoản nhân viên " + _SelectedNhanVien.TenNV + " thành công.", MessageBoxButton.OK);
+                bool flag = false;
+                List<TaiKhoan> lstTK = DataProvider.Ins.DB.TaiKhoans.ToList();
+                foreach (var tk in lstTK)
+                {
+                    if (tk.MaNV != _myTaiKhoan.MaNV && tk.UserName == _myTaiKhoan.UserName)
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag)
+                {
+                    MessageBox.Show("Chỉnh sửa tài khoản thất bại. UserName đã được sử dụng.", "Thất bại!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    DataProvider.Ins.DB.SaveChanges();
+                    GetNhanVien();
+                    MessageBox.Show("Chỉnh sửa tài khoản thành công", "Thành công!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
             }
         }
         void Delete()
