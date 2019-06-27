@@ -86,6 +86,12 @@
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnHuyThem">
             <BeginStoryboard Storyboard="{StaticResource closeThemMoi}"/>
         </EventTrigger>
+        <EventTrigger RoutedEvent="DataGrid.SelectionChanged" SourceName="dataGridBlog">
+            <BeginStoryboard Storyboard="{StaticResource closeThemMoi}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="DataGrid.SelectionChanged" SourceName="dataGridBlog">
+            <BeginStoryboard Storyboard="{StaticResource closeChinhSua}"/>
+        </EventTrigger>
     </UserControl.Triggers>
 
     <Grid>
@@ -102,7 +108,8 @@
                 </Grid.RowDefinitions>
                 <DataGrid Grid.Row="0" ItemsSource="{Binding LstBlog, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" SelectedItem="{Binding SelectedBlog, UpdateSourceTrigger=PropertyChanged}"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" CanUserSortColumns="True">
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" CanUserSortColumns="True"
+                          x:Name="dataGridBlog">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Hình mô tả">
                             <DataGridTemplateColumn.CellTemplate>

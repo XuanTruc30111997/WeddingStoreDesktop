@@ -11,6 +11,7 @@
              d:DesignHeight="650" d:DesignWidth="1000">
 
     <UserControl.Resources>
+        <converter:BoolToVisibilityConverter x:Key="myVisibility" TrueValue="Visible" FalseValue="Collapsed"/>
         <Style x:Key="myCardNgay" TargetType="material:Card">
             <Setter Property="Template">
                 <Setter.Value>
@@ -80,7 +81,7 @@
         <Storyboard x:Key="showChinhSua">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupChinhSua">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="600"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="600"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupXem">
                 <EasingDoubleKeyFrame KeyTime="0" Value="600"/>
@@ -94,7 +95,7 @@
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupXem">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="600"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="600"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -133,6 +134,9 @@
             <BeginStoryboard Storyboard="{StaticResource closeChinhSua}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnHuy">
+            <BeginStoryboard Storyboard="{StaticResource closeChinhSua}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ListBox.SelectionChanged" SourceName="listBoxDatLich">
             <BeginStoryboard Storyboard="{StaticResource closeChinhSua}"/>
         </EventTrigger>
     </UserControl.Triggers>
@@ -203,7 +207,7 @@
 
             <GroupBox Grid.Column="0" Header="Danh sách đặt lịch">
                 <ListBox ItemsSource="{Binding SelectedNgayDatLich.LstDatLich}" ItemContainerStyle="{StaticResource SimpleListBoxItem}"
-                         Background="Transparent"
+                         Background="Transparent" x:Name="listBoxDatLich"
                          SelectedItem="{Binding SelectedDatLich, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBox.ItemsPanel>
@@ -234,7 +238,8 @@
             </GroupBox>
             <Frame Grid.Column="1" Background="Red" material:ShadowAssist.Darken="True"/>
             <GroupBox Grid.Column="2" Header="Thông tin" x:Name="groupXem" 
-                      Background="{Binding SelectedDatLich.TrangThaiDuyet, Converter={StaticResource myTinhTrang}, UpdateSourceTrigger=PropertyChanged}">
+                      Background="{Binding SelectedDatLich.TrangThaiDuyet, Converter={StaticResource myTinhTrang}, UpdateSourceTrigger=PropertyChanged}"
+                      Visibility="{Binding isVisibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myVisibility}}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="7*"/>
@@ -286,7 +291,8 @@
             </GroupBox>
 
             <GroupBox Grid.Column="2" Header="Chỉnh sửa thông tin" x:Name="groupChinhSua" Width="0"
-                      Background="{Binding SelectedDatLich.TrangThaiDuyet, Converter={StaticResource myTinhTrang}, UpdateSourceTrigger=PropertyChanged}">
+                      Background="{Binding SelectedDatLich.TrangThaiDuyet, Converter={StaticResource myTinhTrang}, UpdateSourceTrigger=PropertyChanged}"
+                      Visibility="{Binding isVisibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myVisibility}}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="7*"/>

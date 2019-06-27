@@ -83,6 +83,7 @@ namespace WeddingStoreDesktop.ViewModels
             {
                 _SelectedNgayDatLich = value;
                 OnPropertyChanged();
+                isVisibility = false;
             }
         }
 
@@ -94,6 +95,7 @@ namespace WeddingStoreDesktop.ViewModels
             {
                 _SelectedDatlich = value;
                 OnPropertyChanged();
+                isVisibility = true;
             }
         }
 
@@ -108,6 +110,20 @@ namespace WeddingStoreDesktop.ViewModels
             {
                 _myTime = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private bool _isVisibility { get; set; }
+        public bool isVisibility
+        {
+            get => _isVisibility;
+            set
+            {
+                if(_isVisibility!=value)
+                {
+                    _isVisibility = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -147,6 +163,7 @@ namespace WeddingStoreDesktop.ViewModels
         #region Methods
         private void GetData()
         {
+            isVisibility = false;
             DataProvider.Ins.RefreshDB();
             if (int.TryParse(_Nam, out int myNam))
             {
