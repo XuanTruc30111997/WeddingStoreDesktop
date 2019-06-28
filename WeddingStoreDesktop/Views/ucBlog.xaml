@@ -8,8 +8,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:spice="clr-namespace:SpiceLogic.WpfHtmlEditor;assembly=SpiceLogicWPFHtmlEditor"
              xmlns:smith="clr-namespace:Smith.WPF.HtmlEditor;assembly=Smith.WPF.HtmlEditor"
-             xmlns:ahihi="http://schemas.syncfusion.com/wpf"
              mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -28,7 +28,7 @@
 
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
             
         </Storyboard>
@@ -44,7 +44,7 @@
 
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -77,7 +77,7 @@
 
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -87,7 +87,7 @@
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -225,7 +225,8 @@
                         </Grid>
                         <!--<TextBlock Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
                                FontFamily="13" TextWrapping="Wrap"/>-->
-                        <smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Transparent"/>
+                        <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                        <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
                 </Grid>
             </ScrollViewer>
@@ -275,7 +276,8 @@
                         <!--<xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
                                           FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>-->
 
-                        <smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                        <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                     </Grid>
                 </Grid>
@@ -329,7 +331,8 @@
                         </Grid>
                         <!--<xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
                                           FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>-->
-                        <smith:HtmlEditor Grid.Row="2" BindingContent="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                        <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                     </Grid>
                 </Grid>
