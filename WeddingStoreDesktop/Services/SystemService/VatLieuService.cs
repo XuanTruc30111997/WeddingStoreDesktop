@@ -40,10 +40,11 @@ namespace WeddingStoreDesktop.Services.SystemService
             using (WeddingStoreDBEntities DB = new WeddingStoreDBEntities())
             {
                 if (maHD == null)
-                    lstHoaDon = DB.HoaDons.Where(hd => hd.TinhTrang == 0).ToList();
+                    lstHoaDon = DB.HoaDons.Where(hd => hd.TinhTrang == 0 || hd.TinhTrang == 1).ToList();
                 else
                     lstHoaDon = DB.HoaDons.Where(hd => (hd.TinhTrang == 0 && hd.MaHD != maHD)
-                                                    || (hd.TinhTrang != 1 && hd.MaHD == maHD)).ToList();
+                                                    || (hd.TinhTrang != 1 && hd.MaHD == maHD)
+                                                    || (hd.TinhTrang == 1 && hd.MaHD != maHD)).ToList();
 
                 //HoaDon myHoaDon = DataProvider.Ins.DB.HoaDons.FirstOrDefault(hd => hd.MaHD == maHD);
                 //if (myHoaDon.TinhTrang != 1)
@@ -52,12 +53,18 @@ namespace WeddingStoreDesktop.Services.SystemService
                 foreach (var hd in lstHoaDon)
                 {
                     bool flag = false;
-                    if (hd.NgayTrangTri <= ntt && ntt <= hd.NgayThaoDo || hd.NgayTrangTri <= ntd && ntd <= hd.NgayThaoDo
-                            || ntt <= hd.NgayTrangTri && hd.NgayThaoDo <= ntd
-                            || hd.NgayTrangTri <= ntt && hd.NgayThaoDo >= ntd
-                            || (ntt >= hd.NgayThaoDo && ntt.Value.Subtract(hd.NgayThaoDo.Value).TotalDays <= 3)
-                            || (ntd <= hd.NgayTrangTri && hd.NgayTrangTri.Value.Subtract(ntd.Value).TotalDays <= 3))
+
+                    if (hd.TinhTrang == 1 && hd.NgayThaoDo < ntt && ntt.Value.Subtract(hd.NgayThaoDo.Value).TotalDays > 3)
                         flag = true;
+                    else
+                    {
+                        if (hd.TinhTrang == 0 && hd.NgayTrangTri <= ntt && ntt <= hd.NgayThaoDo || hd.NgayTrangTri <= ntd && ntd <= hd.NgayThaoDo
+                                || ntt <= hd.NgayTrangTri && hd.NgayThaoDo <= ntd
+                                || hd.NgayTrangTri <= ntt && hd.NgayThaoDo >= ntd
+                                || (ntt >= hd.NgayThaoDo && ntt.Value.Subtract(hd.NgayThaoDo.Value).TotalDays <= 3)
+                                || (ntd <= hd.NgayTrangTri && hd.NgayTrangTri.Value.Subtract(ntd.Value).TotalDays <= 3))
+                            flag = true;
+                    }
 
                     if (flag)
                     {
@@ -71,7 +78,12 @@ namespace WeddingStoreDesktop.Services.SystemService
                                     {
                                         if (vlAo.MaVL == ctsp.KhoVatLieu.MaVL)
                                         {
-                                            vlAo.SoLuong -= (cthd.SoLuong * ctsp.SoLuong);
+                                            if (hd.TinhTrang == 1)
+                                            {
+                                                vlAo.SoLuong += (cthd.SoLuong * ctsp.SoLuong);
+                                            }
+                                            else
+                                                vlAo.SoLuong -= (cthd.SoLuong * ctsp.SoLuong);
                                         }
                                     }
                                 }
@@ -83,7 +95,10 @@ namespace WeddingStoreDesktop.Services.SystemService
                             KhoVatLieuAoModel myVL = lstAo.FirstOrDefault(vl => vl.MaVL == ps.MaVL);
                             if (!myVL.IsNhap.Value)
                             {
-                                myVL.SoLuong -= ps.SoLuong;
+                                if (hd.TinhTrang == 1)
+                                    myVL.SoLuong += ps.SoLuong;
+                                else
+                                    myVL.SoLuong -= ps.SoLuong;
                             }
                         }
                     }

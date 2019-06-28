@@ -8,61 +8,92 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:smith="clr-namespace:Smith.WPF.HtmlEditor;assembly=Smith.WPF.HtmlEditor"
+             xmlns:ahihi="http://schemas.syncfusion.com/wpf"
              mc:Ignorable="d">
 
     <UserControl.Resources>
         <converter:ConvertDisplayImage x:Key="myConvertToImage"/>
         <converter:BoolToVisibilityConverter x:Key="myVisibility" TrueValue="Visible" FalseValue="Collapsed"/>
+        <!--<converter:BoolToVisibilityConverter x:Key="myVisibility" TrueValue="Collapsed" FalseValue="Visible"/>-->
 
         <Storyboard x:Key="showChinhSua">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupThongTin" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupChinhSua" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="400"/>
+            </DoubleAnimationUsingKeyFrames>
+            
+        </Storyboard>
+
+        <Storyboard x:Key="closeChinhSua">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupChinhSua" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupThongTin" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="400"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="hide">
             <!--<DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="groupChinhSua"
                              From="0.0" To="1.0" Duration="0:0:0.2"/>-->
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="300"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
-                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="closeChinhSua">
-            <!--<DoubleAnimation Storyboard.TargetProperty="(FrameworkElement.Opacity)" Storyboard.TargetName="groupThongTin"
-                             From="0.0" To="1.0" Duration="0:0:0.2"/>-->
-
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
-                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="300"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Key="showThemMoi">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
-                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
-                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupThemMoi" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupChinhSua" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupThongTin" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="400"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Key="closeThemMoi">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupThemMoi" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="400"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
-                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
@@ -92,14 +123,19 @@
         <EventTrigger RoutedEvent="DataGrid.SelectionChanged" SourceName="dataGridBlog">
             <BeginStoryboard Storyboard="{StaticResource closeChinhSua}"/>
         </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnHide">
+            <BeginStoryboard Storyboard="{StaticResource hide}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnXoa">
+            <BeginStoryboard Storyboard="{StaticResource hide}"/>
+        </EventTrigger>
     </UserControl.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
         <GroupBox Grid.Row="0" Header="Danh sách Blog">
             <Grid>
                 <Grid.RowDefinitions>
@@ -120,21 +156,26 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Tên blog" Binding="{Binding TenBlog}"/>
-                        <DataGridTemplateColumn  Header="Nội dung" Width="200">
+                        <!--<DataGridTemplateColumn  Header="Nội dung" Width="200">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <!--<TextBlock Text="{Binding NoiDung, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>-->
+                                    -->
+                        <!--<TextBlock Text="{Binding NoiDung, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>-->
+                        <!--
                                     <xctk:MultiLineTextEditor Text="{Binding NoiDung, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"
                                                            IsReadOnly="True"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        </DataGridTemplateColumn>-->
                         <!--<DataGridTextColumn Header="Nội dung" Binding="{Binding NoiDung}"/>-->
                         <DataGridTextColumn Header="Created Date" Binding="{Binding CreatedDate, StringFormat=' {0:dd/MM/yyyy}'}"/>
                         <DataGridTextColumn Header="Updated Date" Binding="{Binding UpdatedDate, StringFormat=' {0:dd/MM/yyyy}'}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnHide" Margin="5,0">
+                        <material:PackIcon Kind="Hide"/>
+                    </Button>
                     <Button Command="{Binding RefreshCommand}" Margin="5,0">
                         <material:PackIcon Kind="Refresh"/>
                     </Button>
@@ -145,8 +186,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Thông tin Blog" x:Name="groupThongTin" 
-                  Visibility="{Binding isVisibility, Converter={StaticResource myVisibility}}">
+        <GroupBox Grid.Row="1" Header="Thông tin Blog" x:Name="groupThongTin" Height="0">
             <ScrollViewer>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -162,7 +202,7 @@
                                Stretch="Uniform"/>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button x:Name="btnChinhSua" Content="Chỉnh sửa" Margin="3,0,5,0" Command="{Binding ChinhSuaCommand}"/>
-                            <Button Content="Xóa" Margin="3,0,5,0" Background="#ed2d2d" Command="{Binding XoaCommand}"/>
+                            <Button x:Name="btnXoa" Content="Xóa" Margin="3,0,5,0" Background="#ed2d2d" Command="{Binding XoaCommand}"/>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="1">
@@ -183,15 +223,15 @@
                             <TextBlock Grid.Column="1" Text="{Binding SelectedBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
                                    TextAlignment="Center" FontSize="15"/>
                         </Grid>
-                        <TextBlock Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
-                               FontFamily="13" TextWrapping="Wrap"/>
+                        <!--<TextBlock Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                               FontFamily="13" TextWrapping="Wrap"/>-->
+                        <smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Transparent"/>
                     </Grid>
                 </Grid>
             </ScrollViewer>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Chỉnh sửa Blog" x:Name="groupChinhSua" Height="0"
-                  Visibility="{Binding isVisibility, Converter={StaticResource myVisibility}}">
+        <GroupBox Grid.Row="1" Header="Chỉnh sửa Blog" x:Name="groupChinhSua" Height="0">
             <ScrollViewer>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -232,15 +272,17 @@
                         </Grid>
                         <!--<xctk:MultiLineTextEditor Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
                                                   FontFamily="13" TextWrapping="Wrap"/>-->
-                        <xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
-                                          FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>
+                        <!--<xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                                          FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>-->
+
+                        <smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
                     </Grid>
                 </Grid>
             </ScrollViewer>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Thêm Blog" x:Name="groupThemMoi" Height="0"
-                  Visibility="{Binding isVisibility, Converter={StaticResource myVisibility}}">
+        <GroupBox Grid.Row="1" Header="Thêm Blog" x:Name="groupThemMoi" Height="0">
             <ScrollViewer>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -285,8 +327,10 @@
                             <TextBlock Grid.Column="1" Text="{Binding myBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
                                    TextAlignment="Center" FontSize="15"/>
                         </Grid>
-                        <xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
-                                          FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>
+                        <!--<xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                                          FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>-->
+                        <smith:HtmlEditor Grid.Row="2" BindingContent="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
                     </Grid>
                 </Grid>
             </ScrollViewer>

@@ -37,7 +37,7 @@ namespace WeddingStoreDesktop.ViewModels
             {
                 _SelectedBlog = value;
                 OnPropertyChanged();
-                isVisibility = true;
+                //isVisibility = true;
             }
         }
         string _myMaBlog;
@@ -53,19 +53,19 @@ namespace WeddingStoreDesktop.ViewModels
             }
         }
 
-        private bool _isVisibility { get; set; }
-        public bool isVisibility
-        {
-            get => _isVisibility;
-            set
-            {
-                if (_isVisibility != value)
-                {
-                    _isVisibility = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        //private bool _isVisibility { get; set; }
+        //public bool isVisibility
+        //{
+        //    get => _isVisibility;
+        //    set
+        //    {
+        //        if (_isVisibility != value)
+        //        {
+        //            _isVisibility = value;
+        //            OnPropertyChanged();
+        //        }
+        //    }
+        //}
         #endregion
 
         #region Constructors
@@ -101,7 +101,8 @@ namespace WeddingStoreDesktop.ViewModels
         {
             myBlog = new Blog();
             LstBlog = DataProvider.Ins.DB.Blogs.ToList();
-            isVisibility = false;
+
+            //isVisibility = false;
         }
         void ChinhSua()
         {

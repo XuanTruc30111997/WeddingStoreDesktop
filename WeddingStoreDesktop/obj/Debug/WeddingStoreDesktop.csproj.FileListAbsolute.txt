@@ -242,3 +242,16 @@ D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucDa
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucDatLich.baml
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucBlog.g.cs
 D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\obj\Debug\Views\ucBlog.baml
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Smith.WPF.HtmlEditor.dll
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Microsoft.mshtml.dll
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.Compression.Base.dll
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.DocIO.Base.dll
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.Licensing.dll
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.OfficeChart.Base.dll
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.SfRichTextBoxAdv.WPF.dll
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.Shared.WPF.dll
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.Compression.Base.xml
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.DocIO.Base.xml
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.OfficeChart.Base.xml
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.SfRichTextBoxAdv.WPF.xml
+D:\KhoaLuan\Project\WeddingStoreDesktop\WeddingStoreDesktop\bin\Debug\Syncfusion.Shared.WPF.xml
