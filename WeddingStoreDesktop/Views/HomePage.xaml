@@ -114,7 +114,6 @@
             </StackPanel>
         </Grid>
         <Grid x:Name="gridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
         </Grid>
     </DockPanel>
 </Window>

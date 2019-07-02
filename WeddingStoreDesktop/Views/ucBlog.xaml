@@ -226,7 +226,7 @@
                         <!--<TextBlock Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
                                FontFamily="13" TextWrapping="Wrap"/>-->
                         <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
-                        <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" EditorMode="ReadOnly_Preview"/>
                     </Grid>
                 </Grid>
             </ScrollViewer>
