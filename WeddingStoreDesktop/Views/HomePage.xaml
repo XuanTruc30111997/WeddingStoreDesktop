@@ -114,6 +114,7 @@
             </StackPanel>
         </Grid>
         <Grid x:Name="gridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Image Source="/WeddingStoreDesktop;component/Images/homeBackground.jpg" Stretch="Fill" Opacity=".7"/>
         </Grid>
     </DockPanel>
 </Window>

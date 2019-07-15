@@ -717,6 +717,7 @@
     <Resource Include="Images\TrangTri.png" />
     <Resource Include="Images\TinhNang\datlich.png" />
     <Resource Include="Images\TinhNang\blog.png" />
+    <Resource Include="Images\homeBackground.jpg" />
     <Content Include="Models\SystemModel\WeddingStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WeddingStoreModel.edmx</DependentUpon>
