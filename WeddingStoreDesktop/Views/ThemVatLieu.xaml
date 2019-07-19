@@ -8,11 +8,11 @@
         xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:WeddingStoreDesktop.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Title="ThemVatLieu" Height="400" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="ThemVatLieu" Height="400" Width="800"
+        Style="{StaticResource windowCS}">
 
     <Window.Resources>
-
         <converter:ConvertDisplayImage x:Key="myIamge"/>
 
         <Style TargetType="TextBlock">
@@ -34,20 +34,8 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="#FFD6D65F">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition/>
-            <RowDefinition Height="80"/>
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FFE6E17E" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
+    <DockPanel>
+        <Grid Style="{StaticResource gridTitlte}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition/>
@@ -57,75 +45,81 @@
                     <ImageBrush ImageSource="/WeddingStoreDesktop;component/Images/addVatLieu.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock Grid.Column="1" FontSize="25" FontWeight="Bold" Foreground="White" Margin="25,0"
-                       Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Margin="25,0" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                       Style="{StaticResource textBlockTitlte}"/>
         </Grid>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="6*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Image Grid.Row="0" Stretch="Fill" Margin="10"
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Stretch="Fill" Margin="10"
                        Source="{Binding myVL.AnhMoTa, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource myIamge}}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ChooseImageCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-                <TextBlock Text="{Binding myVL.MaVL}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Grid>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding ChooseImageCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
+                    <TextBlock Text="{Binding myVL.MaVL}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5,0">
-                    <material:PackIcon Kind="MaterialDesign"/>
-                    <TextBox material:HintAssist.Hint="Tên vật liệu" Margin="20,0" VerticalAlignment="Center"
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5,0">
+                        <material:PackIcon Kind="MaterialDesign"/>
+                        <TextBox material:HintAssist.Hint="Tên vật liệu" Margin="20,0" VerticalAlignment="Center"
                              Width="350" Text="{Binding myVL.TenVL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                </StackPanel>
+                    </StackPanel>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5,0">
-                        <material:PackIcon Kind="Counter"/>
-                        <TextBox material:HintAssist.Hint="Số lượng tồn" Margin="20,0" VerticalAlignment="Center"
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5,0">
+                            <material:PackIcon Kind="Counter"/>
+                            <TextBox material:HintAssist.Hint="Số lượng tồn" Margin="20,0" VerticalAlignment="Center"
                              Width="Auto" Text="{Binding myVL.SoLuongTon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5,0">
-                        <material:PackIcon Kind="Atom"/>
-                        <TextBox material:HintAssist.Hint="Đơn vị" Margin="20,0" VerticalAlignment="Center"
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5,0">
+                            <material:PackIcon Kind="Atom"/>
+                            <TextBox material:HintAssist.Hint="Đơn vị" Margin="20,0" VerticalAlignment="Center"
                              Width="Auto" Text="{Binding myVL.DonVi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                    </StackPanel>
-                    <Grid Grid.Column="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <RadioButton Content="Nhập" VerticalAlignment="Center" FontSize="15" GroupName="typeCheck"
+                        </StackPanel>
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Content="Nhập" VerticalAlignment="Center" FontSize="15" GroupName="typeCheck"
                                      Grid.Row="0" IsChecked="{Binding IsNhap,UpdateSourceTrigger=PropertyChanged}"/>
-                        <RadioButton Content="Có sẵn" VerticalAlignment="Center" FontSize="15" GroupName="typeCheck"
+                            <RadioButton Content="Có sẵn" VerticalAlignment="Center" FontSize="15" GroupName="typeCheck"
                                      Grid.Row="1" IsChecked="{Binding IsCoSan,UpdateSourceTrigger=PropertyChanged}"/>
-                        <!--<ListBox ItemsSource="{Binding LstType}" SelectedItem="{Binding SelectedType}">
+                            <!--<ListBox ItemsSource="{Binding LstType}" SelectedItem="{Binding SelectedType}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListBoxItem}">
                                     <Setter Property="Template">
@@ -139,23 +133,24 @@
                                 </Style>
                             </ListBox.ItemContainerStyle>
                         </ListBox>-->
+                        </Grid>
                     </Grid>
-                </Grid>
 
-                <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal">
-                    <material:PackIcon Kind="Money"/>
-                    <TextBox material:HintAssist.Hint="Giá tiền (VNĐ)" Margin="20,0" VerticalAlignment="Center"
+                    <StackPanel Grid.Row="2" Margin="5" Orientation="Horizontal">
+                        <material:PackIcon Kind="Money"/>
+                        <TextBox material:HintAssist.Hint="Giá tiền (VNĐ)" Margin="20,0" VerticalAlignment="Center"
                              Width="150" Text="{Binding myVL.GiaTien, StringFormat=' {0:0,0}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
             </Grid>
-        </Grid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Save" FontSize="20" Width="100" Height="50" Margin="15,0"
-                    Command="{Binding SaveCommand}"/>
-            <Button Content="Cancel" FontSize="20" Width="100" Height="50" Margin="15,0" Background="#FFE6452B"
-                    Command="{Binding CancelCommand}"/>
-        </StackPanel>
-    </Grid>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="Save" Margin="15,0" Command="{Binding SaveCommand}"
+                        Style="{StaticResource buttonSave}"/>
+                <Button Content="Cancel" Margin="15,0" Command="{Binding CancelCommand}"
+                        Style="{StaticResource buttonCancel}"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </Window>

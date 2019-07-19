@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:WeddingStoreDesktop.Views"
         xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:converter="clr-namespace:WeddingStoreDesktop.Converters"
-        mc:Ignorable="d" SizeToContent="Height" Width="600" Background="#8faee0"
-        WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen">
+        mc:Ignorable="d" SizeToContent="Height" Width="600" WindowStartupLocation="CenterScreen"
+        Style="{StaticResource windowCS}">
 
     <Window.Resources>
         <converter:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed" x:Key="myVisible"/>
@@ -49,12 +49,12 @@
 
             <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"
                     Orientation="Horizontal">
-                <Button Height="Auto" Width="Auto" Command="{Binding SaveCommand}">
-                    <material:PackIcon Kind="ContentSave" Height="30" Width="30"/>
+                <Button Command="{Binding SaveCommand}" Style="{StaticResource buttonSave}">
+                    <material:PackIcon Kind="ContentSave"/>
                 </Button>
 
-                <Button Height="Auto" Width="Auto" Margin="20,0" Command="{Binding CancelCommand}">
-                    <material:PackIcon Kind="Cancel" Height="30" Width="30"/>
+                <Button Margin="20,0" Command="{Binding CancelCommand}" Style="{StaticResource buttonCancel}">
+                    <material:PackIcon Kind="Cancel"/>
                 </Button>
             </StackPanel>
         </Grid>

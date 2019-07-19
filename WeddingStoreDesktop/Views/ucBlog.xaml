@@ -28,7 +28,7 @@
 
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupChinhSua">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="500"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:.5" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
             
         </Storyboard>
@@ -44,7 +44,7 @@
 
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="500"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:.5" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -77,7 +77,7 @@
 
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="500"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:.5" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -87,7 +87,7 @@
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThongTin">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="500"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:.5" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="groupThemMoi">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -245,7 +245,13 @@
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
                         <Image Grid.Row="0" Source="{Binding SelectedBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
-                               Stretch="Uniform"/>
+                               Stretch="Uniform">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding ChooseImageCommand2}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button x:Name="btnLuu" Content="Lưu" Margin="3,0,5,0" Command="{Binding LuuCommand}"
                                     Background="#70ed47" Foreground="Black"/>

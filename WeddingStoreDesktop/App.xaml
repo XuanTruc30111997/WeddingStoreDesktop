@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converter="clr-namespace:WeddingStoreDesktop.Converters"
              xmlns:local="clr-namespace:WeddingStoreDesktop"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml"
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,6 +17,123 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PasswordBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- Windows CS -->
+            <Style TargetType="Window" x:Key="windowCS">
+                <Setter Property="Background" Value="#a6c0ed"/>
+                <Setter Property="WindowStyle" Value="None"/>
+            </Style>
+            
+            <!-- UserControl CS -->
+            <Style TargetType="UserControl" x:Name="userControlCS">
+                <Setter Property="Background" Value="#a6c0ed"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+            </Style>
+
+            <!-- TextBlock CS -->
+
+
+            <Style TargetType="TextBlock" x:Name="textBlock">
+                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="FontSize" Value="13"/>
+            </Style>
+            
+            <Style TargetType="TextBlock" x:Key="textBlockTitlte">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="15,0,0,0"/>
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="textBlockBold">
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="textBlockBoldLarge">
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="8,0"/>
+            </Style>
+
+            <!-- TextBox CS -->
+
+            <Style TargetType="TextBox" x:Key="textBoxSearch" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="TextBox" x:Key="textBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+            <!-- Grid CS #74a0ed  -->
+            
+            <Style TargetType="Grid" x:Key="gridTitlte">
+                <Setter Property="Background" Value="#a2cbe0"/>
+                <Setter Property="DockPanel.Dock" Value="Top"/>
+                <Setter Property="Height" Value="50"/>
+            </Style>
+
+            <Style TargetType="Grid" x:Key="gridDanhSach">
+                <Setter Property="Background" Value="#a4bae0"/>
+            </Style>
+
+            <!-- material:PackIcon CS -->
+
+            <Style TargetType="material:PackIcon" x:Name="packIconCS">
+                <Setter Property="Width" Value="30"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+            <!-- Button CS -->
+            
+            <Style TargetType="Button" x:Key="baseStyleButton">
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Width" Value="60"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="buttonSearch" BasedOn="{StaticResource baseStyleButton}">
+                <Setter Property="Background" Value="#568ff0"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontWeight" Value="DemiBold"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="buttonSave" BasedOn="{StaticResource baseStyleButton}">
+                <Setter Property="Background" Value="#4f84e0"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="buttonAdd" BasedOn="{StaticResource baseStyleButton}">
+                <Setter Property="Background" Value="#3779ed"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="buttonRefresh" BasedOn="{StaticResource baseStyleButton}">
+                <Setter Property="Background" Value="#53e653"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="buttonCancel" BasedOn="{StaticResource baseStyleButton}">
+                <Setter Property="Background" Value="#e86241"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="buttonDone" BasedOn="{StaticResource baseStyleButton}">
+                <Setter Property="Background" Value="#557bbd"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="buttonXoa" BasedOn="{StaticResource baseStyleButton}">
+                <Setter Property="Background" Value="#e6615e"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -81,6 +81,7 @@ namespace WeddingStoreDesktop.ViewModels
             ThemCommand = new ActionCommand(p => Them());
             SaveCommand = new ActionCommand(p => Save());
             ChooseImageCommand = new ActionCommand(p => ChooseImage());
+            ChooseImageCommand2 = new ActionCommand(p => ChooseImage2());
         }
         #endregion
 
@@ -93,6 +94,7 @@ namespace WeddingStoreDesktop.ViewModels
         public ICommand ThemCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand ChooseImageCommand { get; }
+        public ICommand ChooseImageCommand2 { get; }
 
         #endregion
 
@@ -164,6 +166,26 @@ namespace WeddingStoreDesktop.ViewModels
                     myBlog.HinhMoTa = mStream.ToArray();
                 }
                 OnPropertyChanged(nameof(myBlog));
+            }
+        }
+
+        void ChooseImage2()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Chọn ảnh";
+            openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                                    "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                                    "Portable Network Graphic (*.png)|*.png";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Image myImage = null;
+                myImage = Image.FromFile(openFileDialog.FileName);
+                using (MemoryStream mStream = new MemoryStream())
+                {
+                    myImage.Save(mStream, myImage.RawFormat);
+                    SelectedBlog.HinhMoTa = mStream.ToArray();
+                }
+                OnPropertyChanged(nameof(SelectedBlog));
             }
         }
         #endregion

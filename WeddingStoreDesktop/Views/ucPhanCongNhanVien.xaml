@@ -18,7 +18,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -58,7 +58,7 @@
                                        Source="{Binding Avatar,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource myAvatar}}"
                                        Stretch="Fill"/>
                                 <StackPanel Grid.Column="1" Margin="10,0" Orientation="Vertical" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textBlockBold}"/>
                                     <TextBlock Text="{Binding ThoiGianDen, StringFormat='Thời gian đến: {0:N}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{Binding ThoiGianDi, StringFormat='Thời gian đi: {0:N}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </StackPanel>
@@ -88,7 +88,7 @@
                                        Source="{Binding Avatar,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource myAvatar}}"
                                        Stretch="Fill"/>
                                 <StackPanel Grid.Column="1" Margin="10,0" Orientation="Vertical" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="{Binding TenNV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textBlockBold}"/>
                                     <TextBlock Text="{Binding ThoiGianDen, StringFormat='Thời gian đến: {0:N}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{Binding ThoiGianDi, StringFormat='Thời gian đi: {0:N}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </StackPanel>

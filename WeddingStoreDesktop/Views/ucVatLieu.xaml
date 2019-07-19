@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WeddingStoreDesktop.Views"
              xmlns:converter="clr-namespace:WeddingStoreDesktop.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="#ba81e8"
+             d:DesignHeight="450" d:DesignWidth="800"
              xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <UserControl.Resources>
@@ -101,12 +101,12 @@
             
             <Grid Grid.Column="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <material:PackIcon Grid.Column="0" Kind="Search" Width="30" Height="30" VerticalAlignment="Bottom"/>
+                <material:PackIcon Grid.Column="0" Kind="Search"/>
                 <TextBox Grid.Column="1" material:HintAssist.Hint="Search Here!!" Text="{Binding myKeyWord,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                         Style="{StaticResource textBoxSearch}"/>
             </Grid>
             <ComboBox Grid.Column="1" material:HintAssist.Hint="--- Option ---" Margin="5,0"
                       HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold"

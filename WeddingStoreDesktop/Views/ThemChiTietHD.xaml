@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:WeddingStoreDesktop.Views"
         xmlns:converter="clr-namespace:WeddingStoreDesktop.Converters"
         xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Title="ThemChiTietHD" Width="1100" Height="650">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"
+        Title="ThemChiTietHD" Width="1100" Height="670"
+        Style="{StaticResource windowCS}">
 
     <Window.Resources>
         <converter:ConvertDisplayImage x:Key="myImage"/>
@@ -24,9 +25,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <material:Card Grid.Row="0" Grid.ColumnSpan="2" Background="#4f8bea" VerticalAlignment="Center">
-            <Label Content="Thêm sản phẩm" VerticalAlignment="Center" FontSize="25"/>
-        </material:Card>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource gridTitlte}">
+            <TextBlock Text="Thêm sản phẩm" VerticalAlignment="Center" Style="{StaticResource textBlockTitlte}"/>
+        </Grid>
 
         <GroupBox Grid.Row="1" Grid.Column="0" Margin="10" Header="Danh sách sản phẩm trong hóa đơn">
             <ListView x:Name="lstChiTiet"
@@ -49,19 +50,19 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Grid.RowSpan="3" Grid.Column="0" Margin="5" Source="{Binding HinhMoTa, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myImage}}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                                                   Text="{Binding TenSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource textBlockBold}"
+                                       Text="{Binding TenSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Grid.Row="1" Grid.Column="1"
-                                                   Text="{Binding SoLuong, StringFormat='Số lượng: {0:0}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                       Text="{Binding SoLuong, StringFormat='Số lượng: {0:0}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Grid.Row="2" Grid.Column="1"
-                                                   Text="{Binding ThanhTien, StringFormat='Thành tiền: {0:0,0} VNĐ', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                       Text="{Binding ThanhTien, StringFormat='Thành tiền: {0:0,0} VNĐ', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Margin="10" Header="Danh sách tất cả sản phẩm" Background="#364d70">
+        <GroupBox Grid.Row="1" Grid.Column="1" Margin="10" Header="Danh sách tất cả sản phẩm">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
@@ -69,14 +70,13 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5">
-                    <material:PackIcon Kind="Search" Width="30" Height="30" VerticalAlignment="Bottom"/>
-                    <TextBox material:HintAssist.Hint="Search here!!" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Text="{Binding mykeyWord, UpdateSourceTrigger=PropertyChanged}"
-                             Height="60" FontSize="15" Foreground="White" Margin="10,0" VerticalAlignment="Bottom"/>
+                    <material:PackIcon Kind="Search" VerticalAlignment="Bottom"/>
+                    <TextBox material:HintAssist.Hint="Search here!!" Style="{StaticResource textBoxSearch}"
+                             Text="{Binding mykeyWord, UpdateSourceTrigger=PropertyChanged}" Margin="10,0"/>
                 </StackPanel>
                 <ComboBox Grid.Row="1" material:HintAssist.Hint="---- Dịch vụ ----" ItemsSource="{Binding LstDichVu,UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding SelectedDichVu,UpdateSourceTrigger=PropertyChanged}"
-                          DisplayMemberPath="TenDV"
+                          DisplayMemberPath="TenDV" material:HintAssist.Foreground="Black"
                           Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                           FontSize="15" FontWeight="Bold" HorizontalContentAlignment="Center"/>
 
@@ -97,9 +97,8 @@
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" Margin="5">
-                                    <TextBlock Text="{Binding TenSP}" Foreground="White" FontSize="20" FontWeight="Bold" Margin="5" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding GiaTien, StringFormat=' {0:0,0} VNĐ'}"
-                                       Foreground="White" FontSize="15" FontStyle="Italic" Margin="5"/>
+                                    <TextBlock Text="{Binding TenSP}" Margin="5" TextWrapping="Wrap" Style="{StaticResource textBlockBoldLarge}"/>
+                                    <TextBlock Text="{Binding GiaTien, StringFormat=' {0:0,0} VNĐ'}" FontStyle="Italic" Margin="5"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -111,17 +110,17 @@
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0">
             <material:PackIcon Kind="AttachMoney" Width="30" Height="30" Margin="10,0"/>
             <TextBlock Text="{Binding TongTien, UpdateSourceTrigger=PropertyChanged, StringFormat=' {0:0,0}'}" Margin="0,0,10,0"
-                       VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                       Style="{StaticResource textBlockBoldLarge}"/>
             <TextBlock Text="VNĐ" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Width="Auto" Height="Auto" Margin="5" Command="{Binding DoneCommand}">
-                <material:PackIcon Kind="Done" Width="30" Height="30"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <Button Margin="5" Command="{Binding DoneCommand}" Style="{StaticResource buttonDone}">
+                <material:PackIcon Kind="Done"/>
             </Button>
 
-            <Button Width="Auto" Height="Auto" Margin="5" Command="{Binding CancelCommand}">
-                <material:PackIcon Kind="Cancel" Width="30" Height="30"/>
+            <Button Margin="5" Command="{Binding CancelCommand}" Style="{StaticResource buttonCancel}">
+                <material:PackIcon Kind="Cancel"/>
             </Button>
         </StackPanel>
 

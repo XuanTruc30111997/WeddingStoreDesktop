@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:WeddingStoreDesktop.Views"
         xmlns:converter="clr-namespace:WeddingStoreDesktop.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="DiemDanhNhanVien" Height="450" Width="800" Background="#FF54DE54">
+        Title="DiemDanhNhanVien" Height="500" Width="800"
+        Style="{StaticResource windowCS}">
     <Window.Resources>
         <converter:ConvertDisplayImage x:Key="myImage"/>
         <Style TargetType="TextBlock">
@@ -18,74 +19,92 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="7">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="6*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="250"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Image Source="{Binding myPCNV.Avatar, Converter={StaticResource myImage}}" Stretch="Fill" Grid.Row="0"/>
-            <TextBlock Text="{Binding myPCNV.TenNV}" HorizontalAlignment="Center" TextWrapping="Wrap" Grid.Row="1"/>
+    <DockPanel>
+        <Grid Style="{StaticResource gridTitlte}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Grid.Column="0">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/WeddingStoreDesktop;component/Images/mautrangtri.png"
+                                    Stretch="Fill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock Text="Điểm danh nhân viên" Grid.Column="1" Style="{StaticResource textBlockTitlte}"/>
         </Grid>
-
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Margin="5">
+        <Grid Margin="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="250"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="6*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Ngày:" Grid.Row="0" Grid.Column="0"/>
-                <TextBlock Text="{Binding myPCNV.Ngay}" Grid.Row="0" Grid.Column="1"/>
-
-                <TextBlock Text="Thời gian đến:" Grid.Row="1" Grid.Column="0"/>
-                <TextBlock Text="{Binding myPCNV.ThoiGianDen}" Grid.Row="1" Grid.Column="1"/>
-
-                <TextBlock Text="Thời gian đi:" Grid.Row="2" Grid.Column="0"/>
-                <TextBlock Text="{Binding myPCNV.ThoiGianDi}" Grid.Row="2" Grid.Column="1"/>
-
-                <TextBlock Text="Tổng thời gian:" Grid.Row="3" Grid.Column="0"/>
-                <TextBlock Text="{Binding tongThoiGian}" Grid.Row="3" Grid.Column="1"/>
+                <Image Source="{Binding myPCNV.Avatar, Converter={StaticResource myImage}}" Stretch="Fill" Grid.Row="0"/>
+                <TextBlock Text="{Binding myPCNV.TenNV}" HorizontalAlignment="Center" TextWrapping="Wrap" Grid.Row="1"/>
             </Grid>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="3*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <RadioButton GroupName="typeCheck" Content="Đến" FontSize="15" FontWeight="Bold" Margin="20,0"
+
+                <Grid Grid.Row="0" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Ngày:" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="{Binding myPCNV.Ngay}" Grid.Row="0" Grid.Column="1"/>
+
+                    <TextBlock Text="Thời gian đến:" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="{Binding myPCNV.ThoiGianDen}" Grid.Row="1" Grid.Column="1"/>
+
+                    <TextBlock Text="Thời gian đi:" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="{Binding myPCNV.ThoiGianDi}" Grid.Row="2" Grid.Column="1"/>
+
+                    <TextBlock Text="Tổng thời gian:" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Text="{Binding tongThoiGian}" Grid.Row="3" Grid.Column="1"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <RadioButton GroupName="typeCheck" Content="Đến" FontSize="15" FontWeight="Bold" Margin="20,0"
                                  IsChecked="{Binding isDen, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <RadioButton GroupName="typeCheck" Content="Đi" FontSize="15" FontWeight="Bold" Margin="20,0"
+                        <RadioButton GroupName="typeCheck" Content="Đi" FontSize="15" FontWeight="Bold" Margin="20,0"
                                  IsChecked="{Binding isDi, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                </StackPanel>
-                <xctk:TimePicker Value="{Binding myTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    </StackPanel>
+                    <xctk:TimePicker Value="{Binding myTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Grid.Row="1" Grid.Column="0" Margin="10"/>
-                <Button Content="Save" Margin="10,5" Width="75" Grid.Row="1" Grid.Column="1" Command="{Binding SaveCommand}"/>
+                    <Button Content="Save" Margin="10,5" Grid.Row="1" Grid.Column="1" Command="{Binding SaveCommand}"
+                            Style="{StaticResource buttonSave}"/>
+                </Grid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button  Content="Done" HorizontalAlignment="Center" Command="{Binding DoneCommand}"
+                             Style="{StaticResource buttonDone}"/>
+                    <Button Content="Cancel" Margin="5,0" Grid.Row="1" Grid.Column="1" Command="{Binding CancelCommand}"
+                            Style="{StaticResource buttonCancel}"/>
+                </StackPanel>
             </Grid>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button  Content="Done" HorizontalAlignment="Center" Command="{Binding DoneCommand}"/>
-                <Button Content="Cancel" Margin="10,5" Width="75" Grid.Row="1" Grid.Column="1" Command="{Binding CancelCommand}"/>
-            </StackPanel>
         </Grid>
-    </Grid>
+    </DockPanel>
 </Window>

@@ -6,9 +6,8 @@
              xmlns:local="clr-namespace:WeddingStoreDesktop.Views"
              mc:Ignorable="d">
     <Grid>
-        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="500"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -22,7 +21,7 @@
                     <RowDefinition/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                
+
                 <GroupBox Header="Lương nhân viên" Margin="5" Grid.Row="0">
                     <DataGrid x:Name="dataGridLuong"
                               ItemsSource="{Binding LstLuongNhanVien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -86,5 +85,4 @@
                                                FontSize="25" FontWeight="Bold" Foreground="Black"
                                                HorizontalAlignment="Right" VerticalAlignment="Center"/>
         </Grid>
-    </Grid>
 </UserControl>

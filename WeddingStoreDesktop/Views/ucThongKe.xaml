@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeddingStoreDesktop.Views"
              xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d"  Background="#FF7F8585">
+             mc:Ignorable="d">
     <Grid>
         <!--<TabControl>
             <TabItem Header="Doanh Thu">-->
@@ -41,8 +41,8 @@
                          VerticalAlignment="Center" Margin="10,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          Text="{Binding nam, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Button Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Show_Click">
-                    <material:PackIcon Kind="Show" Width="30" Height="30" VerticalAlignment="Center"/>
+                <Button Grid.Column="3" Click="Show_Click" Style="{StaticResource buttonSearch}">
+                    <material:PackIcon Kind="Show"/>
                 </Button>
             </Grid>
             <TabControl>

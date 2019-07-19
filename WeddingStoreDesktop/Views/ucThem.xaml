@@ -8,7 +8,6 @@
              xmlns:converter="clr-namespace:WeddingStoreDesktop.Converters"
              mc:Ignorable="d"
              Width="Auto" Height="Auto"
-             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
              xmlns:vm="clr-namespace:WeddingStoreDesktop.ViewModels">
 
     <UserControl.Resources>
@@ -16,18 +15,18 @@
     </UserControl.Resources>
 
     <DockPanel>
-        <Grid DockPanel.Dock="Top" Height="60" Background="#b8cdf2" VerticalAlignment="Top">
+        <Grid Style="{StaticResource gridTitlte}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Thêm mới" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="10"/>
-            <Button Grid.Column="1" Margin="5" Command="{Binding SaveCommand}">
-                <material:PackIcon Kind="ContentSave"/>
+            <TextBlock Grid.Column="0" Text="Thêm mới" Style="{StaticResource textBlockTitlte}"/>
+            <Button Grid.Column="1" Margin="5" Command="{Binding SaveCommand}" Style="{StaticResource buttonSave}">
+                <material:PackIcon Kind="ContentSave" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
-            <Button Grid.Column="2" Margin="5" Background="#FFB00F1D" Command="{Binding RefreshCommand}">
-                <material:PackIcon Kind="Cancel"/>
+            <Button Grid.Column="2" Margin="5" Style="{StaticResource buttonCancel}" Command="{Binding RefreshCommand}">
+                <material:PackIcon Kind="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
         </Grid>
         <!--<Grid DockPanel.Dock="Top" Height="70" Background="#6e8aa0">
@@ -49,7 +48,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Background= "Aqua" HorizontalAlignment="Left" Width="250">
+            <Grid Grid.Column="0" HorizontalAlignment="Left" Width="250">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -58,28 +57,25 @@
                 <GroupBox Grid.Row="0" Header="Thông tin khách hàng">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="AccountCardDetails" Width="30" Height="30" VerticalAlignment="Center"/>
+                            <material:PackIcon Kind="AccountCardDetails" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding myKH.MaKH, StringFormat='Mã khách hàng: {0:N}'}"
                                        VerticalAlignment="Center" Margin="10,0,0,0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Bottom"/>
-                            <TextBox material:HintAssist.Hint="Tên khách hàng" Background="Transparent"
-                               Margin="0,0,0,0"  FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                                 Width="207" Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            <material:PackIcon Kind="Account" VerticalAlignment="Bottom"/>
+                            <TextBox material:HintAssist.Hint="Tên khách hàng" Style="{StaticResource textBox}"
+                                    Width="207" Height="50"
                                      Text="{Binding myKH.TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="AddressMarker" Width="30" Height="30" VerticalAlignment="Bottom"/>
-                            <TextBox material:HintAssist.Hint="Địa chỉ" Background="Transparent"
-                               Margin="0,0,0,0"  FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                                 Width="207" Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            <material:PackIcon Kind="AddressMarker" VerticalAlignment="Bottom"/>
+                            <TextBox material:HintAssist.Hint="Địa chỉ" Style="{StaticResource textBox}"
+                                     Width="207" Height="50"
                                      Text="{Binding myKH.DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="Phone" Width="30" Height="30" VerticalAlignment="Bottom"/>
-                            <TextBox material:HintAssist.Hint="Số điện thoại" Background="Transparent"
-                               Margin="0,0,0,0"  FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                            <material:PackIcon Kind="Phone" VerticalAlignment="Bottom"/>
+                            <TextBox material:HintAssist.Hint="Số điện thoại" 
                                  Width="207" Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      Text="{Binding myKH.SoDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
@@ -89,18 +85,18 @@
                 <GroupBox Grid.Row="1" Header="Thông tin hóa đơn">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="AccountCardDetails" Width="30" Height="30" VerticalAlignment="Center"/>
+                            <material:PackIcon Kind="AccountCardDetails" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding myHD.MaHD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Mã hóa đơn: {0:N}'}"
                                        VerticalAlignment="Center" Margin="10,0,0,0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="Pen" Width="30" Height="30" VerticalAlignment="Bottom"/>
+                            <material:PackIcon Kind="Pen" VerticalAlignment="Bottom"/>
                             <DatePicker material:HintAssist.Hint="Ngay lập hóa đơn" Margin="10,0,0,0"
                                         HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                                         Text="{Binding myHD.NgayLap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="Redo" Width="30" Height="30" VerticalAlignment="Bottom"/>
+                            <material:PackIcon Kind="Redo" VerticalAlignment="Bottom"/>
                             <!--<TextBox material:HintAssist.Hint="Ngày trang trí" Background="Transparent"
                                Margin="0,0,0,0"  FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                                  Width="207" Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -110,13 +106,13 @@
                                         Text="{Binding myHD.NgayTrangTri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="Undo" Width="30" Height="30" VerticalAlignment="Bottom"/>
+                            <material:PackIcon Kind="Undo" VerticalAlignment="Bottom"/>
                             <DatePicker material:HintAssist.Hint="Ngay tháo dở" Margin="10,0,0,0"
                                         HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                                         Text="{Binding myHD.NgayThaoDo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="Money" Width="30" Height="30" VerticalAlignment="Bottom"/>
+                            <material:PackIcon Kind="Money" VerticalAlignment="Bottom"/>
                             <TextBox Margin="10,0,0,0"
                                         HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                                         Text="{Binding myHD.TongTien, StringFormat=' {0:0,0}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -124,32 +120,18 @@
                     </StackPanel>
                 </GroupBox>
 
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <Button Width="70" Height="50" Margin="20" Click="SaveHDKH_Click"
-                            HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="{x:Null}">
-                        <material:PackIcon Kind="ContentSave" Width="50" Height="50"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <material:PackIcon.Foreground>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="Black" Offset="0"/>
-                                    <GradientStop Color="#FF2AF00A" Offset="1"/>
-                                </LinearGradientBrush>
-                            </material:PackIcon.Foreground>
-                        </material:PackIcon>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Margin="20" Click="SaveHDKH_Click" Style="{StaticResource buttonSave}"
+                            HorizontalContentAlignment="Center" VerticalAlignment="Center">
+                        <material:PackIcon Kind="ContentSave"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Button>
 
-                    <Button Width="70" Height="50" Margin="20" Background="{x:Null}"
+                    <Button Style="{StaticResource buttonRefresh}" Margin="20"
                             HorizontalContentAlignment="Center" VerticalAlignment="Center"
                             Click="Refresh_CLick">
-                        <material:PackIcon Kind="Refresh" Width="50" Height="50"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <material:PackIcon.Foreground>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="Black" Offset="0"/>
-                                    <GradientStop Color="#FFF70F0F" Offset="1"/>
-                                </LinearGradientBrush>
-                            </material:PackIcon.Foreground>
-                        </material:PackIcon>
+                        <material:PackIcon Kind="Refresh"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Button>
                 </StackPanel>
             </Grid>
@@ -197,7 +179,7 @@
                             </ListView.ItemTemplate>
                         </ListView>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <material:PackIcon Kind="Money" Width="30" Height="25" Margin="5"/>
+                            <material:PackIcon Kind="Money" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="{Binding TongTienMau, UpdateSourceTrigger=PropertyChanged, StringFormat=' {0:0,0}'}" 
                                        Margin="5" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
                             <TextBlock Text="VNĐ" 
@@ -238,7 +220,7 @@
                             </ListView.ItemTemplate>
                         </ListView>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <material:PackIcon Kind="Money" Width="30" Height="25" Margin="5"/>
+                            <material:PackIcon Kind="Money" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="{Binding TongTienPhatSinh, UpdateSourceTrigger=PropertyChanged, StringFormat=' {0:0,0}'}" 
                                        Margin="5" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
                             <TextBlock Text="VNĐ" 
@@ -264,8 +246,7 @@
                             </Grid.ColumnDefinitions>
                             <material:PackIcon Kind="Search" Grid.Column="0"
                                                    HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                            <TextBox Grid.Column="1" material:HintAssist.Hint="Search Here!!"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            <TextBox Grid.Column="1" material:HintAssist.Hint="Search Here!!" Style="{StaticResource textBoxSearch}"
                                          Text="{Binding keyWordSanPham, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
 
@@ -284,7 +265,7 @@
                                          ItemsSource="{Binding LstDichVu}" SelectedItem="{Binding SelectedDV}"
                                           DisplayMemberPath="TenDV"/>
                             <Button Grid.Column="2" Margin="7" Command="{Binding RefreshSanPhamCommand}">
-                                <material:PackIcon Kind="Refresh"/>
+                                <material:PackIcon Kind="Refresh" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Button>
                         </Grid>
 
@@ -303,7 +284,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Image Grid.RowSpan="2" Grid.Column="0"
                                                Source="{Binding HinhMoTa, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource myImage}}"/>
-                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TenSP}" HorizontalAlignment="Center"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TenSP}" Style="{StaticResource textBlockBold}"/>
                                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding GiaTien, StringFormat=' {0:0,0} VNĐ'}" 
                                                    HorizontalAlignment="Left"/>
                                     </Grid>
@@ -348,7 +329,7 @@
                                     <ColumnDefinition Width="30"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <material:PackIcon Grid.Column="0" Kind="Search" Width="30" Height="30" VerticalAlignment="Bottom"/>
+                                <material:PackIcon Grid.Column="0" Kind="Search" VerticalAlignment="Bottom"/>
                                 <TextBox Grid.Column="1" material:HintAssist.Hint="Search Here!!"
                                          Text="{Binding keyWordVatLieu,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>

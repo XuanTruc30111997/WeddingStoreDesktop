@@ -81,7 +81,7 @@
         <Storyboard x:Key="showChinhSua">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupChinhSua">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="600"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="600"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupXem">
                 <EasingDoubleKeyFrame KeyTime="0" Value="600"/>
@@ -95,7 +95,7 @@
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupXem">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="600"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="600"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -146,8 +146,8 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="Danh sách ngày" Background="#89afed">
-            <Grid>
+        <GroupBox Grid.Row="0" Header="Danh sách ngày">
+            <Grid Style="{StaticResource gridDanhSach}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80"/>
                     <RowDefinition/>
@@ -159,8 +159,8 @@
                               FontSize="17"></ComboBox>
                     <TextBlock Text="Năm" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0"/>
                     <TextBox Width="120" Text="{Binding Nam, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold" TextAlignment="Center" Margin="10,0"/>
-                    <Button Command="{Binding SearchCommand}">
-                        <material:PackIcon Kind="Search" Width="30" Height="25"/>
+                    <Button Command="{Binding SearchCommand}" Style="{StaticResource buttonSearch}">
+                        <material:PackIcon Kind="Search"/>
                     </Button>
                 </StackPanel>
                 <ListBox Grid.Row="1" ItemContainerStyle="{StaticResource SimpleListBoxItem}" Background="Transparent"
@@ -198,6 +198,7 @@
                 </ListBox>
             </Grid>
         </GroupBox>
+        
         <Grid Grid.Row="1" Background="#5b82c1" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
