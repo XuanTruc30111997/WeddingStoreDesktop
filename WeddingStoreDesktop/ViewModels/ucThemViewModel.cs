@@ -16,12 +16,70 @@ using WeddingStoreDesktop.Models.SystemModel;
 using WeddingStoreDesktop.Models.DesktopModel;
 using WeddingStoreDesktop.Services.SystemService;
 using WeddingStoreDesktop.Services.DesktopService;
+using System.Globalization;
 
 namespace WeddingStoreDesktop.ViewModels
 {
     public class ucThemViewModel : BaseViewModel
     {
         #region Properties
+
+        private DateTime _Ngay { get; set; }
+        public DateTime Ngay
+        {
+            get => _Ngay;
+            set
+            {
+                _Ngay = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _showDatLich { get; set; }
+        public bool showDatLich
+        {
+            get => _showDatLich;
+            set
+            {
+                _showDatLich = value;
+                OnPropertyChanged();
+                notShowDatLich = !_showDatLich;
+            }
+        }
+
+        private bool _notShowDatLich { get; set; }
+        public bool notShowDatLich
+        {
+            get => _notShowDatLich;
+            set
+            {
+                _notShowDatLich = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Khách hàng
+        private List<DatLich> _LstDatLich { get; set; }
+        public List<DatLich> LstDatLich
+        {
+            get => _LstDatLich;
+            set
+            {
+                _LstDatLich = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DatLich _SelectedDatLich { get; set; }
+        public DatLich SelectedDatLich
+        {
+            get => _SelectedDatLich;
+            set
+            {
+                _SelectedDatLich = value;
+                OnPropertyChanged();
+            }
+        }
 
         // Sản phẩm
         private List<SanPham> _myLstSanPham { get; set; }
@@ -319,12 +377,19 @@ namespace WeddingStoreDesktop.ViewModels
         #region Constructors
         public ucThemViewModel()
         {
+            //Ngay = DateTime.Today.Date.ToString("d");
+            showDatLich = false;
+            Ngay = DateTime.Now;
+            //Ngay = DateTime.ParseExact(DateTime.Today.Date.ToString("d"),"MM/dd/yyyy",CultureInfo.InvariantCulture).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
             SelectedOption = "All";
             GetData();
             RefreshSanPhamCommand = new ActionCommand(p => RefreshSanPham());
             SaveCommand = new ActionCommand(p => Save());
             RefreshCommand = new ActionCommand(p => Refresh());
             SaveHDKHCommand = new ActionCommand(p => GetDanhSachVatLieu());
+            SearchDatLichCommand = new ActionCommand(p => SearchDatLich());
+            DoneCommand = new ActionCommand(p => SetKhachHangDatLich());
+            DatLichCommand = new ActionCommand(p => ShowOrCloseDatLich());
         }
         #endregion
 
@@ -333,9 +398,26 @@ namespace WeddingStoreDesktop.ViewModels
         public ICommand RefreshCommand { get; }
         public ICommand SaveHDKHCommand { get; }
         public ICommand SaveCommand { get; }
+        public ICommand SearchDatLichCommand { get; }
+        public ICommand DoneCommand { get; }
+        public ICommand DatLichCommand { get; }
         #endregion
 
         #region Methods
+
+        void SetKhachHangDatLich()
+        {
+            if (_SelectedDatLich != null)
+            {
+                myKH.TenKH = _SelectedDatLich.TenKH;
+                myKH.DiaChi = _SelectedDatLich.DiaChi;
+                myKH.SoDT = _SelectedDatLich.SoDT;
+
+                OnPropertyChanged(nameof(myKH));
+
+                //SelectedDatLich = new DatLich();
+            }
+        }
 
         void RefreshSanPham()
         {
@@ -343,6 +425,10 @@ namespace WeddingStoreDesktop.ViewModels
             SelectedDV = null;
             keyWordSanPham = "";
             GetSanPham();
+        }
+        void ShowOrCloseDatLich()
+        {
+            showDatLich = !_showDatLich;
         }
 
         void GetData()
@@ -358,7 +444,9 @@ namespace WeddingStoreDesktop.ViewModels
                 NgayTrangTri = null,
                 NgayThaoDo = null,
                 TongTien = 0,
-                TinhTrang = 0
+                TinhTrang = 0,
+                TienCoc = 0,
+                IsThanhToan = false
             };
 
             myKH = new KhachHang
@@ -372,12 +460,17 @@ namespace WeddingStoreDesktop.ViewModels
             //_lstVatLieu = DataProvider.Ins.DB.KhoVatLieux.ToList();
             //_firstLstVatLieu = _lstVatLieu;
             LstThongTinMau = new List<ThongTinMauModel>();
-            _TongTienMau = 0;
+            TongTienMau = 0;
             LstThongTinPhatSinh = new List<ThongTinPhatSinhModel>();
-            _TongTienPhatSinh = 0;
+            TongTienPhatSinh = 0;
 
             LstLoaiDichVu = DataProvider.Ins.DB.LoaiDichVus.ToList();
             LstDichVu = DataProvider.Ins.DB.DichVus.ToList();
+        }
+
+        void SearchDatLich()
+        {
+            LstDatLich = DataProvider.Ins.DB.DatLiches.Where(dl => dl.TinhTrang == 4 && dl.NgayDat.Value == _Ngay).ToList();
         }
 
         public void GetSanPham()
@@ -461,11 +554,18 @@ namespace WeddingStoreDesktop.ViewModels
         }
         void GetDanhSachVatLieu()
         {
+            LstThongTinMau = new List<ThongTinMauModel>();
+            LstThongTinPhatSinh = new List<ThongTinPhatSinhModel>();
+
+            TongTienMau = 0;
+            TongTienPhatSinh = 0;
+
             if (_myHD.NgayTrangTri.HasValue && _myHD.NgayThaoDo.HasValue && _myHD.NgayLap.HasValue)
             {
                 // Làm mới danh sách mẫu và danh sách phát sinh
-                LstThongTinMau.Clear();
-                LstThongTinPhatSinh.Clear();
+                //LstThongTinMau.Clear();
+                //LstThongTinPhatSinh.Clear();
+
                 isSaveHDKH = true;
                 // Lấy danh sách vật liệu ảo
                 _lstVatLieuAo = new List<KhoVatLieuAoModel>();
@@ -805,7 +905,16 @@ namespace WeddingStoreDesktop.ViewModels
                             });
                             DataProvider.Ins.DB.SaveChanges();
                         }
-                        MessageBox.Show("Thêm dữ liệu thành công!!", "Success!!!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+                        // Cập nhập tình trạng đặt lịch 4 --> 5: Đã lập
+                        if (_SelectedDatLich != null)
+                        {
+                            DatLich myDatLich = DataProvider.Ins.DB.DatLiches.FirstOrDefault(dl => dl.MaDL == _SelectedDatLich.MaDL);
+                            myDatLich.TinhTrang = 5;
+                            DataProvider.Ins.DB.SaveChanges();
+                        }
+
+                        MessageBox.Show("Thêm dữ liệu thành công!!", "Success!!!", MessageBoxButton.OK);
                         Refresh();
                     }
                     catch (Exception)

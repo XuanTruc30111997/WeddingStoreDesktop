@@ -62,6 +62,7 @@ namespace WeddingStoreDesktop.ViewModels
                 new ReportParameter("MaHD",myHD.MaHD),
                 new ReportParameter("NgayLap",myHD.NgayLap.Value.ToString()),
                 new ReportParameter("TongTien",myHD.TongTien.Value.ToString()),
+                new ReportParameter("TienCoc",myHD.TienCoc.Value.ToString()),
                 new ReportParameter("TenNV",Shared.CurrentTenNV)
             };
             _reportViewer.LocalReport.SetParameters(rptParameters);

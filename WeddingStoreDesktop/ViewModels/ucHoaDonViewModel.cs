@@ -170,6 +170,9 @@ namespace WeddingStoreDesktop.ViewModels
             ChangeTinhTrangTo1Command = new ActionCommand(p => ChangeTinhTrang1());
             ChangeTinhTrangTo2Command = new ActionCommand(p => ChangeTinhTrang2());
             ChangeTinhTrangTo3Command = new ActionCommand(p => ChangeTinhTrang3());
+
+            NhanThanhToanCommand = new ActionCommand(p => NhanThanhToan());
+            HuyThanhToanCommand = new ActionCommand(p => HuyThanhToan());
         }
         #endregion
 
@@ -182,6 +185,8 @@ namespace WeddingStoreDesktop.ViewModels
         public ICommand ChangeTinhTrangTo1Command { get; }
         public ICommand ChangeTinhTrangTo2Command { get; }
         public ICommand ChangeTinhTrangTo3Command { get; }
+        public ICommand NhanThanhToanCommand { get; }
+        public ICommand HuyThanhToanCommand { get; }
         #endregion
 
         #region Methods
@@ -447,6 +452,34 @@ namespace WeddingStoreDesktop.ViewModels
                 DataProvider.Ins.DB.SaveChanges();
 
                 myHD.TinhTrang = 2;
+                OnPropertyChanged(nameof(myHD));
+            }
+        }
+
+        private void NhanThanhToan()
+        {
+            var response = MessageBox.Show("Nhận thanh toán hóa đơn?", "Thanh toán", MessageBoxButton.YesNo);
+            if (response == MessageBoxResult.Yes)
+            {
+                HoaDon myHoaDon = DataProvider.Ins.DB.HoaDons.FirstOrDefault(hd => hd.MaHD == _myHD.MaHD);
+                myHoaDon.IsThanhToan = true;
+                DataProvider.Ins.DB.SaveChanges();
+
+                myHD.IsThanhToan = true;
+                OnPropertyChanged(nameof(myHD));
+            }
+        }
+
+        private void HuyThanhToan()
+        {
+            var response = MessageBox.Show("Hủy nhận thanh toán hóa đơn?", "Hủy Thanh toán", MessageBoxButton.YesNo);
+            if (response == MessageBoxResult.Yes)
+            {
+                HoaDon myHoaDon = DataProvider.Ins.DB.HoaDons.FirstOrDefault(hd => hd.MaHD == _myHD.MaHD);
+                myHoaDon.IsThanhToan = false;
+                DataProvider.Ins.DB.SaveChanges();
+
+                myHD.IsThanhToan = false;
                 OnPropertyChanged(nameof(myHD));
             }
         }

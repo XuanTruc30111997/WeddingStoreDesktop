@@ -11,8 +11,8 @@ namespace WeddingStoreDesktop.Models.SystemModel
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class DatLich : BaseModel
+    
+    public partial class DatLich:BaseModel
     {
         public string MaDL { get; set; }
         public string TenKH { get; set; }
@@ -22,7 +22,7 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public Nullable<System.DateTime> NgayDat { get; set; }
         public Nullable<System.TimeSpan> ThoiGian { get; set; }
         public string GhiChu { get; set; }
-        private Nullable<bool> _TrangThaiDuyet { get; set; }
-        public Nullable<bool> TrangThaiDuyet { get => _TrangThaiDuyet; set { _TrangThaiDuyet = value; OnPropertyChanged(); } }
+        private Nullable<int> _TinhTrang { get; set; }
+        public Nullable<int> TinhTrang { get => _TinhTrang; set { _TinhTrang = value; OnPropertyChanged(); } }
     }
 }

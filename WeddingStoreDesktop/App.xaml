@@ -32,8 +32,6 @@
             </Style>
 
             <!-- TextBlock CS -->
-
-
             <Style TargetType="TextBlock" x:Name="textBlock">
                 <Setter Property="Margin" Value="5,0,0,0"/>
                 <Setter Property="FontSize" Value="13"/>
@@ -97,11 +95,23 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
 
+            <Style TargetType="material:PackIcon" x:Key="packIconSmall">
+                <Setter Property="Width" Value="15"/>
+                <Setter Property="Height" Value="15"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
             <!-- Button CS -->
             
             <Style TargetType="Button" x:Key="baseStyleButton">
                 <Setter Property="Height" Value="40"/>
                 <Setter Property="Width" Value="60"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="buttonSmall">
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Width" Value="30"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
             </Style>
 

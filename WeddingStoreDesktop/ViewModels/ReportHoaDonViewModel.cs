@@ -37,10 +37,9 @@ namespace WeddingStoreDesktop.ViewModels
             this.maHD = maHD;
             this.maKH = maKH;
 
-            PayCommand = new ActionCommand(p => ahihi());
+            //PayCommand = new ActionCommand(p => ahihi());
 
             SaveCommand = new ActionCommand(p => CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(true)));
-            CancelCommand = new ActionCommand(p => CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(false)));
         }
 
         public string maNV;
@@ -53,14 +52,12 @@ namespace WeddingStoreDesktop.ViewModels
             this.thang = thang;
             this.nam = nam;
 
-            PayCommand = new ActionCommand(p => ahihi());
+            //PayCommand = new ActionCommand(p => ahihi());
             SaveCommand = new ActionCommand(p => CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(true)));
-            CancelCommand = new ActionCommand(p => CloseRequested?.Invoke(this, new DialogCloseRequestedEventArgs(false)));
         }
 
         public ICommand SaveCommand { get; }
-        public ICommand CancelCommand { get; }
-        public ICommand PayCommand { get; }
+        //public ICommand PayCommand { get; }
 
         //public void ahihi()
         //{
@@ -115,11 +112,11 @@ namespace WeddingStoreDesktop.ViewModels
         //    }
         //}
 
-        void ahihi()
-        {
-            PrintDialog printDlg = new PrintDialog();
-            if (printDlg.ShowDialog() == true)
-                printDlg.PrintVisual(new ucTestReport(maHD), "Hóa đơn");
-        }
+        //void ahihi()
+        //{
+        //    PrintDialog printDlg = new PrintDialog();
+        //    if (printDlg.ShowDialog() == true)
+        //        printDlg.PrintVisual(new ucTestReport(maHD), "Hóa đơn");
+        //}
     }
 }

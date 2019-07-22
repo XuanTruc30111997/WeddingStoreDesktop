@@ -66,6 +66,8 @@
     <EntitySetMapping Name="HoaDons">
       <EntityTypeMapping TypeName="WeddingStoreDBModel.HoaDon">
         <MappingFragment StoreEntitySet="HoaDon">
+          <ScalarProperty Name="IsThanhToan" ColumnName="IsThanhToan" />
+          <ScalarProperty Name="TienCoc" ColumnName="TienCoc" />
           <ScalarProperty Name="MaHD" ColumnName="MaHD" />
           <ScalarProperty Name="MaKH" ColumnName="MaKH" />
           <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
@@ -178,6 +180,7 @@
     <EntitySetMapping Name="DatLiches">
       <EntityTypeMapping TypeName="WeddingStoreDBModel.DatLich">
         <MappingFragment StoreEntitySet="DatLich">
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
           <ScalarProperty Name="MaDL" ColumnName="MaDL" />
           <ScalarProperty Name="TenKH" ColumnName="TenKH" />
           <ScalarProperty Name="SoDT" ColumnName="SoDT" />
@@ -186,7 +189,17 @@
           <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
           <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-          <ScalarProperty Name="TrangThaiDuyet" ColumnName="TrangThaiDuyet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DanhGias">
+      <EntityTypeMapping TypeName="WeddingStoreDBModel.DanhGia">
+        <MappingFragment StoreEntitySet="DanhGia">
+          <ScalarProperty Name="SaoDanhGia" ColumnName="SaoDanhGia" />
+          <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="MaDG" ColumnName="MaDG" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

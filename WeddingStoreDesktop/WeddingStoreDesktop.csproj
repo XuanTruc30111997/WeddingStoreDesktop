@@ -196,6 +196,8 @@
     <Compile Include="Converters\ConvertDisplayImage.cs" />
     <Compile Include="Converters\ConvertNgayToImage.cs" />
     <Compile Include="Converters\ConvertObjectToBinary.cs" />
+    <Compile Include="Converters\ConvertThanhToanToImage.cs" />
+    <Compile Include="Converters\ConvertTinhTrangDatLich.cs" />
     <Compile Include="Converters\ConvertTinhTrangToBrush.cs" />
     <Compile Include="Converters\ConvertToEnable.cs" />
     <Compile Include="Converters\ConvertToVisibility.cs" />
@@ -239,6 +241,9 @@
       <DependentUpon>WeddingStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SystemModel\ChiTietSanPham.cs">
+      <DependentUpon>WeddingStoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemModel\DanhGia.cs">
       <DependentUpon>WeddingStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SystemModel\DatLich.cs">
@@ -718,6 +723,14 @@
     <Resource Include="Images\TinhNang\datlich.png" />
     <Resource Include="Images\TinhNang\blog.png" />
     <Resource Include="Images\homeBackground.jpg" />
+    <Resource Include="Images\ChuaDuyet.png" />
+    <Resource Include="Images\ChuaGap.png" />
+    <Resource Include="Images\DaLap.png" />
+    <Resource Include="Images\DongYLap.png" />
+    <Resource Include="Images\KhongDongYLap.png" />
+    <Resource Include="Images\DaGap.png" />
+    <Resource Include="Images\DaThanhToan.png" />
+    <Resource Include="Images\ChuaThanhToan.png" />
     <Content Include="Models\SystemModel\WeddingStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WeddingStoreModel.edmx</DependentUpon>

@@ -83,7 +83,11 @@
         </EventTrigger>
     </UserControl.Triggers>
     -->
-    <Grid>
+    <DockPanel>
+        <Grid Style="{StaticResource gridTitlte}">
+            <TextBlock Text="Quản lý vật liệu" Style="{StaticResource textBlockTitlte}"/>
+        </Grid>
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -187,5 +191,6 @@
             <TextBlock Grid.Row="3" Text="{Binding SelectedVatLieu.GiaTien, StringFormat='Giá tiền: {0:0,0}'}"
                        HorizontalAlignment="Center" FontSize="20" FontWeight="ExtraBold"/>
         </Grid>
-    </Grid>
+        </Grid>
+    </DockPanel>
 </UserControl>

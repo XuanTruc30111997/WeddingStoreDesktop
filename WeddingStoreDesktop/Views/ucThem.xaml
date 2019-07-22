@@ -12,7 +12,32 @@
 
     <UserControl.Resources>
         <converter:ConvertDisplayImage x:Key="myImage"/>
+        <converter:BoolToVisibilityConverter x:Key="isShowDatLich" TrueValue="Visible" FalseValue="Collapsed"/>
+
+        <Storyboard x:Key="showDatLich">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="gridDatLich">
+                <EasingDoubleKeyFrame KeyTime="0" Value="30"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="250"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="closeDatLich">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="gridDatLich">
+                <EasingDoubleKeyFrame KeyTime="0" Value="250"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="30"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnShow">
+            <BeginStoryboard Storyboard="{StaticResource showDatLich}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnClose">
+            <BeginStoryboard Storyboard="{StaticResource closeDatLich}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
 
     <DockPanel>
         <Grid Style="{StaticResource gridTitlte}">
@@ -48,38 +73,143 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" HorizontalAlignment="Left" Width="250">
+            <Grid Grid.Column="0" HorizontalAlignment="Left" Width="300">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="90"/>
                 </Grid.RowDefinitions>
+                
                 <GroupBox Grid.Row="0" Header="Thông tin khách hàng">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="AccountCardDetails" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding myKH.MaKH, StringFormat='Mã khách hàng: {0:N}'}"
-                                       VerticalAlignment="Center" Margin="10,0,0,0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="Account" VerticalAlignment="Bottom"/>
-                            <TextBox material:HintAssist.Hint="Tên khách hàng" Style="{StaticResource textBox}"
-                                    Width="207" Height="50"
+                    <!--<Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <StackPanel Orientation="Horizontal">
+                                <material:PackIcon Kind="AccountCardDetails" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding myKH.MaKH, StringFormat='Mã khách hàng: {0:N}'}"
+                                       Margin="10,0,0,0" Style="{StaticResource textBlockBold}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <material:PackIcon Kind="Account" VerticalAlignment="Bottom"/>
+                                <TextBox material:HintAssist.Hint="Tên khách hàng" Style="{StaticResource textBox}" 
+                                     Width="207" Height="50"
                                      Text="{Binding myKH.TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="AddressMarker" VerticalAlignment="Bottom"/>
-                            <TextBox material:HintAssist.Hint="Địa chỉ" Style="{StaticResource textBox}"
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <material:PackIcon Kind="AddressMarker" VerticalAlignment="Bottom"/>
+                                <TextBox material:HintAssist.Hint="Địa chỉ" Style="{StaticResource textBox}"
                                      Width="207" Height="50"
                                      Text="{Binding myKH.DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <material:PackIcon Kind="Phone" VerticalAlignment="Bottom"/>
-                            <TextBox material:HintAssist.Hint="Số điện thoại" 
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <material:PackIcon Kind="Phone" VerticalAlignment="Bottom"/>
+                                <TextBox material:HintAssist.Hint="Số điện thoại" 
                                  Width="207" Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      Text="{Binding myKH.SoDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
+                        <Grid Grid.Column="1" HorizontalAlignment="Right">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource buttonSmall}" Margin="3,0,0,0">
+                                <material:PackIcon Kind="ArrowBack" Style="{StaticResource packIconSmall}"/>
+                            </Button>
+                            <Grid Grid.Column="1" Style="{StaticResource gridDanhSach}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Text="Nhập ngày: " Style="{StaticResource textBlockBold}"/>
+                                    <TextBox material:HintAssist.Hint="mm/dd/yyyy" VerticalAlignment="Center" Margin="5,0,5,10"
+                                         Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                                    <Button Style="{StaticResource buttonSmall}" Background="Transparent" BorderBrush="#52504a">
+                                        <material:PackIcon Kind="Search" Style="{StaticResource packIconSmall}"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Grid>-->
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Right" Width="30" x:Name="gridDatLich">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource buttonSmall}" Margin="3,0,0,0"
+                                    Background="#a4bae0" x:Name="btnShow"
+                                    Visibility="{Binding notShowDatLich, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource isShowDatLich}}"
+                                    Command="{Binding DatLichCommand}">
+                                <material:PackIcon Kind="ArrowCollapseLeft" Style="{StaticResource packIconSmall}"/>
+                            </Button>
+                            <Button Grid.Column="0" Style="{StaticResource buttonSmall}" Margin="3,0,0,0"
+                                    Background="#a4bae0" x:Name="btnClose"
+                                    Visibility="{Binding showDatLich, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource isShowDatLich}}"
+                                    Command="{Binding DatLichCommand}">
+                                <material:PackIcon Kind="ArrowCollapseRight" Style="{StaticResource packIconSmall}"/>
+                            </Button>
+                            <Grid Grid.Column="1" Style="{StaticResource gridDanhSach}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Text="Nhập ngày: " Style="{StaticResource textBlockBold}"/>
+                                    <!--<TextBox material:HintAssist.Hint="dd/mm/yyyy" VerticalAlignment="Center" Margin="5,0,5,10"
+                                             Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>-->
+                                    <DatePicker material:HintAssist.Hint="Ngày" Margin="5,0,0,0" Width="100"
+                                                HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                                Text="{Binding Ngay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <Button Style="{StaticResource buttonSmall}" Background="Transparent" BorderBrush="#52504a"
+                                            Margin="10" Command="{Binding SearchDatLichCommand}">
+                                        <material:PackIcon Kind="Search" Style="{StaticResource packIconSmall}"/>
+                                    </Button>
+                                </StackPanel>
+
+                                <ComboBox material:HintAssist.Hint="Tên khách hàng" Grid.Row="1" Margin="5"
+                                          Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                          VerticalAlignment="Top" ItemsSource="{Binding LstDatLich, UpdateSourceTrigger=PropertyChanged}"
+                                          SelectedItem="{Binding SelectedDatLich, UpdateSourceTrigger=PropertyChanged}"
+                                          DisplayMemberPath="TenKH"/>
+
+                                <Button Grid.Row="2" Style="{StaticResource buttonDone}" Content="Xong" HorizontalAlignment="Right" Margin="5"
+                                        Command="{Binding DoneCommand}"/>
+                            </Grid>
+                        </Grid>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <material:PackIcon Kind="AccountCardDetails" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding myKH.MaKH, StringFormat='Mã khách hàng: {0:N}'}"
+                                       Margin="10,0,0,0" Style="{StaticResource textBlockBold}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <material:PackIcon Kind="Account" VerticalAlignment="Bottom"/>
+                                <TextBox material:HintAssist.Hint="Tên khách hàng" Style="{StaticResource textBox}" 
+                                     Width="207" Height="50"
+                                     Text="{Binding myKH.TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <material:PackIcon Kind="AddressMarker" VerticalAlignment="Bottom"/>
+                                <TextBox material:HintAssist.Hint="Địa chỉ" Style="{StaticResource textBox}"
+                                     Width="207" Height="50"
+                                     Text="{Binding myKH.DiaChi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <material:PackIcon Kind="Phone" VerticalAlignment="Bottom"/>
+                                <TextBox material:HintAssist.Hint="Số điện thoại" 
+                                 Width="207" Height="50" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Text="{Binding myKH.SoDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
                 </GroupBox>
 
                 <GroupBox Grid.Row="1" Header="Thông tin hóa đơn">
@@ -87,7 +217,7 @@
                         <StackPanel Orientation="Horizontal">
                             <material:PackIcon Kind="AccountCardDetails" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding myHD.MaHD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Mã hóa đơn: {0:N}'}"
-                                       VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                       Margin="10,0,0,0" Style="{StaticResource textBlockBold}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <material:PackIcon Kind="Pen" VerticalAlignment="Bottom"/>
@@ -113,23 +243,32 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <material:PackIcon Kind="Money" VerticalAlignment="Bottom"/>
+                            <TextBlock Text="Tổng tiền:" Style="{StaticResource textBlockBold}"/>
                             <TextBox Margin="10,0,0,0"
                                         HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                                         Text="{Binding myHD.TongTien, StringFormat=' {0:0,0}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <material:PackIcon Kind="Money" VerticalAlignment="Bottom"/>
+                            <TextBlock Text="Tiền cọc:" Style="{StaticResource textBlockBold}"/>
+                            <TextBox Margin="10,0,0,0"
+                                        HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                        Text="{Binding myHD.TienCoc, StringFormat=' {0:0,0}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Margin="20" Click="SaveHDKH_Click" Style="{StaticResource buttonSave}"
-                            HorizontalContentAlignment="Center" VerticalAlignment="Center">
+                    <Button Margin="20" Style="{StaticResource buttonSave}"
+                            HorizontalContentAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding SaveHDKHCommand}">
                         <material:PackIcon Kind="ContentSave"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Button>
 
                     <Button Style="{StaticResource buttonRefresh}" Margin="20"
                             HorizontalContentAlignment="Center" VerticalAlignment="Center"
-                            Click="Refresh_CLick">
+                            Command="{Binding RefreshCommand}">
                         <material:PackIcon Kind="Refresh"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Button>
@@ -148,9 +287,9 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <ListView x:Name="lstMau" Grid.Row="0"
-                        ItemsSource="{Binding LstThongTinMau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedItem="{Binding SelectedMau, UpdateSourceTrigger=PropertyChanged}"
-                              MouseDoubleClick="Mau_Click">
+                                  ItemsSource="{Binding LstThongTinMau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding SelectedMau, UpdateSourceTrigger=PropertyChanged}"
+                                  MouseDoubleClick="Mau_Click">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -164,7 +303,8 @@
                                         </Grid.ColumnDefinitions>
                                         <Image Grid.RowSpan="2" Grid.Column="0"
                                            Source="{Binding HinhMoTa, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myImage}}"/>
-                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TenSP}"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TenSP}"
+                                                   Style="{StaticResource textBlockBold}"/>
                                         <Grid Grid.Row="1" Grid.Column="1">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="150"/>
@@ -181,7 +321,7 @@
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                             <material:PackIcon Kind="Money" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="{Binding TongTienMau, UpdateSourceTrigger=PropertyChanged, StringFormat=' {0:0,0}'}" 
-                                       Margin="5" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+                                       Margin="5" Style="{StaticResource textBlockBoldLarge}"/>
                             <TextBlock Text="VNĐ" 
                                        Margin="5" FontSize="15" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         </StackPanel>
@@ -212,7 +352,8 @@
                                         </Grid.ColumnDefinitions>
                                         <Image Grid.RowSpan="2" Grid.Column="0"
                                            Source="{Binding AnhMoTa, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myImage}}"/>
-                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TenVL}"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TenVL}"
+                                                   Style="{StaticResource textBlockBold}"/>
                                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SoLuong}" HorizontalAlignment="Left"/>
                                         <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding ThanhTien, StringFormat=' {0:0,0} VNĐ'}" HorizontalAlignment="Right"/>
                                     </Grid>
@@ -222,7 +363,7 @@
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                             <material:PackIcon Kind="Money" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="{Binding TongTienPhatSinh, UpdateSourceTrigger=PropertyChanged, StringFormat=' {0:0,0}'}" 
-                                       Margin="5" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+                                       Margin="5" Style="{StaticResource textBlockBoldLarge}"/>
                             <TextBlock Text="VNĐ" 
                                        Margin="5" FontSize="15" FontWeight="DemiBold" VerticalAlignment="Center"/>
                         </StackPanel>
@@ -356,7 +497,8 @@
                                         </Grid.ColumnDefinitions>
                                         <Image Grid.RowSpan="2" Grid.Column="0"
                                                Source="{Binding AnhMoTa, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myImage}}"/>
-                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TenVL}"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TenVL}"
+                                                   Style="{StaticResource textBlockBold}"/>
                                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding GiaTien, StringFormat= ' {0:0,0} VNĐ'}"/>
                                     </Grid>
                                 </DataTemplate>

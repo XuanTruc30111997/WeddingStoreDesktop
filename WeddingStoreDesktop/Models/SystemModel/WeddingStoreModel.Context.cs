@@ -42,5 +42,6 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<DatLich> DatLiches { get; set; }
+        public virtual DbSet<DanhGia> DanhGias { get; set; }
     }
 }

@@ -33,10 +33,10 @@ namespace WeddingStoreDesktop.Views
             switch (vm.idRequest)
             {
                 case 1:
-                    ahihi.Children.Add(new ucTestReport(vm.maHD));
+                    gridReport.Children.Add(new ucTestReport(vm.maHD));
                     break;
                 case 2:
-                    ahihi.Children.Add(new ucReportLuongNhanVien(vm.maNV, vm.thang, vm.nam));
+                    gridReport.Children.Add(new ucReportLuongNhanVien(vm.maNV, vm.thang, vm.nam));
                     break;
             }
         }

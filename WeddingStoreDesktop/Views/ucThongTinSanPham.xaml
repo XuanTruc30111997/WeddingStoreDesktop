@@ -9,14 +9,14 @@
              xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <UserControl.Resources>
-        <converter:ConvertDisplayImage x:Key="myDispalyImage"/>
+        <converter:ConvertDisplayImage x:Key="myDisplayImage"/>
     </UserControl.Resources>
 
     <Grid Margin="10,5,10,0">
         <StackPanel Orientation="Vertical">
             <Ellipse Margin="5" Height="100" Width="100">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding mySanPham.HinhMoTa, Converter={StaticResource myDispalyImage}, UpdateSourceTrigger=PropertyChanged}"
+                    <ImageBrush ImageSource="{Binding mySanPham.HinhMoTa, Converter={StaticResource myDisplayImage}, UpdateSourceTrigger=PropertyChanged}"
                                 Stretch="Fill"/>
                 </Ellipse.Fill>
             </Ellipse>

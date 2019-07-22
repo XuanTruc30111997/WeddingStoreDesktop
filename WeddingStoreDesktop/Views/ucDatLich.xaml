@@ -7,11 +7,11 @@
              xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converter="clr-namespace:WeddingStoreDesktop.Converters"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="1000">
+             mc:Ignorable="d">
 
     <UserControl.Resources>
         <converter:BoolToVisibilityConverter x:Key="myVisibility" TrueValue="Visible" FalseValue="Collapsed"/>
+
         <Style x:Key="myCardNgay" TargetType="material:Card">
             <Setter Property="Template">
                 <Setter.Value>
@@ -46,7 +46,7 @@
         </Style>
 
         <Style x:Key="myCardDatLich" TargetType="material:Card">
-            <Setter Property="Template">
+            <!--<Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="material:Card">
                         <Border Background="{TemplateBinding Background}">
@@ -54,14 +54,14 @@
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
-            </Setter>
+            </Setter>-->
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FF64EED5"/>
                     <Trigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:0.400" To="145" Storyboard.TargetProperty="Height"/>
+                                <DoubleAnimation Duration="0:0:0.400" To="150" Storyboard.TargetProperty="Height"/>
                                 <DoubleAnimation Duration="0:0:0.400" To="165" Storyboard.TargetProperty="Width"/>
                             </Storyboard>
                         </BeginStoryboard>
@@ -69,7 +69,7 @@
                     <Trigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:0.400" To="130" Storyboard.TargetProperty="Height"/>
+                                <DoubleAnimation Duration="0:0:0.400" To="135" Storyboard.TargetProperty="Height"/>
                                 <DoubleAnimation Duration="0:0:0.400" To="150" Storyboard.TargetProperty="Width"/>
                             </Storyboard>
                         </BeginStoryboard>
@@ -78,24 +78,45 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="Ellipse" x:Name="myEllipse">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
+
         <Storyboard x:Key="showChinhSua">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupChinhSua">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="600"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="650"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupXem">
-                <EasingDoubleKeyFrame KeyTime="0" Value="600"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="650"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+
         </Storyboard>
         <Storyboard x:Key="closeChinhSua">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupChinhSua">
-                <EasingDoubleKeyFrame KeyTime="0" Value="600"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="650"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="groupXem">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="600"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="650"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowTinhtrang">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="stackTinhTrang">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="570"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseTinhtrang">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="stackTinhTrang">
+                <EasingDoubleKeyFrame KeyTime="0" Value="570"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -123,7 +144,8 @@
             <Setter Property="Margin" Value="5"/>
         </Style>
 
-        <converter:BoolToBrushConverter x:Key="myTinhTrang" TrueValue="#81ed61" FalseValue="#ef3248"/>
+        <!--<converter:BoolToBrushConverter x:Key="myTinhTrang" TrueValue="#81ed61" FalseValue="#ef3248"/>-->
+        <converter:ConvertTinhTrangDatLich x:Key="tinhTrang"/>
     </UserControl.Resources>
 
     <UserControl.Triggers>
@@ -139,228 +161,277 @@
         <EventTrigger RoutedEvent="ListBox.SelectionChanged" SourceName="listBoxDatLich">
             <BeginStoryboard Storyboard="{StaticResource closeChinhSua}"/>
         </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnTinhTrang">
+            <BeginStoryboard Storyboard="{StaticResource ShowTinhtrang}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnDong">
+            <BeginStoryboard Storyboard="{StaticResource CloseTinhtrang}"/>
+        </EventTrigger>
     </UserControl.Triggers>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="5*"/>
-        </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="Danh sách ngày">
-            <Grid Style="{StaticResource gridDanhSach}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" Margin="30,0">
-                    <ComboBox ItemsSource="{Binding LstThang}" material:HintAssist.Hint="Chọn tháng" Margin="5"
+
+    <DockPanel>
+        <Grid Style="{StaticResource gridTitlte}">
+            <TextBlock Text="Quản lý đặt lịch" Style="{StaticResource textBlockTitlte}"/>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4.5*"/>
+                <RowDefinition Height="5.5*"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Header="Danh sách ngày">
+                <Grid Style="{StaticResource gridDanhSach}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center" Margin="30,0">
+                        <ComboBox ItemsSource="{Binding LstThang}" material:HintAssist.Hint="Chọn tháng" Margin="5"
                               SelectedItem="{Binding Thang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}" material:HintAssist.Foreground="Black"
                               FontSize="17"></ComboBox>
-                    <TextBlock Text="Năm" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0"/>
-                    <TextBox Width="120" Text="{Binding Nam, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold" TextAlignment="Center" Margin="10,0"/>
-                    <Button Command="{Binding SearchCommand}" Style="{StaticResource buttonSearch}">
-                        <material:PackIcon Kind="Search"/>
-                    </Button>
-                </StackPanel>
-                <ListBox Grid.Row="1" ItemContainerStyle="{StaticResource SimpleListBoxItem}" Background="Transparent"
+                        <TextBlock Text="Năm" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0"/>
+                        <TextBox Width="120" Text="{Binding Nam, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold" TextAlignment="Center" Margin="10,0"/>
+                        <Button Command="{Binding SearchCommand}" Style="{StaticResource buttonSearch}">
+                            <material:PackIcon Kind="Search"/>
+                        </Button>
+                    </StackPanel>
+                    <ListBox Grid.Row="1" ItemContainerStyle="{StaticResource SimpleListBoxItem}" Background="Transparent"
                          ItemsSource="{Binding LstNgayDatLich, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding SelectedNgayDatLich, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
 
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <material:Card x:Name="card" Width="120" Height="100" Margin="5" Background="#e58a6e"
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <material:Card x:Name="card" Width="120" Height="100" Margin="5" Background="#e58a6e"
                                            Style="{StaticResource myCardNgay}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
 
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <material:PackIcon Kind="CalendarClock" Width="25" Height="25"/>
-                                        <TextBlock Text="{Binding LstDatLich.Count, UpdateSourceTrigger=PropertyChanged}" Margin="8,0" VerticalAlignment="Center"/>
-                                    </StackPanel>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <material:PackIcon Kind="CalendarClock" Width="25" Height="25"/>
+                                            <TextBlock Text="{Binding LstDatLich.Count, UpdateSourceTrigger=PropertyChanged}" Margin="8,0" VerticalAlignment="Center"/>
+                                        </StackPanel>
 
-                                    <TextBlock Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                        <TextBlock Text="{Binding Ngay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                                                FontSize="18" FontWeight="Bold"/>
-                                </Grid>
-                            </material:Card>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
-        </GroupBox>
-        
-        <Grid Grid.Row="1" Background="#5b82c1" Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="600"/>
-            </Grid.ColumnDefinitions>
+                                    </Grid>
+                                </material:Card>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </GroupBox>
 
-            <GroupBox Grid.Column="0" Header="Danh sách đặt lịch">
-                <ListBox ItemsSource="{Binding SelectedNgayDatLich.LstDatLich}" ItemContainerStyle="{StaticResource SimpleListBoxItem}"
+            <Grid Grid.Row="1" Background="#5b82c1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <GroupBox Grid.Column="0" Header="Danh sách đặt lịch">
+                    <ListBox ItemsSource="{Binding SelectedNgayDatLich.LstDatLich}" ItemContainerStyle="{StaticResource SimpleListBoxItem}"
                          Background="Transparent" x:Name="listBoxDatLich"
                          SelectedItem="{Binding SelectedDatLich, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
 
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <material:Card x:Name="card" Width="150" Height="130" Margin="5" Background="{Binding TrangThaiDuyet, Converter={StaticResource myTinhTrang}, UpdateSourceTrigger=PropertyChanged}"
-                                           Style="{StaticResource myCardDatLich}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <material:Card x:Name="card" Width="150" Height="135" Margin="5"
+                                               Style="{StaticResource myCardDatLich}"
+                                               Background="#96b5d4">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Ellipse Grid.Row="0">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding TinhTrang, Converter={StaticResource tinhTrang}, UpdateSourceTrigger=PropertyChanged}"
+                                                            Stretch="Fill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="{Binding TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                       TextWrapping="Wrap" TextAlignment="Center" Style="{StaticResource textBlockBoldLarge}"/>
+                                            <TextBlock Text="{Binding ThoiGian, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
+                                                       Style="{StaticResource textBlockBold}"/>
+                                        </Grid>
+                                    </Grid>
+                                </material:Card>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
+                <Frame Grid.Column="1" Background="#084a8c" Margin="1" material:ShadowAssist.Darken="True"/>
+                <GroupBox Grid.Column="2" Header="Thông tin" x:Name="groupXem" 
+                          Visibility="{Binding isVisibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myVisibility}}">
+                    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Ellipse Grid.Row="0" Grid.ColumnSpan="2">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding SelectedDatLich.TinhTrang, Converter={StaticResource tinhTrang}, UpdateSourceTrigger=PropertyChanged}"
+                                                Stretch="Fill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Grid VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding SelectedDatLich.TenKH, StringFormat='Tên khách hàng: {0:N}'}"
+                                           Style="{StaticResource myTextBlock}"/>
+                                <TextBlock Grid.Row="1" Text="{Binding SelectedDatLich.SoDT, StringFormat='Số điện thoại: {0:N}'}"
+                                           Style="{StaticResource myTextBlock}"/>
+                                <TextBlock Grid.Row="2" Text="{Binding SelectedDatLich.DiaChi, StringFormat='Địa chỉ: {0:N}'}"
+                                           Style="{StaticResource myTextBlock}"/>
+                                <TextBlock Grid.Row="3" Text="{Binding SelectedDatLich.GhiChu, StringFormat='Ghi chú: {0:N}'}"
+                                           Style="{StaticResource myTextBlock}" TextWrapping="Wrap"/>
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding SelectedDatLich.NgayCuoi, StringFormat='Ngày cưới: {0:dd/MM/yyyy}'}"
+                                   Style="{StaticResource myTextBlock}"/>
+                                <TextBlock Grid.Row="1" Text="{Binding SelectedDatLich.NgayDat, StringFormat='Ngày đặt: {0:dd/MM/yyyy}'}"
+                                   Style="{StaticResource myTextBlock}"/>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                    <TextBlock Text="Thời gian: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
+                                    <TextBlock  Text="{Binding SelectedDatLich.ThoiGian, StringFormat= {}{0:hh\\:mm} }"
+                                        Style="{StaticResource myTextBlock}"/>
+                                </StackPanel>
+                            </Grid>
+                            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="10,0" Orientation="Horizontal">
+                                <Button x:Name="btnChinhSua" Content="Chỉnh sửa" Margin="5,0" Background="#FFEE8F4E" Foreground="Black" Command="{Binding ChinhSuaCommand}"/>
+                                <!--<Button Content="Duyệt" Margin="5,0" Background="#FF72EE4E" Foreground="Black" Command="{Binding DuyetCommand}"/>
+                            <Button Content="Hủy duyệt" Margin="5,0" Command="{Binding HuyDuyetCommand}"/>-->
+                                <Button x:Name="btnTinhTrang" Content="Tình trạng" Margin="5,0" Background="#99b588"/>
+                                <Button Content="Xóa" Margin="5,0" Background="#FFEA3737" Command="{Binding XoaCommand}"/>
+                            </StackPanel>
 
-                                    <TextBlock Text="{Binding TenKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                               FontSize="18" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center"/>
-                                    <TextBlock Text="{Binding ThoiGian, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                               FontSize="18" FontWeight="Bold"/>
-                                </Grid>
-                            </material:Card>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </GroupBox>
-            <Frame Grid.Column="1" Background="Red" material:ShadowAssist.Darken="True"/>
-            <GroupBox Grid.Column="2" Header="Thông tin" x:Name="groupXem" 
-                      Background="{Binding SelectedDatLich.TrangThaiDuyet, Converter={StaticResource myTinhTrang}, UpdateSourceTrigger=PropertyChanged}"
-                      Visibility="{Binding isVisibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myVisibility}}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="7*"/>
-                        <ColumnDefinition Width="3*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-                    <Grid VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="{Binding SelectedDatLich.TenKH, StringFormat='Tên khách hàng: {0:N}'}"
-                                   Style="{StaticResource myTextBlock}"/>
-                        <TextBlock Grid.Row="1" Text="{Binding SelectedDatLich.SoDT, StringFormat='Số điện thoại: {0:N}'}"
-                                   Style="{StaticResource myTextBlock}"/>
-                        <TextBlock Grid.Row="2" Text="{Binding SelectedDatLich.DiaChi, StringFormat='Địa chỉ: {0:N}'}"
-                                   Style="{StaticResource myTextBlock}"/>
-                        <TextBlock Grid.Row="3" Text="{Binding SelectedDatLich.GhiChu, StringFormat='Ghi chú: {0:N}'}"
-                                   Style="{StaticResource myTextBlock}" TextWrapping="Wrap"/>
-                    </Grid>
-                    <Grid Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="{Binding SelectedDatLich.NgayCuoi, StringFormat='Ngày cưới: {0:dd/MM/yyyy}'}"
-                                   Style="{StaticResource myTextBlock}"/>
-                        <TextBlock Grid.Row="1" Text="{Binding SelectedDatLich.NgayDat, StringFormat='Ngày đặt: {0:dd/MM/yyyy}'}"
-                                   Style="{StaticResource myTextBlock}"/>
-                        <StackPanel Grid.Row="2" Orientation="Horizontal">
-                            <TextBlock Text="Thời gian: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
-                            <TextBlock  Text="{Binding SelectedDatLich.ThoiGian, StringFormat= {}{0:hh\\:mm} }"
-                                   Style="{StaticResource myTextBlock}"/>
-                        </StackPanel>
-                    </Grid>
-                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="10,0" Orientation="Horizontal">
-                        <Button x:Name="btnChinhSua" Content="Chỉnh sửa" Margin="5,0" Background="#FFEE8F4E" Foreground="Black" Command="{Binding ChinhSuaCommand}"/>
-                        <Button Content="Duyệt" Margin="5,0" Background="#FF72EE4E" Foreground="Black" Command="{Binding DuyetCommand}"/>
-                        <Button Content="Hủy duyệt" Margin="5,0" Command="{Binding HuyDuyetCommand}"/>
-                        <Button Content="Xóa" Margin="5,0" Background="#FFEA3737" Command="{Binding XoaCommand}"/>
-                    </StackPanel>
-                </Grid>
-            </GroupBox>
+                            <StackPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="10,0" Orientation="Horizontal"
+                                    x:Name="stackTinhTrang" Width="0">
+                                <Button Content="Duyệt" Margin="5,0" Background="#FF72EE4E" Foreground="Black" Command="{Binding DuyetCommand}"/>
+                                <Button Content="Hủy duyệt" Margin="5,0" Background="#f25f49" Command="{Binding HuyDuyetCommand}"/>
+                                <Button Content="Đã gặp" Margin="5,0" Background="#76a6e8" Command="{Binding DaGapCommand}"/>
+                                <Button Content="Đồng ý" Margin="5,0" Background="#53ed2d" Command="{Binding DongYCommand}"/>
+                                <Button Content="Không đồng ý" Margin="5,0" Background="#FFEA3737" Command="{Binding KhongDongYCommand}"/>
+                                <Button x:Name="btnDong" Content="Đóng" Margin="5,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                </GroupBox>
 
-            <GroupBox Grid.Column="2" Header="Chỉnh sửa thông tin" x:Name="groupChinhSua" Width="0"
-                      Background="{Binding SelectedDatLich.TrangThaiDuyet, Converter={StaticResource myTinhTrang}, UpdateSourceTrigger=PropertyChanged}"
-                      Visibility="{Binding isVisibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myVisibility}}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="7*"/>
-                        <ColumnDefinition Width="3*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-                    <Grid VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="5">
+                <GroupBox Grid.Column="2" Header="Chỉnh sửa thông tin" x:Name="groupChinhSua" Width="0"
+                          Visibility="{Binding isVisibility, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource myVisibility}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
                             <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="120"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Tên khách hàng: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
-                            <TextBox Grid.Column="1" Text="{Binding SelectedDatLich.TenKH, StringFormat=' {0:N}'}" TextWrapping="Wrap"/>
+                        <Ellipse Grid.Row="0" Grid.ColumnSpan="2">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding SelectedDatLich.TinhTrang, Converter={StaticResource tinhTrang}, UpdateSourceTrigger=PropertyChanged}"
+                                                            Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Grid VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="120"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Tên khách hàng: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
+                                <TextBox Grid.Column="1" Text="{Binding SelectedDatLich.TenKH, StringFormat=' {0:N}'}" TextWrapping="Wrap"/>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="120"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Số điện thoại: " Margin="0,5"  Style="{StaticResource myTextBlock}" Width="120"/>
+                                <TextBox Grid.Column="1" Text="{Binding SelectedDatLich.SoDT, StringFormat=' {0:N}'}" TextWrapping="Wrap"/>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="120"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Địa chỉ: " Margin="0,5"  Style="{StaticResource myTextBlock}" Width="120"/>
+                                <TextBox Grid.Column="1" Text="{Binding SelectedDatLich.DiaChi, StringFormat=' {0:N}'}" TextWrapping="Wrap"/>
+                            </Grid>
                         </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="120"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Số điện thoại: " Margin="0,5"  Style="{StaticResource myTextBlock}" Width="120"/>
-                            <TextBox Grid.Column="1" Text="{Binding SelectedDatLich.SoDT, StringFormat=' {0:N}'}" TextWrapping="Wrap"/>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="120"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Địa chỉ: " Margin="0,5"  Style="{StaticResource myTextBlock}" Width="120"/>
-                            <TextBox Grid.Column="1" Text="{Binding SelectedDatLich.DiaChi, StringFormat=' {0:N}'}" TextWrapping="Wrap"/>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Ngày cưới: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
-                            <DatePicker SelectedDate="{Binding SelectedDatLich.NgayCuoi, StringFormat=' {0:dd/MM/yyyy}'}"
+                        <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Text="Ngày cưới: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
+                                <DatePicker SelectedDate="{Binding SelectedDatLich.NgayCuoi, StringFormat=' {0:dd/MM/yyyy}'}"
                                         FontSize="13" FontWeight="Bold"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <TextBlock Text="Ngày đặt: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
-                            <DatePicker SelectedDate="{Binding SelectedDatLich.NgayDat, StringFormat=' {0:dd/MM/yyyy}'}"
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="Ngày đặt: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
+                                <DatePicker SelectedDate="{Binding SelectedDatLich.NgayDat, StringFormat=' {0:dd/MM/yyyy}'}"
                                         FontSize="13" FontWeight="Bold"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Orientation="Horizontal">
-                            <TextBlock Text="Thời gian: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
-                            <xctk:TimePicker Value="{Binding myTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Text="Thời gian: " Margin="0,5"  Style="{StaticResource myTextBlock}"/>
+                                <xctk:TimePicker Value="{Binding myTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="10,0" Orientation="Horizontal">
+                            <Button x:Name="btnLuu" Content="Lưu" Margin="5,0" Background="#FF72EE4E" Foreground="Black" Command="{Binding LuuCommand}"/>
+                            <Button x:Name="btnHuy" Content="Hủy" Margin="5,0" Background="#FFEA3737" Command="{Binding HuyCommand}"/>
                         </StackPanel>
                     </Grid>
-                    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="10,0" Orientation="Horizontal">
-                        <Button x:Name="btnLuu" Content="Lưu" Margin="5,0" Background="#FF72EE4E" Foreground="Black" Command="{Binding LuuCommand}"/>
-                        <Button x:Name="btnHuy" Content="Hủy" Margin="5,0" Background="#FFEA3737" Command="{Binding HuyCommand}"/>
-                    </StackPanel>
-                </Grid>
-            </GroupBox>
+                </GroupBox>
+            </Grid>
         </Grid>
-    </Grid>
+    </DockPanel>
 </UserControl>

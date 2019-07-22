@@ -12,9 +12,12 @@
     <UserControl.Resources>
         <converter:ConvertToVisibility x:Key="IsVisibility"/>
         <converter:ConvertTinhTrangToBrush x:Key="tinhTrang"/>
+        <converter:ConvertThanhToanToImage x:Key="myThanhToanImage"/>
+        
         <Style TargetType="TextBlock" x:Name="myTextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
+        
         <Style x:Name="myCard" TargetType="material:Card">
             <Setter Property="Background" Value="#6a96e6"/>
             <Setter Property="Template">
@@ -32,7 +35,15 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
+        <Style TargetType="Ellipse" x:Key="myEllipse">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
     </UserControl.Resources>
+    
     <DockPanel>
         <Grid Style="{StaticResource gridTitlte}">
             <TextBlock Text="Quản lý hóa đơn" Style="{StaticResource textBlockTitlte}"/>
@@ -185,12 +196,24 @@
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
-                                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                    <material:PackIcon Kind="Book" Height="30" Width="30"/>
-                                                    <TextBlock Text="{Binding myHD.MaHD,StringFormat='Mã HD: {0:N}'}" Style="{StaticResource textBlockBold}"
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition Width="50"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                        <material:PackIcon Kind="Book" Height="30" Width="30"/>
+                                                        <TextBlock Text="{Binding myHD.MaHD,StringFormat='Mã HD: {0:N}'}" Style="{StaticResource textBlockBold}"
                                                            Margin="5"/>
-                                                </StackPanel>
+                                                    </StackPanel>
+                                                    <Ellipse Grid.Column="1" Style="{StaticResource myEllipse}">
+                                                        <Ellipse.Fill>
+                                                            <ImageBrush ImageSource="{Binding myHD.IsThanhToan, Mode=TwoWay, Converter={StaticResource myThanhToanImage}, UpdateSourceTrigger=PropertyChanged}"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                </Grid>
                                                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                                                     <material:PackIcon Kind="DateRange" Height="30" Width="30"/>
                                                     <TextBlock Text="Ngày lập: " VerticalAlignment="Center"/>
@@ -215,6 +238,10 @@
                                                     <material:PackIcon Kind="AccountBalanceWallet" Height="30" Width="30"/>
                                                     <TextBlock Text="{Binding myHD.TongTien,StringFormat='Tổng tiền: {0:0,0} VNĐ'}" Style="{StaticResource textBlockBoldLarge}"/>
                                                 </StackPanel>
+                                                <StackPanel Grid.Row="4" Orientation="Horizontal">
+                                                    <material:PackIcon Kind="AccountBalanceWallet" Height="30" Width="30"/>
+                                                    <TextBlock Text="{Binding myHD.TienCoc,StringFormat='Tiền Cọc: {0:0,0} VNĐ'}" Style="{StaticResource textBlockBoldLarge}"/>
+                                                </StackPanel>
                                             </Grid>
                                         </GroupBox>
                                         <Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -222,10 +249,15 @@
                                                 <ColumnDefinition />
                                                 <ColumnDefinition Width="80"/>
                                             </Grid.ColumnDefinitions>
-                                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                                <Button Content="Chưa trang trí" Width="150" Margin="5" Background="Aqua" Foreground="Black" Command="{Binding ChangeTinhTrangTo1Command}"/>
-                                                <Button Content="Đã trang trí" Width="150" Margin="5" Background="Green" Foreground="Black" Command="{Binding ChangeTinhTrangTo2Command}"/>
-                                                <Button Content="Đã tháo dỡ" Width="150" Margin="5" Background="Gray" Foreground="Black" Command="{Binding ChangeTinhTrangTo3Command}"/>
+                                            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
+                                                <StackPanel  Orientation="Horizontal">
+                                                    <Button Content="Chưa trang trí" Width="150" Margin="5" Background="Aqua" Foreground="Black" Command="{Binding ChangeTinhTrangTo1Command}"/>
+                                                    <Button Content="Đã trang trí" Width="150" Margin="5" Background="Green" Foreground="Black" Command="{Binding ChangeTinhTrangTo2Command}"/>
+                                                    <Button Content="Đã tháo dỡ" Width="150" Margin="5" Background="Gray" Foreground="Black" Command="{Binding ChangeTinhTrangTo3Command}"/>
+                                                </StackPanel>
+                                                <Border Background="#ed1f1f" Width="5" CornerRadius="5" Margin="5"/>
+                                                <Button Content="Thanh toán" Margin="5" Background="#3fb56f" Command="{Binding NhanThanhToanCommand}"/>
+                                                <Button Content="Hủy thanh toán" Margin="5" Background="#d44444" Command="{Binding HuyThanhToanCommand}"/>
                                             </StackPanel>
                                             <material:PopupBox x:Name="popupMore" Grid.Column="1"
                                                            HorizontalAlignment="Right" VerticalAlignment="Bottom"

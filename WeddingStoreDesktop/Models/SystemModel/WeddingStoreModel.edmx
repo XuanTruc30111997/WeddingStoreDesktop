@@ -46,6 +46,16 @@
           <Property Name="SoLuong" Type="int" />
           <Property Name="GiaTien" Type="real" />
         </EntityType>
+        <EntityType Name="DanhGia">
+          <Key>
+            <PropertyRef Name="MaDG" />
+          </Key>
+          <Property Name="MaDG" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaKH" Type="nchar" MaxLength="10" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="CommentDate" Type="datetime" />
+          <Property Name="SaoDanhGia" Type="int" />
+        </EntityType>
         <EntityType Name="DatLich">
           <Key>
             <PropertyRef Name="MaDL" />
@@ -58,7 +68,7 @@
           <Property Name="NgayDat" Type="date" />
           <Property Name="ThoiGian" Type="time" Precision="7" />
           <Property Name="GhiChu" Type="nvarchar(max)" />
-          <Property Name="TrangThaiDuyet" Type="bit" />
+          <Property Name="TinhTrang" Type="int" />
         </EntityType>
         <EntityType Name="DichVu">
           <Key>
@@ -89,6 +99,8 @@
           <Property Name="NgayThaoDo" Type="date" />
           <Property Name="TongTien" Type="real" />
           <Property Name="TinhTrang" Type="int" />
+          <Property Name="TienCoc" Type="real" />
+          <Property Name="IsThanhToan" Type="bit" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -256,6 +268,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DanhGia_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="DanhGia">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DichVu_LoaiDichVu">
           <End Role="LoaiDichVu" Type="Self.LoaiDichVu" Multiplicity="0..1" />
           <End Role="DichVu" Type="Self.DichVu" Multiplicity="*" />
@@ -369,6 +393,7 @@
           <EntitySet Name="ChiTietDonGiaNhapHang" EntityType="Self.ChiTietDonGiaNhapHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietSanPham" EntityType="Self.ChiTietSanPham" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DatLich" EntityType="Self.DatLich" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DichVu" EntityType="Self.DichVu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonGiaNhapHang" EntityType="Self.DonGiaNhapHang" Schema="dbo" store:Type="Tables" />
@@ -405,6 +430,10 @@
           <AssociationSet Name="FK_ChiTietSanPham_SanPham" Association="Self.FK_ChiTietSanPham_SanPham">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="ChiTietSanPham" EntitySet="ChiTietSanPham" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGia_KhachHang" Association="Self.FK_DanhGia_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="DanhGia" EntitySet="DanhGia" />
           </AssociationSet>
           <AssociationSet Name="FK_DichVu_LoaiDichVu" Association="Self.FK_DichVu_LoaiDichVu">
             <End Role="LoaiDichVu" EntitySet="LoaiDichVu" />
@@ -531,6 +560,8 @@
           <NavigationProperty Name="KhachHang" Relationship="Self.FK_HoaDon_KhachHang" FromRole="HoaDon" ToRole="KhachHang" />
           <NavigationProperty Name="PhanCongs" Relationship="Self.FK_PhanCong_HoaDon" FromRole="HoaDon" ToRole="PhanCong" />
           <NavigationProperty Name="PhatSinhs" Relationship="Self.FK_PhatSinh_HoaDon" FromRole="HoaDon" ToRole="PhatSinh" />
+          <Property Name="TienCoc" Type="Single" />
+          <Property Name="IsThanhToan" Type="Boolean" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -541,6 +572,7 @@
           <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SoDT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="HoaDons" Relationship="Self.FK_HoaDon_KhachHang" FromRole="KhachHang" ToRole="HoaDon" />
+          <NavigationProperty Name="DanhGias" Relationship="WeddingStoreDBModel.FK_DanhGia_KhachHang" FromRole="KhachHang" ToRole="DanhGia" />
         </EntityType>
         <EntityType Name="KhoVatLieu">
           <Key>
@@ -654,7 +686,7 @@
           <Property Name="NgayDat" Type="DateTime" Precision="0" />
           <Property Name="ThoiGian" Type="Time" Precision="7" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TrangThaiDuyet" Type="Boolean" />
+          <Property Name="TinhTrang" Type="Int32" />
         </EntityType>
         <Association Name="FK_ChiTietDonGiaNhapHang_DonGiaNhapHang">
           <End Role="DonGiaNhapHang" Type="Self.DonGiaNhapHang" Multiplicity="1" />
@@ -914,7 +946,35 @@
             <End Role="NhanVien" EntitySet="NhanViens" />
             <End Role="TaiKhoan" EntitySet="TaiKhoans" />
           </AssociationSet>
+          <EntitySet Name="DanhGias" EntityType="WeddingStoreDBModel.DanhGia" />
+          <AssociationSet Name="FK_DanhGia_KhachHang" Association="WeddingStoreDBModel.FK_DanhGia_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="DanhGia" EntitySet="DanhGias" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DanhGia">
+          <Key>
+            <PropertyRef Name="MaDG" />
+          </Key>
+          <Property Name="MaDG" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MaKH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CommentDate" Type="DateTime" Precision="3" />
+          <Property Name="SaoDanhGia" Type="Int32" />
+          <NavigationProperty Name="KhachHang" Relationship="WeddingStoreDBModel.FK_DanhGia_KhachHang" FromRole="DanhGia" ToRole="KhachHang" />
+        </EntityType>
+        <Association Name="FK_DanhGia_KhachHang">
+          <End Type="WeddingStoreDBModel.KhachHang" Role="KhachHang" Multiplicity="0..1" />
+          <End Type="WeddingStoreDBModel.DanhGia" Role="DanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="DanhGia">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -986,6 +1046,8 @@
           <EntitySetMapping Name="HoaDons">
             <EntityTypeMapping TypeName="WeddingStoreDBModel.HoaDon">
               <MappingFragment StoreEntitySet="HoaDon">
+                <ScalarProperty Name="IsThanhToan" ColumnName="IsThanhToan" />
+                <ScalarProperty Name="TienCoc" ColumnName="TienCoc" />
                 <ScalarProperty Name="MaHD" ColumnName="MaHD" />
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
@@ -1098,6 +1160,7 @@
           <EntitySetMapping Name="DatLiches">
             <EntityTypeMapping TypeName="WeddingStoreDBModel.DatLich">
               <MappingFragment StoreEntitySet="DatLich">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaDL" ColumnName="MaDL" />
                 <ScalarProperty Name="TenKH" ColumnName="TenKH" />
                 <ScalarProperty Name="SoDT" ColumnName="SoDT" />
@@ -1106,7 +1169,17 @@
                 <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
                 <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-                <ScalarProperty Name="TrangThaiDuyet" ColumnName="TrangThaiDuyet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhGias">
+            <EntityTypeMapping TypeName="WeddingStoreDBModel.DanhGia">
+              <MappingFragment StoreEntitySet="DanhGia">
+                <ScalarProperty Name="SaoDanhGia" ColumnName="SaoDanhGia" />
+                <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaDG" ColumnName="MaDG" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

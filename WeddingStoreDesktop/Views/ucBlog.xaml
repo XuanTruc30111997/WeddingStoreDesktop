@@ -30,7 +30,7 @@
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:.5" Value="500"/>
             </DoubleAnimationUsingKeyFrames>
-            
+
         </Storyboard>
 
         <Storyboard x:Key="closeChinhSua">
@@ -66,7 +66,7 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupThemMoi" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
-            
+
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="groupChinhSua" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
             </ObjectAnimationUsingKeyFrames>
@@ -131,218 +131,224 @@
         </EventTrigger>
     </UserControl.Triggers>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="Danh sách Blog">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <DataGrid Grid.Row="0" ItemsSource="{Binding LstBlog, UpdateSourceTrigger=PropertyChanged}"
+    <DockPanel>
+        <Grid Style="{StaticResource gridTitlte}">
+            <TextBlock Text="Quản lý Blog" Style="{StaticResource textBlockTitlte}"/>
+        </Grid>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Header="Danh sách Blog">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" ItemsSource="{Binding LstBlog, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" SelectedItem="{Binding SelectedBlog, UpdateSourceTrigger=PropertyChanged}"
                       ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" CanUserSortColumns="True"
                           x:Name="dataGridBlog">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Hình mô tả">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding HinhMoTa, Converter={StaticResource myConvertToImage}}"
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Hình mô tả">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding HinhMoTa, Converter={StaticResource myConvertToImage}}"
                                        Height="100" Width="100" Stretch="Fill"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Tên blog" Binding="{Binding TenBlog}"/>
-                        <!--<DataGridTemplateColumn  Header="Nội dung" Width="200">
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Tên blog" Binding="{Binding TenBlog}"/>
+                            <!--<DataGridTemplateColumn  Header="Nội dung" Width="200">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     -->
-                        <!--<TextBlock Text="{Binding NoiDung, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>-->
-                        <!--
+                            <!--<TextBlock Text="{Binding NoiDung, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>-->
+                            <!--
                                     <xctk:MultiLineTextEditor Text="{Binding NoiDung, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"
                                                            IsReadOnly="True"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>-->
-                        <!--<DataGridTextColumn Header="Nội dung" Binding="{Binding NoiDung}"/>-->
-                        <DataGridTextColumn Header="Created Date" Binding="{Binding CreatedDate, StringFormat=' {0:dd/MM/yyyy}'}"/>
-                        <DataGridTextColumn Header="Updated Date" Binding="{Binding UpdatedDate, StringFormat=' {0:dd/MM/yyyy}'}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="btnHide" Margin="5,0">
-                        <material:PackIcon Kind="Hide"/>
-                    </Button>
-                    <Button Command="{Binding RefreshCommand}" Margin="5,0">
-                        <material:PackIcon Kind="Refresh"/>
-                    </Button>
-                    <Button Command="{Binding ThemCommand}" x:Name="btnThemMoi" Margin="5,0">
-                        <material:PackIcon Kind="Add"/>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
+                            <!--<DataGridTextColumn Header="Nội dung" Binding="{Binding NoiDung}"/>-->
+                            <DataGridTextColumn Header="Created Date" Binding="{Binding CreatedDate, StringFormat=' {0:dd/MM/yyyy}'}"/>
+                            <DataGridTextColumn Header="Updated Date" Binding="{Binding UpdatedDate, StringFormat=' {0:dd/MM/yyyy}'}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="btnHide" Margin="5,0">
+                            <material:PackIcon Kind="Hide"/>
+                        </Button>
+                        <Button Command="{Binding RefreshCommand}" Margin="5,0">
+                            <material:PackIcon Kind="Refresh"/>
+                        </Button>
+                        <Button Command="{Binding ThemCommand}" x:Name="btnThemMoi" Margin="5,0">
+                            <material:PackIcon Kind="Add"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Thông tin Blog" x:Name="groupThongTin" Height="0">
-            <ScrollViewer>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="{Binding SelectedBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
+            <GroupBox Grid.Row="1" Header="Thông tin Blog" x:Name="groupThongTin" Height="0">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="{Binding SelectedBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
                                Stretch="Uniform"/>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="btnChinhSua" Content="Chỉnh sửa" Margin="3,0,5,0" Command="{Binding ChinhSuaCommand}"/>
-                            <Button x:Name="btnXoa" Content="Xóa" Margin="3,0,5,0" Background="#ed2d2d" Command="{Binding XoaCommand}"/>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="{Binding SelectedBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="btnChinhSua" Content="Chỉnh sửa" Margin="3,0,5,0" Command="{Binding ChinhSuaCommand}"/>
+                                <Button x:Name="btnXoa" Content="Xóa" Margin="3,0,5,0" Background="#ed2d2d" Command="{Binding XoaCommand}"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding SelectedBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
                                FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
-                        <Grid Grid.Row="1" Margin="0,5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding SelectedBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
+                            <Grid Grid.Row="1" Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding SelectedBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
                                    TextAlignment="Center" FontSize="15"/>
-                            <TextBlock Grid.Column="1" Text="{Binding SelectedBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
+                                <TextBlock Grid.Column="1" Text="{Binding SelectedBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
                                    TextAlignment="Center" FontSize="15"/>
-                        </Grid>
-                        <!--<TextBlock Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                            </Grid>
+                            <!--<TextBlock Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
                                FontFamily="13" TextWrapping="Wrap"/>-->
-                        <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
-                        <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" EditorMode="ReadOnly_Preview"/>
+                            <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                            <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" EditorMode="ReadOnly_Preview"/>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </ScrollViewer>
-        </GroupBox>
+                </ScrollViewer>
+            </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Chỉnh sửa Blog" x:Name="groupChinhSua" Height="0">
-            <ScrollViewer>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="{Binding SelectedBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
+            <GroupBox Grid.Row="1" Header="Chỉnh sửa Blog" x:Name="groupChinhSua" Height="0">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="{Binding SelectedBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
                                Stretch="Uniform">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding ChooseImageCommand2}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Image>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="btnLuu" Content="Lưu" Margin="3,0,5,0" Command="{Binding LuuCommand}"
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChooseImageCommand2}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="btnLuu" Content="Lưu" Margin="3,0,5,0" Command="{Binding LuuCommand}"
                                     Background="#70ed47" Foreground="Black"/>
-                            <Button x:Name="btnHuy" Content="Hủy" Margin="3,0,5,0" Command="{Binding HuyCommand}"
+                                <Button x:Name="btnHuy" Content="Hủy" Margin="3,0,5,0" Command="{Binding HuyCommand}"
                                     Background="#5ee098" Foreground="Black"/>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBox Grid.Row="0" Text="{Binding SelectedBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
-                                 FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
-                        <Grid Grid.Row="1" Margin="0,5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding SelectedBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
-                                   TextAlignment="Center" FontSize="15"/>
-                            <TextBlock Grid.Column="1" Text="{Binding SelectedBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
-                                   TextAlignment="Center" FontSize="15"/>
+                            </StackPanel>
                         </Grid>
-                        <!--<xctk:MultiLineTextEditor Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox Grid.Row="0" Text="{Binding SelectedBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
+                                 FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
+                            <Grid Grid.Row="1" Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding SelectedBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                                <TextBlock Grid.Column="1" Text="{Binding SelectedBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                            </Grid>
+                            <!--<xctk:MultiLineTextEditor Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
                                                   FontFamily="13" TextWrapping="Wrap"/>-->
-                        <!--<xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                            <!--<xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
                                           FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>-->
 
-                        <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
-                        <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                            <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                            <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding SelectedBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-                    </Grid>
-                </Grid>
-            </ScrollViewer>
-        </GroupBox>
-
-        <GroupBox Grid.Row="1" Header="Thêm Blog" x:Name="groupThemMoi" Height="0">
-            <ScrollViewer>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="{Binding myBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
-                               Stretch="Uniform">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding ChooseImageCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Image>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="btnThem" Content="Thêm" Margin="3,0,5,0" Command="{Binding SaveCommand}"
-                                    Background="#5063e0"/>
-                            <Button Content="Hủy thêm" Margin="3,0,5,0" Background="#ed2d2d" Command="{Binding HuyThemCommand}"
-                                    x:Name="btnHuyThem"/>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBox Grid.Row="0" Text="{Binding myBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
-                                 FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
-                        <Grid Grid.Row="1" Margin="0,5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding myBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
-                                   TextAlignment="Center" FontSize="15"/>
-                            <TextBlock Grid.Column="1" Text="{Binding myBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
-                                   TextAlignment="Center" FontSize="15"/>
                         </Grid>
-                        <!--<xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
-                                          FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>-->
-                        <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
-                        <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
                     </Grid>
-                </Grid>
-            </ScrollViewer>
-        </GroupBox>
-    </Grid>
+                </ScrollViewer>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1" Header="Thêm Blog" x:Name="groupThemMoi" Height="0">
+                <ScrollViewer>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="{Binding myBlog.HinhMoTa, Converter={StaticResource myConvertToImage}}"
+                               Stretch="Uniform">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChooseImageCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="btnThem" Content="Thêm" Margin="3,0,5,0" Command="{Binding SaveCommand}"
+                                    Background="#5063e0"/>
+                                <Button Content="Hủy thêm" Margin="3,0,5,0" Background="#ed2d2d" Command="{Binding HuyThemCommand}"
+                                    x:Name="btnHuyThem"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox Grid.Row="0" Text="{Binding myBlog.TenBlog,UpdateSourceTrigger=PropertyChanged}" FontSize="25" 
+                                 FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
+                            <Grid Grid.Row="1" Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding myBlog.CreatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày tạo: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                                <TextBlock Grid.Column="1" Text="{Binding myBlog.UpdatedDate, UpdateSourceTrigger=PropertyChanged, StringFormat='Ngày cập nhập: {0:dd/MM/yyyy}'}"
+                                   TextAlignment="Center" FontSize="15"/>
+                            </Grid>
+                            <!--<xctk:PropertyGridEditorTextBox Grid.Row="2" Margin="5" Text="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged}"
+                                          FontSize="15" FontFamily="Times New Roman" TextWrapping="Wrap"/>-->
+                            <!--<smith:HtmlEditor Grid.Row="2" BindingContent="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                            <spice:WpfHtmlEditor Grid.Row="2"  BodyHtml="{Binding myBlog.NoiDung, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
 </UserControl>

@@ -84,6 +84,8 @@
     <NavigationProperty Name="KhachHang" Relationship="Self.FK_HoaDon_KhachHang" FromRole="HoaDon" ToRole="KhachHang" />
     <NavigationProperty Name="PhanCongs" Relationship="Self.FK_PhanCong_HoaDon" FromRole="HoaDon" ToRole="PhanCong" />
     <NavigationProperty Name="PhatSinhs" Relationship="Self.FK_PhatSinh_HoaDon" FromRole="HoaDon" ToRole="PhatSinh" />
+    <Property Name="TienCoc" Type="Single" />
+    <Property Name="IsThanhToan" Type="Boolean" />
   </EntityType>
   <EntityType Name="KhachHang">
     <Key>
@@ -94,6 +96,7 @@
     <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SoDT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="HoaDons" Relationship="Self.FK_HoaDon_KhachHang" FromRole="KhachHang" ToRole="HoaDon" />
+    <NavigationProperty Name="DanhGias" Relationship="WeddingStoreDBModel.FK_DanhGia_KhachHang" FromRole="KhachHang" ToRole="DanhGia" />
   </EntityType>
   <EntityType Name="KhoVatLieu">
     <Key>
@@ -207,7 +210,7 @@
     <Property Name="NgayDat" Type="DateTime" Precision="0" />
     <Property Name="ThoiGian" Type="Time" Precision="7" />
     <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="TrangThaiDuyet" Type="Boolean" />
+    <Property Name="TinhTrang" Type="Int32" />
   </EntityType>
   <Association Name="FK_ChiTietDonGiaNhapHang_DonGiaNhapHang">
     <End Role="DonGiaNhapHang" Type="Self.DonGiaNhapHang" Multiplicity="1" />
@@ -467,5 +470,33 @@
       <End Role="NhanVien" EntitySet="NhanViens" />
       <End Role="TaiKhoan" EntitySet="TaiKhoans" />
     </AssociationSet>
+    <EntitySet Name="DanhGias" EntityType="WeddingStoreDBModel.DanhGia" />
+    <AssociationSet Name="FK_DanhGia_KhachHang" Association="WeddingStoreDBModel.FK_DanhGia_KhachHang">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="DanhGia" EntitySet="DanhGias" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="DanhGia">
+    <Key>
+      <PropertyRef Name="MaDG" />
+    </Key>
+    <Property Name="MaDG" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MaKH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommentDate" Type="DateTime" Precision="3" />
+    <Property Name="SaoDanhGia" Type="Int32" />
+    <NavigationProperty Name="KhachHang" Relationship="WeddingStoreDBModel.FK_DanhGia_KhachHang" FromRole="DanhGia" ToRole="KhachHang" />
+  </EntityType>
+  <Association Name="FK_DanhGia_KhachHang">
+    <End Type="WeddingStoreDBModel.KhachHang" Role="KhachHang" Multiplicity="0..1" />
+    <End Type="WeddingStoreDBModel.DanhGia" Role="DanhGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="DanhGia">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

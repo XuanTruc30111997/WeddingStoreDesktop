@@ -119,7 +119,7 @@ namespace WeddingStoreDesktop.ViewModels
             get => _isVisibility;
             set
             {
-                if(_isVisibility!=value)
+                if (_isVisibility != value)
                 {
                     _isVisibility = value;
                     OnPropertyChanged();
@@ -142,8 +142,13 @@ namespace WeddingStoreDesktop.ViewModels
 
             SearchCommand = new ActionCommand(p => GetData());
             LuuCommand = new ActionCommand(p => Luu());
+
             DuyetCommand = new ActionCommand(p => Duyet());
             HuyDuyetCommand = new ActionCommand(p => HuyDuyet());
+            DaGapCommand = new ActionCommand(p => DaGap());
+            KhongDongYCommand = new ActionCommand(p => KhongDongY());
+            DongYCommand = new ActionCommand(p => DongY());
+
             XoaCommand = new ActionCommand(p => Xoa());
             HuyCommand = new ActionCommand(p => Huy());
             ChinhSuaCommand = new ActionCommand(p => ChinhSua());
@@ -155,6 +160,9 @@ namespace WeddingStoreDesktop.ViewModels
         public ICommand LuuCommand { get; }
         public ICommand DuyetCommand { get; }
         public ICommand HuyDuyetCommand { get; }
+        public ICommand DaGapCommand { get; }
+        public ICommand DongYCommand { get; }
+        public ICommand KhongDongYCommand { get; }
         public ICommand XoaCommand { get; }
         public ICommand HuyCommand { get; }
         public ICommand ChinhSuaCommand { get; }
@@ -202,7 +210,8 @@ namespace WeddingStoreDesktop.ViewModels
         void Duyet()
         {
             DatLich myDatLich = DataProvider.Ins.DB.DatLiches.FirstOrDefault(dl => dl.MaDL == _SelectedDatlich.MaDL);
-            myDatLich.TrangThaiDuyet = true;
+            //myDatLich.TrangThaiDuyet = true;
+            myDatLich.TinhTrang = 1;
             OnPropertyChanged(nameof(SelectedDatLich));
             DataProvider.Ins.DB.SaveChanges();
         }
@@ -210,14 +219,36 @@ namespace WeddingStoreDesktop.ViewModels
         void HuyDuyet()
         {
             DatLich myDatLich = DataProvider.Ins.DB.DatLiches.FirstOrDefault(dl => dl.MaDL == _SelectedDatlich.MaDL);
-            myDatLich.TrangThaiDuyet = false;
+            //myDatLich.TrangThaiDuyet = false;
+            myDatLich.TinhTrang = 0;
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        void DaGap()
+        {
+            DatLich myDatLich = DataProvider.Ins.DB.DatLiches.FirstOrDefault(dl => dl.MaDL == _SelectedDatlich.MaDL);
+            myDatLich.TinhTrang = 2;
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        void DongY()
+        {
+            DatLich myDatLich = DataProvider.Ins.DB.DatLiches.FirstOrDefault(dl => dl.MaDL == _SelectedDatlich.MaDL);
+            myDatLich.TinhTrang = 4;
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+        void KhongDongY()
+        {
+            DatLich myDatLich = DataProvider.Ins.DB.DatLiches.FirstOrDefault(dl => dl.MaDL == _SelectedDatlich.MaDL);
+            myDatLich.TinhTrang = 3;
             DataProvider.Ins.DB.SaveChanges();
         }
 
         void Xoa()
         {
-            var response= MessageBox.Show("Xóa đặt lịch của khách hàng " + _SelectedDatlich.TenKH + " ?", "Xóa??", MessageBoxButton.OKCancel);
-            if(response==MessageBoxResult.OK)
+            var response = MessageBox.Show("Xóa đặt lịch của khách hàng " + _SelectedDatlich.TenKH + " ?", "Xóa??", MessageBoxButton.OKCancel);
+            if (response == MessageBoxResult.OK)
             {
                 DataProvider.Ins.DB.DatLiches.Remove(_SelectedDatlich);
                 DataProvider.Ins.DB.SaveChanges();
@@ -230,7 +261,7 @@ namespace WeddingStoreDesktop.ViewModels
             DataProvider.Ins.RefreshDB();
             GetData();
             SelectedNgayDatLich = _LstNgayDatLich.FirstOrDefault(n => n.Ngay == _myNgayDatLich);
-            SelectedDatLich = _SelectedNgayDatLich.LstDatLich.FirstOrDefault(dl=>dl.MaDL==_myDatLich);
+            SelectedDatLich = _SelectedNgayDatLich.LstDatLich.FirstOrDefault(dl => dl.MaDL == _myDatLich);
         }
         #endregion
     }

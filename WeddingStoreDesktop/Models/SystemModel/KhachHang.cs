@@ -18,6 +18,7 @@ namespace WeddingStoreDesktop.Models.SystemModel
         public KhachHang()
         {
             this.HoaDons = new HashSet<HoaDon>();
+            this.DanhGias = new HashSet<DanhGia>();
         }
     
         public string MaKH { get; set; }
@@ -27,5 +28,7 @@ namespace WeddingStoreDesktop.Models.SystemModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
     }
 }

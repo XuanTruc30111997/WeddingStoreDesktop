@@ -37,6 +37,8 @@
         <AssociationConnector Association="WeddingStoreDBModel.FK_PhatSinh_KhoVatLieu" ManuallyRouted="false" />
         <AssociationConnector Association="WeddingStoreDBModel.FK_PhanCong_NhanVien" ManuallyRouted="false" />
         <AssociationConnector Association="WeddingStoreDBModel.FK_TaiKhoan_NhanVien1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WeddingStoreDBModel.DanhGia" Width="1.5" PointX="3" PointY="22.25" />
+        <AssociationConnector Association="WeddingStoreDBModel.FK_DanhGia_KhachHang" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

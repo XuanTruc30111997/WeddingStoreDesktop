@@ -14,19 +14,12 @@
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="ahihi">
+        <Grid Grid.Row="0" x:Name="gridReport">
         </Grid>
-        
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,0,10">
-            <Button Height="Auto" Width="Auto" Margin="5" Command="{Binding PayCommand}">
-                <material:PackIcon Kind="Payment" Width="30" Height="30"
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Button>
 
-            <Button Height="Auto" Width="Auto" Margin="5" Command="{Binding CancelCommand}">
-                <material:PackIcon Kind="Cancel" Width="30" Height="30" 
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Button>
-        </StackPanel>
+        <Button Height="Auto" Width="Auto" Margin="5" Command="{Binding SaveCommand}"
+                Grid.Row="1" HorizontalAlignment="Right">
+            <material:PackIcon Kind="Done"/>
+        </Button>
     </Grid>
 </Window>
