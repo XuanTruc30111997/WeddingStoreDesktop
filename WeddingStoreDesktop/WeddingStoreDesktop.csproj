@@ -198,6 +198,7 @@
     <Compile Include="Converters\ConvertObjectToBinary.cs" />
     <Compile Include="Converters\ConvertThanhToanToImage.cs" />
     <Compile Include="Converters\ConvertTinhTrangDatLich.cs" />
+    <Compile Include="Converters\ConvertTinhTrangHoaDonToImage.cs" />
     <Compile Include="Converters\ConvertTinhTrangToBrush.cs" />
     <Compile Include="Converters\ConvertToEnable.cs" />
     <Compile Include="Converters\ConvertToVisibility.cs" />
@@ -731,6 +732,9 @@
     <Resource Include="Images\DaGap.png" />
     <Resource Include="Images\DaThanhToan.png" />
     <Resource Include="Images\ChuaThanhToan.png" />
+    <Resource Include="Images\ChuaTrangTri.png" />
+    <Resource Include="Images\DaThaoDo.png" />
+    <Resource Include="Images\DaTrangTri.png" />
     <Content Include="Models\SystemModel\WeddingStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WeddingStoreModel.edmx</DependentUpon>

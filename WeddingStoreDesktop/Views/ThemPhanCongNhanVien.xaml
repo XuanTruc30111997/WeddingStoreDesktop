@@ -76,16 +76,16 @@
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                 <material:PackIcon Kind="AccountBalance"/>
                                 <TextBlock Text="{Binding myKH.MaKH,StringFormat='Mã KH: {0:N}'}"
-                                           Style="{StaticResource textBlockBold}"/>
+                                           Style="{StaticResource textBlockBoldLarge}"/>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <material:PackIcon Kind="Account"/>
-                                <TextBlock Text="{Binding myKH.TenKH,StringFormat='Tên KH: {0:N}'}" IsEnabled="{Binding canEdit}"
-                                           Style="{StaticResource textBlockBold}"/>
+                                <TextBlock Text="{Binding myKH.TenKH,StringFormat='Tên KH: {0:N}'}"
+                                           Style="{StaticResource textBlockBoldLarge}"/>
                             </StackPanel>
                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                 <material:PackIcon Kind="UserAddress"/>
-                                <TextBlock Text="{Binding myKH.DiaChi,StringFormat='Địa chỉ: {0:N}'}"  IsEnabled="{Binding canEdit}"/>
+                                <TextBlock Text="{Binding myKH.DiaChi,StringFormat='Địa chỉ: {0:N}'}"/>
                             </StackPanel>
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                 <material:PackIcon Kind="Phone"/>
@@ -104,28 +104,30 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                 <material:PackIcon Kind="Book"/>
-                                <TextBlock Text="{Binding myHD.MaHD,StringFormat='Mã HD: {0:N}'}" Style="{StaticResource textBlockBold}"/>
+                                <TextBlock Text="{Binding myHD.MaHD,StringFormat='Mã HD: {0:N}'}" Style="{StaticResource textBlockBoldLarge}"/>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <material:PackIcon Kind="DateRange"/>
                                 <TextBlock Text="Ngày lập: " VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding myHD.NgayLap,StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding canEdit}"/>
+                                <TextBlock Text="{Binding myHD.NgayLap,StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal">
                                     <material:PackIcon Kind="CalendarDay"/>
                                     <TextBlock Text="Ngày trang trí: " VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding myHD.NgayTrangTri,StringFormat='dd/MM/yyyy', UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="{Binding myHD.NgayTrangTri,StringFormat='dd/MM/yyyy', UpdateSourceTrigger=PropertyChanged}"
+                                               Style="{StaticResource textBlockBold}"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Margin="10,0">
                                     <material:PackIcon Kind="CalendarDay"/>
                                     <TextBlock Text="Ngày tháo dở: " VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding myHD.NgayThaoDo,StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding canEdit}"/>
+                                    <TextBlock Text="{Binding myHD.NgayThaoDo,StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                               Style="{StaticResource textBlockBold}"/>
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                 <material:PackIcon Kind="AccountBalanceWallet"/>
-                                <TextBlock Text="{Binding myHD.TongTien,StringFormat='Tổng tiền: {0:0,0} VNĐ'}"/>
+                                <TextBlock Text="{Binding myHD.TongTien,StringFormat='Tổng tiền: {0:0,0} VNĐ'}" Style="{StaticResource textBlockBoldLarge}"/>
                             </StackPanel>
                         </Grid>
                     </GroupBox>

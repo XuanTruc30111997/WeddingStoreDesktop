@@ -13,6 +13,7 @@
         <converter:ConvertToVisibility x:Key="IsVisibility"/>
         <converter:ConvertTinhTrangToBrush x:Key="tinhTrang"/>
         <converter:ConvertThanhToanToImage x:Key="myThanhToanImage"/>
+        <converter:ConvertTinhTrangHoaDonToImage x:Key="myTinhTrangImage"/>
         
         <Style TargetType="TextBlock" x:Name="myTextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -144,8 +145,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <GroupBox Grid.Row="0" Header="Thông tin hóa đơn"
-                                      Background="{Binding myHD.TinhTrang,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource tinhTrang}}">
+                                <GroupBox Grid.Row="0" Header="Thông tin hóa đơn">
                                     <Grid Visibility="{Binding SelectedHDKH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IsVisibility}}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -202,6 +202,7 @@
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition/>
                                                         <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="50"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0" Orientation="Horizontal">
                                                         <material:PackIcon Kind="Book" Height="30" Width="30"/>
@@ -209,6 +210,11 @@
                                                            Margin="5"/>
                                                     </StackPanel>
                                                     <Ellipse Grid.Column="1" Style="{StaticResource myEllipse}">
+                                                        <Ellipse.Fill>
+                                                            <ImageBrush ImageSource="{Binding myHD.TinhTrang, Mode=TwoWay, Converter={StaticResource myTinhTrangImage}, UpdateSourceTrigger=PropertyChanged}"/>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                    <Ellipse Grid.Column="2" Style="{StaticResource myEllipse}">
                                                         <Ellipse.Fill>
                                                             <ImageBrush ImageSource="{Binding myHD.IsThanhToan, Mode=TwoWay, Converter={StaticResource myThanhToanImage}, UpdateSourceTrigger=PropertyChanged}"/>
                                                         </Ellipse.Fill>
@@ -251,9 +257,9 @@
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
                                                 <StackPanel  Orientation="Horizontal">
-                                                    <Button Content="Chưa trang trí" Width="150" Margin="5" Background="Aqua" Foreground="Black" Command="{Binding ChangeTinhTrangTo1Command}"/>
-                                                    <Button Content="Đã trang trí" Width="150" Margin="5" Background="Green" Foreground="Black" Command="{Binding ChangeTinhTrangTo2Command}"/>
-                                                    <Button Content="Đã tháo dỡ" Width="150" Margin="5" Background="Gray" Foreground="Black" Command="{Binding ChangeTinhTrangTo3Command}"/>
+                                                    <Button Content="Chưa trang trí" Width="150" Margin="5" Background="#7cebd3" Foreground="Black" Command="{Binding ChangeTinhTrangTo1Command}"/>
+                                                    <Button Content="Đã trang trí" Width="150" Margin="5" Background="#7dbce3" Foreground="Black" Command="{Binding ChangeTinhTrangTo2Command}"/>
+                                                    <Button Content="Đã tháo dỡ" Width="150" Margin="5" Background="#a3d96c" Foreground="Black" Command="{Binding ChangeTinhTrangTo3Command}"/>
                                                 </StackPanel>
                                                 <Border Background="#ed1f1f" Width="5" CornerRadius="5" Margin="5"/>
                                                 <Button Content="Thanh toán" Margin="5" Background="#3fb56f" Command="{Binding NhanThanhToanCommand}"/>
